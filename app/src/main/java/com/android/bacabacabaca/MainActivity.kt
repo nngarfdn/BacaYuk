@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.android.bacabacabaca.databinding.ActivityMainBinding
 import com.android.bacabacabaca.feat_hurufkapital.AbjadKapitalActivity
+import com.android.bacabacabaca.feat_urutabjad.UrutAbjadActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +18,9 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             btnAbjadKapital.setOnClickListener {
                 startActivity(Intent(this@MainActivity, AbjadKapitalActivity::class.java))
+            }
+            btnUrutAbjad.setOnClickListener {
+                startActivity(Intent(this@MainActivity, UrutAbjadActivity::class.java))
             }
         }
 
