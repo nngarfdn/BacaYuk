@@ -1,4 +1,4 @@
-package com.android.bacabacabaca.feat_hurufkapital
+package com.android.bacabacabaca.ui.feat_hurufkapital
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.bacabacabaca.databinding.ItemAbjadBinding
-import com.android.bacabacabaca.model.Abjad
+import com.android.bacabacabaca.listener.adapter.AdapterListener
+import com.android.bacabacabaca.data.model.Abjad
 
 
-class AbjadAdapter: RecyclerView.Adapter<AbjadAdapter.RecentAdapterViewHolder>() {
+class AbjadAdapter(val listener: AdapterListener): RecyclerView.Adapter<AbjadAdapter.RecentAdapterViewHolder>() {
     inner class RecentAdapterViewHolder(val view: View) :
         RecyclerView.ViewHolder(view)
 
@@ -43,10 +44,15 @@ class AbjadAdapter: RecyclerView.Adapter<AbjadAdapter.RecentAdapterViewHolder>()
             Log.d("TAG", "onBindViewHolder: $data")
             val binding = ItemAbjadBinding.bind(this)
             binding.txtAbjad.text = data?.abjad
-
+            rootView.setOnClickListener {
+                listener.onClick(data?.abjad, position, binding.root)
+            }
         }
     }
+
+
 
     override fun getItemCount(): Int = differ.currentList.size
 
 }
+

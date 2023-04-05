@@ -1,4 +1,4 @@
-package com.android.bacabacabaca.model
+package com.android.bacabacabaca.data.model
 
 data class Abjad(
     var id: Int = 0,

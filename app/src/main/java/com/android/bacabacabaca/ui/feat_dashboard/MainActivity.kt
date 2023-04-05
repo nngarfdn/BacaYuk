@@ -1,15 +1,19 @@
-package com.android.bacabacabaca
+package com.android.bacabacabaca.ui.feat_dashboard
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.android.bacabacabaca.databinding.ActivityMainBinding
-import com.android.bacabacabaca.feat_hurufkapital.AbjadKapitalActivity
-import com.android.bacabacabaca.feat_urutabjad.UrutAbjadActivity
+import com.android.bacabacabaca.ui.feat_hurufkapital.AbjadKapitalActivity
+import com.android.bacabacabaca.ui.feat_urutabjad.UrutAbjadActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val mainViewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +27,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this@MainActivity, UrutAbjadActivity::class.java))
             }
         }
+
+        mainViewModel.saveEmail("nanang@gmail.com")
+        val email = mainViewModel.getEmail()
+        Toast.makeText(this, "$email", Toast.LENGTH_SHORT).show()
 
     }
 

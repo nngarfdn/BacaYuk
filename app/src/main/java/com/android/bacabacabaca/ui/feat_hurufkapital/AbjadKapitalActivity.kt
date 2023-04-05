@@ -1,13 +1,17 @@
-package com.android.bacabacabaca.feat_hurufkapital
+package com.android.bacabacabaca.ui.feat_hurufkapital
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.android.bacabacabaca.databinding.ActivityAbjadKapitalBinding
-import com.android.bacabacabaca.model.Abjad
+import com.android.bacabacabaca.ui.feat_detail_abjad.DetailAbjadActivity
+import com.android.bacabacabaca.listener.adapter.AdapterListener
+import com.android.bacabacabaca.data.model.Abjad
 
-class AbjadKapitalActivity : AppCompatActivity() {
+class AbjadKapitalActivity : AppCompatActivity(), AdapterListener {
     private val binding by lazy { ActivityAbjadKapitalBinding.inflate(layoutInflater) }
-    private val abjadAdapter by lazy { AbjadAdapter() }
+    private val abjadAdapter by lazy { AbjadAdapter(this@AbjadKapitalActivity) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -53,5 +57,9 @@ class AbjadKapitalActivity : AppCompatActivity() {
         abjadKapital.add(Abjad(24, "Y", "#F89F47", "y"))
         abjadKapital.add(Abjad(25, "Z", "#F89F47", "z"))
         return abjadKapital
+    }
+
+    override fun onClick(data: Any?, position: Int?, view: View?) {
+        startActivity(Intent(this@AbjadKapitalActivity, DetailAbjadActivity::class.java))
     }
 }

@@ -1,4 +1,4 @@
-package com.android.bacabacabaca.feat_urutabjad
+package com.android.bacabacabaca.ui.feat_urutabjad
 
 import android.annotation.SuppressLint
 import android.content.ClipData
@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnDragListener
 import android.view.View.OnTouchListener
+import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ import com.android.bacabacabaca.databinding.ActivityUrutAbjadBinding
 
 class UrutAbjadActivity : AppCompatActivity() {
     private val binding by lazy { ActivityUrutAbjadBinding.inflate(layoutInflater) }
+    private var answerList = arrayListOf<String>("A","B", "C", "D","E")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -29,6 +31,7 @@ class UrutAbjadActivity : AppCompatActivity() {
 //            choice1.setOnDragListener(ChoiceDragListener())
 //            choice2.setOnDragListener(ChoiceDragListener())
 //            choice3.setOnDragListener(ChoiceDragListener())
+
 
             opt1.setOnTouchListener(ChoiceTouchListener())
             opt2.setOnTouchListener(ChoiceTouchListener())
@@ -55,6 +58,11 @@ class UrutAbjadActivity : AppCompatActivity() {
                  * - clip data could be set to pass data as part of drag
                  * - shadow can be tailored
                  */
+                //change the text color to teal 200
+                val tv = view as TextView
+                tv.setTextColor(view.context.getColor(R.color.teal_200))
+                //change size of text only dragged
+//                tv.textSize = 200f
                 val data = ClipData.newPlainText("", "")
                 val shadowBuilder = View.DragShadowBuilder(view)
                 //start dragging the item touched
@@ -99,15 +107,24 @@ class UrutAbjadActivity : AppCompatActivity() {
     inner class ChoiceDragListener : OnDragListener {
         override fun onDrag(v: View, event: DragEvent): Boolean {
             when (event.action) {
-                DragEvent.ACTION_DRAG_STARTED -> {}
-                DragEvent.ACTION_DRAG_ENTERED -> {}
-                DragEvent.ACTION_DRAG_EXITED -> {}
+                DragEvent.ACTION_DRAG_STARTED -> {
+                    //change the text color to teal200
+                    Toast.makeText(this@UrutAbjadActivity, "Drag Started", Toast.LENGTH_SHORT).show()
+                }
+                DragEvent.ACTION_DRAG_ENTERED -> {
+                    Toast.makeText(this@UrutAbjadActivity, "Drag Entered", Toast.LENGTH_SHORT).show()
+                }
+                DragEvent.ACTION_DRAG_EXITED -> {
+                    Toast.makeText(this@UrutAbjadActivity, "Drag Exited", Toast.LENGTH_SHORT).show()
+                }
                 DragEvent.ACTION_DROP -> {
+                    Toast.makeText(this@UrutAbjadActivity, "Drop", Toast.LENGTH_SHORT).show()
 
                     //handle the dragged view being dropped over a drop view
                     val view = event.localState as View
                     //view dragged item is being dropped on
                     val dropTarget = v as TextView
+                    //resize when being dragged
                     //view being dragged and dropped
                     val dropped = view as TextView
                     //checking whether first character of dropTarget equals first character of dropped
@@ -118,6 +135,13 @@ class UrutAbjadActivity : AppCompatActivity() {
                         //todo : change text color
                         dropTarget.text = dropped.text
                         dropTarget.setTextColor(resources.getColor(R.color.purple_200))
+                        //add animation
+                        val animation = android.view.animation.AnimationUtils.loadAnimation(
+                            applicationContext,
+                            R.anim.scale
+                        )
+                        dropTarget.startAnimation(animation)
+
 //                        dropTarget.text = dropTarget.text.toString() + dropped.text.toString()
                         //make it bold to highlight the fact that an item has been dropped
                         dropTarget.setTypeface(Typeface.DEFAULT_BOLD)

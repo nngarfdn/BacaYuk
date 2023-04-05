@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feat_hurufkapital.AbjadKapitalActivity">
+    tools:context=".ui.feat_detail_abjad.DetailAbjadActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ImageView
+        android:id="@+id/img_1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/rv_abjad_kapital"/>
-
+        android:layout_height="200dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginHorizontal="100dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher_background"/>
 </LinearLayout>
