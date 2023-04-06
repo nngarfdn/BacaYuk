@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.android.bacabacabaca'
+    namespace 'com.android.bisabelajar'
     compileSdk 33
 
     viewBinding {
