@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.bisabelajar.databinding.ItemAbjadBinding
-import com.android.bisabelajar.listener.adapter.AdapterListener
+import com.android.bisabelajar.ui.listener.adapter.AdapterListener
 import com.android.bisabelajar.data.model.Abjad
 
 

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "555188726322",
+    "project_id": "bisabelajar-b0579",
+    "storage_bucket": "bisabelajar-b0579.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555188726322:android:7ec7b18e6ea99eed74ea2b",
+        "android_client_info": {
+          "package_name": "com.android.bisabelajar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555188726322-ev24aptrb23u5oljq9ap89ie36o465m0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.bisabelajar",
+            "certificate_hash": "04e94bb88895901e7862c03319e35b248573275b"
+          }
+        },
+        {
+          "client_id": "555188726322-b7f6m3v4bjg9e9sv7lj9dmm70fur523t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf2eYJMPwdq6tmxzYiCH0xDVr_ZXTSMPg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555188726322-b7f6m3v4bjg9e9sv7lj9dmm70fur523t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

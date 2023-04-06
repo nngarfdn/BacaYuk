@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.android.bisabelajar.databinding.ActivityAbjadKapitalBinding
 import com.android.bisabelajar.ui.feat_detail_abjad.DetailAbjadActivity
-import com.android.bisabelajar.listener.adapter.AdapterListener
+import com.android.bisabelajar.ui.listener.adapter.AdapterListener
 import com.android.bisabelajar.data.model.Abjad
 
 class AbjadKapitalActivity : AppCompatActivity(), AdapterListener {

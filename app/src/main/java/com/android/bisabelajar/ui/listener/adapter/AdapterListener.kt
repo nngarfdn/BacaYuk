@@ -1,4 +1,4 @@
-package com.android.bisabelajar.listener.adapter
+package com.android.bisabelajar.ui.listener.adapter
 
 import android.view.View
 
