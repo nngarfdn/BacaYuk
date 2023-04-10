@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -13,7 +14,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.android.bacabacabaca"
+        applicationId "com.android.bisabelajar"
         minSdk 21
         targetSdk 33
         versionCode 1
@@ -82,13 +83,15 @@ dependencies {
     //datastore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
-    implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.2.0'
     // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:31.2.3')
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.5'
-    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.3'
-    implementation 'com.google.firebase:firebase-firestore:24.4.3'
+//    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.6'
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.5'
+    implementation 'com.google.firebase:firebase-firestore:24.4.5'
+    //firebase core
+    implementation 'com.google.firebase:firebase-core:21.1.1'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

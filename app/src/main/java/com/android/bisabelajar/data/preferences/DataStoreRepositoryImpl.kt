@@ -1,4 +1,4 @@
-package com.android.bisabelajar.data.preferences.implementation
+package com.android.bisabelajar.data.preferences
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -7,19 +7,12 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.android.bisabelajar.data.preferences.interfaces.DataStoreRepository
 import com.android.bisabelajar.utils.PREFERENCES_NAME
 import kotlinx.coroutines.flow.first
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = PREFERENCES_NAME)
 
-class DataStoreRepositoryImpl constructor(private val context: Context): DataStoreRepository {
-
-//    suspend fun intPreferencesKey(key: String): Preferences.Key<Int> {
-//        val preferencesKey = intPreferencesKey(key)
-//        val preferences = context.dataStore.data.first()
-//        return preferences[preferencesKey] ?: 0
-//    }
+class DataStoreRepositoryImpl (private val context: Context): DataStoreRepository {
 
     override suspend fun putString(key: String, value: String) {
         val preferencesKey = stringPreferencesKey(key)

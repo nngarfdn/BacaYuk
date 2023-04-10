@@ -1,4 +1,4 @@
-package com.android.bisabelajar.data.preferences.interfaces
+package com.android.bisabelajar.data.preferences
 
 import androidx.datastore.core.DataStore
 
