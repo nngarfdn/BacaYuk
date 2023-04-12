@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.android.bisabelajar.data.model.User
 import com.android.bisabelajar.databinding.ActivityMainBinding
 import com.android.bisabelajar.ui.feat_hurufkapital.AbjadKapitalActivity
 import com.android.bisabelajar.ui.feat_urutabjad.UrutAbjadActivity
@@ -20,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-//        FirebaseApp.initializeApp(this)
 
         binding.apply {
             btnAbjadKapital.setOnClickListener {
@@ -31,9 +31,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        mainViewModel.register("tes123@gmail.com", "12345678")
+        mainViewModel.register("tester01@gmail.com", "12345678")
 
         mainViewModel.saveEmail("nanang@gmail.com")
+        mainViewModel.saveUser(User("123", "tes@gmail.com", "tes"))
         val email = mainViewModel.getEmail()
         Toast.makeText(this, "$email", Toast.LENGTH_SHORT).show()
     }

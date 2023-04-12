@@ -5,7 +5,6 @@ import org.koin.dsl.module
 
 val contextModule = module {
     single { App.getContext() }
-//    android.content.Context
     single { get<App>().contentResolver }
     single { get<App>().packageManager }
     single { get<App>().applicationContext }

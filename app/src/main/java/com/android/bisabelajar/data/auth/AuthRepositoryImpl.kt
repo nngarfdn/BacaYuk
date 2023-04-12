@@ -11,8 +11,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.AuthResult
 
 class AuthRepositoryImpl(
-    private val firebaseAuthDataSource: AuthDataSource,
-    private val context: Context
+    private val firebaseAuthDataSource: AuthDataSource
 ) : AuthRepository {
     override suspend fun register(email: String, password: String): LoginResponse {
         return try {

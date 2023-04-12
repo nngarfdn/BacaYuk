@@ -32,6 +32,7 @@ class App: Application() {
             androidLogger(Level.NONE)
             androidContext(this@App)
             modules(listOf(
+                firebaseModule,
                 preferencesModule,
                 viewModelModule,
                 dataSourceModule,
