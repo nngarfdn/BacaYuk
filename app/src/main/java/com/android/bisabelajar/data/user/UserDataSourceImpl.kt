@@ -12,17 +12,25 @@ import kotlinx.coroutines.tasks.await
 class UserDataSourceImpl(private val firestore: FirebaseFirestore): UserDataSource{
 
 
-    override fun getUserFromFirestore(id: String): Flow<Response<User>> = flow {
-        val snapshot = firestore.collection("users").document(id).get().await()
-        val user = snapshot.toObject(User::class.java)
-        if (user != null) {
-            emit(Response.Success(user)) // jika dapat ditemukan data user dari Firestore
-        } else {
-            emit(Response.Error(null,"User not found.")) // jika tidak dapat ditemukan data user dari Firestore
+    override fun getUserFromFirestore(id: String): Flow<Response<User>> {
+        Log.d("UserDataSourceImpl", "getUserFromFirestore: called")
+        return flow {
+            val firestoreInstance = FirebaseFirestore.getInstance()
+            val snapshot = firestoreInstance.collection("Users").document(id).get().await()
+            //log
+            Log.d("UserDataSourceImpl", "getUserFromFirestore: $snapshot")
+            val user = snapshot.toObject(User::class.java)
+            if (user != null) {
+                emit(Response.Success(user)) // jika dapat ditemukan data user dari Firestore
+                Log.d("UserDataSourceImpl", "getUserFromFirestore: $user")
+            } else {
+                emit(Response.Error(null,"User not found."))
+                Log.d("UserDataSourceImpl", "getUserFromFirestore: Notfound")// jika tidak dapat ditemukan data user dari Firestore
+            }
+        }.catch {
+            emit(Response.Error(null,"Failed to fetch user data from Firestore."))
+            Log.e("UserDataSourceImpl", "Failed to fetch user data from Firestore.", it)
         }
-    }.catch {
-        emit(Response.Error(null,"Failed to fetch user data from Firestore."))
-        Log.e("UserDataSourceImpl", "Failed to fetch user data from Firestore.", it)
     }
 
     override suspend fun addUpdateUserToFirestore(user: User): Boolean {
@@ -36,6 +44,4 @@ class UserDataSourceImpl(private val firestore: FirebaseFirestore): UserDataSour
             false // kembalikan nilai boolean false jika operasi gagal
         }
     }
-
-
 }
