@@ -13,6 +13,12 @@ android {
         enabled = true
     }
 
+    sourceSets {
+        main {
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/font']
+        }
+    }
+
     defaultConfig {
         applicationId "com.android.bisabelajar"
         minSdk 21
@@ -92,6 +98,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:24.4.5'
     //firebase core
     implementation 'com.google.firebase:firebase-core:21.1.1'
+
+    //sdp and ssp
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+    implementation 'com.intuit.ssp:ssp-android:1.1.0'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

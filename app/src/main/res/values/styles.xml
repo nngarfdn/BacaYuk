@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextViewH72Regular">
+        <item name="android:fontFamily">@font/pjs_regular</item>
+        <item name="android:textSize">@dimen/_72ssp</item>
+    </style>
+
+    <style name="TextViewH48Regular">
+        <item name="android:fontFamily">@font/pjs_regular</item>
+        <item name="android:textSize">@dimen/_48ssp</item>
+    </style>
+
+    <style name="TextViewH36Regular">
+        <item name="android:fontFamily">@font/pjs_regular</item>
+        <item name="android:textSize">@dimen/_36ssp</item>
+    </style>
+
+    <style name="TextViewH24Regular">
+        <item name="android:fontFamily">@font/pjs_regular</item>
+        <item name="android:textSize">@dimen/_24ssp</item>
+    </style>
+
+    <style name="TextViewH20Regular">
+        <item name="android:fontFamily">@font/pjs_regular</item>
+        <item name="android:textSize">@dimen/_20ssp</item>
+    </style>
+
+    <style name="TextViewH18Regular">
+        <item name="android:fontFamily">@font/pjs_regular</item>
+        <item name="android:textSize">@dimen/_18ssp</item>
+    </style>
+
+    <style name="TextViewH16Regular">
+        <item name="android:fontFamily">@font/pjs_regular</item>
+        <item name="android:textSize">@dimen/_16ssp</item>
+    </style>
+
+    <style name="TextViewH14Regular">
+        <item name="android:fontFamily">@font/pjs_regular</item>
+        <item name="android:textSize">@dimen/_14ssp</item>
+    </style>
+
+    <style name="TextViewH12Regular">
+        <item name="android:fontFamily">@font/pjs_regular</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+    </style>
+
+    <style name="TextViewH10Regular">
+        <item name="android:fontFamily">@font/pjs_regular</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
+    </style>
+
+    <style name="TextViewH72Medium">
+        <item name="android:fontFamily">@font/pjs_medium</item>
+        <item name="android:textSize">@dimen/_72ssp</item>
+    </style>
+
+    <style name="TextViewH48Medium">
+        <item name="android:fontFamily">@font/pjs_medium</item>
+        <item name="android:textSize">@dimen/_48ssp</item>
+    </style>
+
+    <style name="TextViewH36Medium">
+        <item name="android:fontFamily">@font/pjs_medium</item>
+        <item name="android:textSize">@dimen/_36ssp</item>
+    </style>
+
+    <style name="TextViewH24Medium">
+        <item name="android:fontFamily">@font/pjs_medium</item>
+        <item name="android:textSize">@dimen/_24ssp</item>
+    </style>
+
+    <style name="TextViewH20Medium">
+        <item name="android:fontFamily">@font/pjs_medium</item>
+        <item name="android:textSize">@dimen/_20ssp</item>
+    </style>
+
+    <style name="TextViewH18Medium">
+        <item name="android:fontFamily">@font/pjs_medium</item>
+        <item name="android:textSize">@dimen/_18ssp</item>
+    </style>
+
+    <style name="TextViewH16Medium">
+        <item name="android:fontFamily">@font/pjs_medium</item>
+        <item name="android:textSize">@dimen/_16ssp</item>
+    </style>
+
+    <style name="TextViewH14Medium">
+        <item name="android:fontFamily">@font/pjs_medium</item>
+        <item name="android:textSize">@dimen/_14ssp</item>
+    </style>
+
+    <style name="TextViewH12Medium">
+        <item name="android:fontFamily">@font/pjs_medium</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+    </style>
+
+    <style name="TextViewH10Medium">
+        <item name="android:fontFamily">@font/pjs_medium</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
+    </style>
+
+    <style name="TextViewH72SemiBold">
+        <item name="android:fontFamily">@font/pjs_semi_bold</item>
+        <item name="android:textSize">@dimen/_72ssp</item>
+    </style>
+
+    <style name="TextViewH48SemiBold">
+        <item name="android:fontFamily">@font/pjs_semi_bold</item>
+        <item name="android:textSize">@dimen/_48ssp</item>
+    </style>
+
+    <style name="TextViewH36SemiBold">
+        <item name="android:fontFamily">@font/pjs_semi_bold</item>
+        <item name="android:textSize">@dimen/_36ssp</item>
+    </style>
+
+    <style name="TextViewH24SemiBold">
+        <item name="android:fontFamily">@font/pjs_semi_bold</item>
+        <item name="android:textSize">@dimen/_24ssp</item>
+    </style>
+
+    <style name="TextViewH20SemiBold">
+        <item name="android:fontFamily">@font/pjs_semi_bold</item>
+        <item name="android:textSize">@dimen/_20ssp</item>
+    </style>
+
+    <style name="TextViewH18SemiBold">
+        <item name="android:fontFamily">@font/pjs_semi_bold</item>
+        <item name="android:textSize">@dimen/_18ssp</item>
+    </style>
+
+    <style name="TextViewH16SemiBold">
+        <item name="android:fontFamily">@font/pjs_semi_bold</item>
+        <item name="android:textSize">@dimen/_16ssp</item>
+    </style>
+
+    <style name="TextViewH14SemiBold">
+        <item name="android:fontFamily">@font/pjs_semi_bold</item>
+        <item name="android:textSize">@dimen/_14ssp</item>
+    </style>
+
+    <style name="TextViewH12SemiBold">
+        <item name="android:fontFamily">@font/pjs_semi_bold</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+    </style>
+
+    <style name="TextViewH10SemiBold">
+        <item name="android:fontFamily">@font/pjs_semi_bold</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
+    </style>
+
+    <style name="TextViewH72Bold">
+        <item name="android:fontFamily">@font/pjs_bold</item>
+        <item name="android:textSize">@dimen/_72ssp</item>
+    </style>
+
+    <style name="TextViewH48Bold">
+        <item name="android:fontFamily">@font/pjs_bold</item>
+        <item name="android:textSize">@dimen/_48ssp</item>
+    </style>
+
+    <style name="TextViewH36Bold">
+        <item name="android:fontFamily">@font/pjs_bold</item>
+        <item name="android:textSize">@dimen/_36ssp</item>
+    </style>
+
+    <style name="TextViewH24Bold">
+        <item name="android:fontFamily">@font/pjs_bold</item>
+        <item name="android:textSize">@dimen/_24ssp</item>
+    </style>
+
+    <style name="TextViewH20Bold">
+        <item name="android:fontFamily">@font/pjs_bold</item>
+        <item name="android:textSize">@dimen/_20ssp</item>
+    </style>
+
+    <style name="TextViewH18Bold">
+        <item name="android:fontFamily">@font/pjs_bold</item>
+        <item name="android:textSize">@dimen/_18ssp</item>
+    </style>
+
+    <style name="TextViewH16Bold">
+        <item name="android:fontFamily">@font/pjs_bold</item>
+        <item name="android:textSize">@dimen/_16ssp</item>
+    </style>
+
+    <style name="TextViewH14Bold">
+        <item name="android:fontFamily">@font/pjs_bold</item>
+        <item name="android:textSize">@dimen/_14ssp</item>
+    </style>
+
+    <style name="TextViewH12Bold">
+        <item name="android:fontFamily">@font/pjs_bold</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+    </style>
+
+    <style name="TextViewH10Bold">
+        <item name="android:fontFamily">@font/pjs_bold</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
+    </style>
+
+</resources>

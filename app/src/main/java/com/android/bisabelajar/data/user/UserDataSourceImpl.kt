@@ -11,14 +11,11 @@ import kotlinx.coroutines.tasks.await
 
 class UserDataSourceImpl(private val firestore: FirebaseFirestore): UserDataSource{
 
-
     override fun getUserFromFirestore(id: String): Flow<Response<User>> {
-        Log.d("UserDataSourceImpl", "getUserFromFirestore: called")
+
         return flow {
             val firestoreInstance = FirebaseFirestore.getInstance()
             val snapshot = firestoreInstance.collection("Users").document(id).get().await()
-            //log
-            Log.d("UserDataSourceImpl", "getUserFromFirestore: $snapshot")
             val user = snapshot.toObject(User::class.java)
             if (user != null) {
                 emit(Response.Success(user)) // jika dapat ditemukan data user dari Firestore
