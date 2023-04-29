@@ -18,6 +18,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.apply {
+            toolbar.txtTitle.text = getString(R.string.masuk)
             btnLogin.setOnClickListener {
                 changeErrorStateEditText(edtEmail, txtEmailError, "Email tidak boleh kosong", true)
             }

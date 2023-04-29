@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">BacaBacaBaca</string>
+    <string name="sample_text">Sample Text</string>
+    <string name="email">Email</string>
+    <string name="kata_sandi">Kata Sandi</string>
+    <string name="masukan_email">Masukan Email</string>
+    <string name="masukan_katasandi">Masukan Katasandi</string>
+    <string name="masuk">Masuk</string>
+    <string name="lupa_kata_sandi">Lupa Kata Sandi?</string>
 </resources>

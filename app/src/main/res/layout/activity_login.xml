@@ -6,34 +6,132 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.feat_auth.login.LoginActivity">
-<!--    kasih scroll view-->
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/edt_email"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar"/>
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/normal_state_edittext_outline"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="12dp"
-        android:layout_margin="16dp"/>
-    <TextView
-        android:id="@+id/txt_email_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:visibility="gone"
-        android:textColor="@color/red_error"/>
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:fontFamily="@font/pjs_extra_bold_italic"
-        android:layout_height="wrap_content"
-        android:text="Masuk"/>
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_16sdp"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        style="@style/TextViewH72Regular" />
+            <ImageView
+                android:layout_width="@dimen/_183sdp"
+                android:layout_height="@dimen/_64sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_24sdp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_logo_wide"/>
+
+            <TextView
+                android:id="@+id/txt_capt_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                style="@style/TextViewH14Medium"
+                android:textColor="@color/neutral_700"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                app:endIconMode="clear_text"
+                app:placeholderText="@string/masukan_email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_state_edittext_outline"
+                android:paddingVertical="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/txt_email_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                style="@style/TextViewH12Regular"
+                android:visibility="gone"
+                android:textColor="@color/red_error"/>
+
+            <TextView
+                android:id="@+id/txt_capt_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/kata_sandi"
+                style="@style/TextViewH14Medium"
+                android:textColor="@color/neutral_700"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                app:endIconMode="password_toggle"
+                app:placeholderText="@string/masukan_katasandi"
+                android:layout_marginTop="@dimen/_4sdp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_state_edittext_outline"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="textPassword"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:paddingVertical="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/txt_password_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                style="@style/TextViewH12Regular"
+                android:visibility="gone"
+                android:textColor="@color/red_error"/>
+            <TextView
+                android:id="@+id/txt_forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:text="@string/lupa_kata_sandi"
+                style="@style/TextViewH12Regular"
+                android:textColor="@color/primary_500"/>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_width="match_parent"
+                android:background="@drawable/button_rounded_purple_10px"
+                android:fontFamily="@font/pjs_medium"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:text="@string/masuk"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_16sdp">
+                <TextView
+                    android:id="@+id/txt_capt_belum_punya_akun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Belum punya akun?"
+                    style="@style/TextViewH14Regular"
+                    android:textColor="@color/neutral_700"/>
+                <TextView
+                    android:id="@+id/txt_daftar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Daftar"
+                    style="@style/TextViewH14Bold"
+                    android:textColor="@color/primary_500"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
