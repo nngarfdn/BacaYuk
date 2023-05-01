@@ -29,6 +29,36 @@
                 tools:ignore="ContentDescription" />
 
             <TextView
+                android:id="@+id/txt_capt_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nama_lengkap"
+                style="@style/TextViewH14Medium"
+                android:textColor="@color/neutral_700"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                app:endIconMode="clear_text"
+                app:placeholderText="@string/masukan_nama_lengkap"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_state_edittext_outline"
+                    android:paddingVertical="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/txt_name_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                style="@style/TextViewH12Regular"
+                android:visibility="gone"
+                android:textColor="@color/red_error"/>
+
+            <TextView
                 android:id="@+id/txt_capt_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,13 +72,13 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:layout_height="wrap_content">
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edt_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:background="@drawable/normal_state_edittext_outline"
-                android:paddingVertical="12dp" />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:background="@drawable/normal_state_edittext_outline"
+                    android:paddingVertical="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
                 android:id="@+id/txt_email_error"
@@ -92,17 +122,43 @@
                 style="@style/TextViewH12Regular"
                 android:visibility="gone"
                 android:textColor="@color/red_error"/>
+
             <TextView
-                android:id="@+id/txt_forgot_password"
+                android:id="@+id/txt_capt_password_confirmation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/konfirmasi_kata_sandi"
+                style="@style/TextViewH14Medium"
+                android:textColor="@color/neutral_700"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                app:endIconMode="password_toggle"
+                app:placeholderText="@string/masukan_ulang_kata_sandi"
                 android:layout_marginTop="@dimen/_4sdp"
-                android:text="@string/lupa_kata_sandi"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_password_confirmation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_state_edittext_outline"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="textPassword"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:paddingVertical="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/txt_password_confirmation_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
                 style="@style/TextViewH12Regular"
-                android:textColor="@color/primary_500"/>
+                android:visibility="gone"
+                android:textColor="@color/red_error"/>
 
             <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_daftar"
                 android:layout_marginTop="@dimen/_16sdp"
                 android:layout_width="match_parent"
                 android:background="@drawable/button_rounded_purple_10px"
@@ -110,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/_8sdp"
                 android:textColor="@color/white"
-                android:text="@string/masuk"/>
+                android:text="@string/daftar"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -122,14 +178,14 @@
                     android:id="@+id/txt_capt_belum_punya_akun"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/belum_punya_akun"
+                    android:text="@string/sudah_punya_akun"
                     style="@style/TextViewH14Regular"
                     android:textColor="@color/neutral_700"/>
                 <TextView
-                    android:id="@+id/txt_daftar"
+                    android:id="@+id/txt_masuk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/daftar"
+                    android:text="@string/masuk"
                     style="@style/TextViewH14Bold"
                     android:textColor="@color/primary_500"/>
             </LinearLayout>

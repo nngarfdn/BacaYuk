@@ -8,6 +8,6 @@ typealias LoginResponse = Response<User>
 typealias RegisterResponse = Response<User>
 
 interface AuthRepository {
-    suspend fun register(email: String, password: String): LoginResponse
-    suspend fun login(email: String, password: String): RegisterResponse
+    suspend fun register(email: String, password: String):RegisterResponse
+    suspend fun login(email: String, password: String): Flow<LoginResponse>
 }

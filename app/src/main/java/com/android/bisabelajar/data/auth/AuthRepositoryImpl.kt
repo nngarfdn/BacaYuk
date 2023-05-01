@@ -9,11 +9,13 @@ import com.android.bisabelajar.domain.repository.LoginResponse
 import com.android.bisabelajar.domain.repository.RegisterResponse
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.AuthResult
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class AuthRepositoryImpl(
     private val firebaseAuthDataSource: AuthDataSource
 ) : AuthRepository {
-    override suspend fun register(email: String, password: String): LoginResponse {
+    override suspend fun register(email: String, password: String):  RegisterResponse{
         return try {
 
             val result: AuthResult = firebaseAuthDataSource.register(email, password)
@@ -31,18 +33,27 @@ class AuthRepositoryImpl(
         }
     }
 
-    override suspend fun login(email: String, password: String): RegisterResponse {
-        return try {
+    override suspend fun login(email: String, password: String): Flow<LoginResponse> {
+//        return try {
+//            val result: AuthResult = firebaseAuthDataSource.login(email, password)
+//            if (result.user != null) {
+//                val user = User(result.user!!.uid, result.user!!.email.orEmpty(), "")
+//                Response.Success(user)
+//            } else {
+//                Response.Error(Exception("Failed to login: User is null"))
+//            }
+//        } catch (exception: Exception) {
+//            Response.Error(exception)
+//        }
+
+        return flow {
             val result: AuthResult = firebaseAuthDataSource.login(email, password)
             if (result.user != null) {
                 val user = User(result.user!!.uid, result.user!!.email.orEmpty(), "")
-                Response.Success(user)
+                emit(Response.Success(user))
             } else {
-                Response.Error(Exception("Failed to login: User is null"))
+                emit(Response.Error(Exception("Failed to login: User is null")))
             }
-        } catch (exception: Exception) {
-            Response.Error(exception)
         }
     }
-
 }

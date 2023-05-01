@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BacaBacaBaca</string>
+    <string name="app_name">BacaYuk</string>
     <string name="sample_text">Sample Text</string>
     <string name="email">Email</string>
     <string name="kata_sandi">Kata Sandi</string>
@@ -7,4 +7,12 @@
     <string name="masukan_katasandi">Masukan Katasandi</string>
     <string name="masuk">Masuk</string>
     <string name="lupa_kata_sandi">Lupa Kata Sandi?</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="daftar">Daftar</string>
+    <string name="masukan_nama_lengkap">Masukan Nama Lengkap</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="konfirmasi_kata_sandi">Konfirmasi Kata Sandi</string>
+    <string name="masukan_ulang_kata_sandi">Masukan Ulang Kata Sandi</string>
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
+    <string name="nama_lengkap_wajib_diisi">Nama lengkap wajib diisi</string>
 </resources>
