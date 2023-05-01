@@ -4,14 +4,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.widget.Toast
 import com.android.bisabelajar.R
+import com.android.bisabelajar.data.model.Response
 import com.android.bisabelajar.databinding.ActivityRegisterBinding
+import com.android.bisabelajar.ui.feat_auth.login.LoginActivity
+import com.android.bisabelajar.ui.feat_dashboard.MainActivity
 import com.android.bisabelajar.utils.changeErrorStateEditText
 import com.android.bisabelajar.utils.isValidEmail
+import com.android.bisabelajar.utils.openActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityRegisterBinding.inflate(layoutInflater) }
+    private val registerViewModel: RegisterViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +28,32 @@ class RegisterActivity : AppCompatActivity() {
         binding.apply {
             toolbar.txtTitle.text = getString(R.string.daftar)
             onTextChange()
+            txtMasuk.setOnClickListener {
+                openActivity(this@RegisterActivity, LoginActivity::class.java)
+            }
+            btnDaftar.isEnabled = edtName.text.toString().isNotEmpty() && edtEmail.text.toString()
+                .isNotEmpty() && edtPassword.text.toString()
+                .isNotEmpty() && edtPasswordConfirmation.text.toString().isNotEmpty()
+        }
+
+        registerViewModel.user.observe(this@RegisterActivity) { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("LoginActivity", "onCreate: ${response.data.email}")
+                    openActivity(this@RegisterActivity, MainActivity::class.java)
+                }
+                is Response.Error -> {
+                    Toast.makeText(this, "${response.e?.message}", Toast.LENGTH_SHORT).show()
+                    Log.d("LoginActivity", "onCreate: ${response.message}")
+                }
+                else -> {
+
+                }
+            }
+        }
+
+        registerViewModel.errorMessage.observe(this@RegisterActivity) {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -28,16 +62,33 @@ class RegisterActivity : AppCompatActivity() {
         binding.apply {
             edtName.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    changeErrorStateEditText(
-                        this@RegisterActivity,
-                        edtName,
-                        txtNameError,
-                        getString(R.string.nama_lengkap_wajib_diisi),
-                        s.toString().isEmpty()
-                    )
+                    if (edtName.text.toString().isEmpty()) {
+                        changeErrorStateEditText(
+                            this@RegisterActivity,
+                            edtName,
+                            txtNameError,
+                            getString(R.string.nama_lengkap_wajib_diisi),
+                            true
+                        )
+                    } else {
+                        changeErrorStateEditText(
+                            this@RegisterActivity,
+                            edtName,
+                            txtNameError,
+                            getString(R.string.nama_lengkap_wajib_diisi),
+                            false
+                        )
+
+                    }
                     btnDaftar.isEnabled = s.toString().isNotEmpty() && edtEmail.text.toString()
                         .isNotEmpty() && edtPassword.text.toString()
                         .isNotEmpty() && edtPasswordConfirmation.text.toString().isNotEmpty()
+                    btnDaftar.setOnClickListener {
+                        registerViewModel.register(
+                            edtEmail.text.toString(),
+                            edtPassword.text.toString()
+                        )
+                    }
                 }
 
                 override fun beforeTextChanged(
@@ -96,7 +147,10 @@ class RegisterActivity : AppCompatActivity() {
                             .isNotEmpty() && edtPassword.text.toString()
                             .isNotEmpty() && edtPasswordConfirmation.text.toString().isNotEmpty()
                     btnDaftar.setOnClickListener {
-//                        todo: onclick
+                        registerViewModel.register(
+                            edtEmail.text.toString(),
+                            edtPassword.text.toString()
+                        )
                     }
                 }
             })
@@ -136,7 +190,10 @@ class RegisterActivity : AppCompatActivity() {
                             .isNotEmpty() && edtPassword.text.toString()
                             .isNotEmpty() && edtPasswordConfirmation.text.toString().isNotEmpty()
                     btnDaftar.setOnClickListener {
-                        //todo: onclick
+                        registerViewModel.register(
+                            edtEmail.text.toString(),
+                            edtPassword.text.toString()
+                        )
                     }
                 }
 
@@ -193,7 +250,10 @@ class RegisterActivity : AppCompatActivity() {
                             .isNotEmpty() && edtPassword.text.toString()
                             .isNotEmpty() && edtPasswordConfirmation.text.toString().isNotEmpty()
                     btnDaftar.setOnClickListener {
-                        //todo: onclick
+                        registerViewModel.register(
+                            edtEmail.text.toString(),
+                            edtPassword.text.toString()
+                        )
                     }
                 }
 
