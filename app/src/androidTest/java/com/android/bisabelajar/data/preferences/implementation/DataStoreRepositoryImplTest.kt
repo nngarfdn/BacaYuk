@@ -7,6 +7,8 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.bisabelajar.data.preferences.DataStoreRepository
+import com.android.bisabelajar.data.preferences.DataStoreRepositoryImpl
+import com.android.bisabelajar.data.preferences.dataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
