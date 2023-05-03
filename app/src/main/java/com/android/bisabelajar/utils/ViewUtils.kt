@@ -22,6 +22,7 @@ fun View.invisible() {
 fun isValidEmail(email: String): Boolean {
     return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
 }
+
 fun changeErrorStateEditText(context: Context, btn: AppCompatEditText, tv: TextView, errorMsg: String,
                              isError: Boolean){
     if (isError) {

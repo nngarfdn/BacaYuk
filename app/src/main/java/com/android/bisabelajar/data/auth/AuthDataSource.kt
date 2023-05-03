@@ -14,4 +14,8 @@ class AuthDataSource(private val firebaseAuth: FirebaseAuth) {
         return firebaseAuth.createUserWithEmailAndPassword(email, password).await()
     }
 
+    suspend fun forgotPassword(email: String){
+        firebaseAuth.sendPasswordResetEmail(email).await()
+    }
+
 }

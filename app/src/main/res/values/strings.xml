@@ -15,4 +15,8 @@
     <string name="masukan_ulang_kata_sandi">Masukan Ulang Kata Sandi</string>
     <string name="sudah_punya_akun">Sudah punya akun?</string>
     <string name="nama_lengkap_wajib_diisi">Nama lengkap wajib diisi</string>
+    <string name="kami_akan_mengirimkan_tautan_untuk_mengatur_ulang_kata_sandi_anda">Kami akan mengirimkan tautan untuk mengatur ulang kata sandi Anda</string>
+    <string name="kirim_tautan">Kirim Tautan</string>
+    <string name="tidak">Tidak</string>
+    <string name="ya">Ya</string>
 </resources>

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.bisabelajar.R
 import com.android.bisabelajar.data.model.Response
 import com.android.bisabelajar.databinding.ActivityLoginBinding
+import com.android.bisabelajar.ui.feat_auth.forgot_password.ForgotPasswordActivity
 import com.android.bisabelajar.ui.feat_auth.register.RegisterActivity
 import com.android.bisabelajar.ui.feat_dashboard.MainActivity
 import com.android.bisabelajar.utils.changeErrorStateEditText
@@ -31,6 +32,9 @@ class LoginActivity : AppCompatActivity() {
                 edtEmail.text.toString().isNotEmpty() && edtPassword.text.toString().isNotEmpty()
             txtDaftar.setOnClickListener {
                 openActivity(this@LoginActivity, RegisterActivity::class.java)
+            }
+            txtForgotPassword.setOnClickListener {
+                openActivity(this@LoginActivity, ForgotPasswordActivity::class.java)
             }
         }
 
