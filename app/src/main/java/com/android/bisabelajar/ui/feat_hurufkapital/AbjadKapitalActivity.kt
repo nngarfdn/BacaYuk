@@ -15,9 +15,7 @@ class AbjadKapitalActivity : AppCompatActivity(), AdapterListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         abjadAdapter.submitData(getAbjadKapital())
-
         binding.apply {
             rvAbjadKapital.apply {
                 adapter = abjadAdapter

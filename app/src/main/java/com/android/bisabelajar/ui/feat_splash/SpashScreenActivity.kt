@@ -9,6 +9,7 @@ import com.android.bisabelajar.R
 import com.android.bisabelajar.databinding.ActivitySpashScreenBinding
 import com.android.bisabelajar.ui.feat_auth.login.LoginActivity
 import com.android.bisabelajar.ui.feat_dashboard.MainActivity
+import com.android.bisabelajar.ui.feat_student.list_student.ListStudentActivity
 
 class SpashScreenActivity : AppCompatActivity() {
 
@@ -26,7 +27,7 @@ class SpashScreenActivity : AppCompatActivity() {
 
             override fun onFinish() {
                 // Intent untuk berpindah ke MainActivity
-                val intent = Intent(this@SpashScreenActivity, LoginActivity::class.java)
+                val intent = Intent(this@SpashScreenActivity, ListStudentActivity::class.java)
                 startActivity(intent)
                 finish()
             }
