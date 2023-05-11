@@ -5,22 +5,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="32dp"
-    tools:context=".ui.feat_dashboard.MainActivity">
+    tools:context=".ui.feat_menu_utama.MainActivity">
 
 
-    <Button
-        android:id="@+id/btn_abjad_kapital"
-        android:text="Abjad Kapital"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar"/>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_16sdp"
+            android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_profile"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_70sdp"
+                android:src="@drawable/ic_person"
+                app:civ_border_color="@color/primary_100"
+                app:civ_border_width="@dimen/_2sdp"/>
 
-    <Button
-        android:id="@+id/btn_urut_abjad"
-        android:text="Urut Abjad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextViewH16Bold"
+                android:textAlignment="center"
+                android:text="@string/loading"
+                android:layout_marginTop="@dimen/_8sdp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_baca_huruf"
+                android:layout_marginTop="@dimen/_48sdp"
+                android:layout_width="match_parent"
+                android:background="@drawable/button_rounded_green_10px"
+                android:fontFamily="@font/pjs_medium"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:text="@string/baca_huruf"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_baca_kata"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_width="match_parent"
+                android:background="@drawable/button_rounded_blue_10px"
+                android:fontFamily="@font/pjs_medium"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:text="@string/baca_kata"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_baca_kalimat"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_width="match_parent"
+                android:background="@drawable/button_rounded_purple_10px"
+                android:fontFamily="@font/pjs_medium"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:text="@string/baca_kalimat"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
 
 
 

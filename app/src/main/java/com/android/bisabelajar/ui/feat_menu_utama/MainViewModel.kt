@@ -1,4 +1,4 @@
-package com.android.bisabelajar.ui.feat_dashboard
+package com.android.bisabelajar.ui.feat_menu_utama
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -11,7 +11,6 @@ import com.android.bisabelajar.data.preferences.DataStoreRepository
 import com.android.bisabelajar.domain.usecase.AuthUseCase
 import com.android.bisabelajar.domain.usecase.UserUseCase
 import com.android.bisabelajar.utils.EMAIL
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/_8sdp"
+    android:layout_height="@dimen/_72sdp">
+
+    <ImageView
+        android:id="@+id/img_abjad"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        android:src="@drawable/bg_rounded_menu"
+        app:civ_border_color="@color/primary_100"
+        app:civ_border_width="@dimen/_2sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_checklist"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:src="@drawable/ic_checklist"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/txt_abjad"
+        style="@style/TextViewH24Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A"
+        android:textColor="@color/teal_700"
+        app:layout_constraintBottom_toBottomOf="@+id/img_abjad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/img_abjad"
+        app:layout_constraintTop_toTopOf="@+id/img_abjad" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

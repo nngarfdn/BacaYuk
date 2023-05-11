@@ -22,34 +22,7 @@ terus di highlight-->
             android:layout_margin="8dp"
             android:textSize="100sp"
             android:text="D"/>
-        <TextView
-            android:id="@+id/opt_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="100sp"
-            android:text="B"/>
-        <TextView
-            android:id="@+id/opt_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="100sp"
-            android:text="E"/>
-        <TextView
-            android:id="@+id/opt_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="100sp"
-            android:text="C"/>
-        <TextView
-            android:id="@+id/opt_5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="100sp"
-            android:text="A"/>
+
 
     </LinearLayout>
 

@@ -1,4 +1,4 @@
-package com.android.bisabelajar.ui.feat_hurufkapital
+package com.android.bisabelajar.ui.feat_baca_huruf.menu_baca_huruf
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.android.bisabelajar.databinding.ItemAbjadBinding
 import com.android.bisabelajar.ui.listener.adapter.AdapterListener
 import com.android.bisabelajar.data.model.Abjad
+import com.android.bisabelajar.databinding.ItemAbjadMenuBinding
+import com.android.bisabelajar.utils.invisible
+import com.android.bisabelajar.utils.visible
 
 
-class AbjadAdapter(val listener: AdapterListener): RecyclerView.Adapter<AbjadAdapter.RecentAdapterViewHolder>() {
+class AbjadMenuAdapter(val listener: AdapterListener): RecyclerView.Adapter<AbjadMenuAdapter.RecentAdapterViewHolder>() {
     inner class RecentAdapterViewHolder(val view: View) :
         RecyclerView.ViewHolder(view)
 
@@ -28,13 +30,13 @@ class AbjadAdapter(val listener: AdapterListener): RecyclerView.Adapter<AbjadAda
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
-    fun submitData(list: ArrayList<Abjad?>?) {
+    fun submitData(list: ArrayList<Abjad>) {
 
         differ.submitList(list) }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentAdapterViewHolder {
         //return binding
-        val binding = ItemAbjadBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemAbjadMenuBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RecentAdapterViewHolder(binding.root)
     }
 
@@ -42,10 +44,15 @@ class AbjadAdapter(val listener: AdapterListener): RecyclerView.Adapter<AbjadAda
         holder.view.apply {
             val data = differ.currentList[position]
             Log.d("TAG", "onBindViewHolder: $data")
-            val binding = ItemAbjadBinding.bind(this)
+            val binding = ItemAbjadMenuBinding.bind(this)
             binding.txtAbjad.text = data?.abjadKapital
+            if (position < 10) {
+                binding.imgChecklist.visible()
+            } else {
+                binding.imgChecklist.invisible()
+            }
             rootView.setOnClickListener {
-                listener.onClick(data?.abjadKapital, position, binding.root)
+                listener.onClick(data, position, binding.root)
             }
         }
     }

@@ -10,7 +10,7 @@ import com.android.bisabelajar.R
 import com.android.bisabelajar.data.model.Response
 import com.android.bisabelajar.databinding.ActivityRegisterBinding
 import com.android.bisabelajar.ui.feat_auth.login.LoginActivity
-import com.android.bisabelajar.ui.feat_dashboard.MainActivity
+import com.android.bisabelajar.ui.feat_menu_utama.MainActivity
 import com.android.bisabelajar.utils.changeErrorStateEditText
 import com.android.bisabelajar.utils.isValidEmail
 import com.android.bisabelajar.utils.openActivity

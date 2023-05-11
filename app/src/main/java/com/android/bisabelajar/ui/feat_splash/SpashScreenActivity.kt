@@ -4,11 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
-import com.android.bisabelajar.R
 import com.android.bisabelajar.databinding.ActivitySpashScreenBinding
-import com.android.bisabelajar.ui.feat_auth.login.LoginActivity
-import com.android.bisabelajar.ui.feat_dashboard.MainActivity
 import com.android.bisabelajar.ui.feat_student.list_student.ListStudentActivity
 
 class SpashScreenActivity : AppCompatActivity() {

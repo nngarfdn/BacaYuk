@@ -21,4 +21,13 @@
     <string name="ya">Ya</string>
     <string name="nama_siswa">Nama Siswa</string>
     <string name="pilih">Pilih</string>
+    <string name="pilih_siswa">Pilih Siswa</string>
+    <string name="loading">Loading</string>
+    <string name="baca_huruf">Baca Huruf</string>
+    <string name="baca_kata">Baca Kata</string>
+    <string name="baca_kalimat">Baca Kalimat</string>
+    <string name="a">A</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lanjutkan">Lanjutkan</string>
 </resources>

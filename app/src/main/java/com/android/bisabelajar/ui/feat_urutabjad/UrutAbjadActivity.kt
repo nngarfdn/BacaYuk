@@ -23,20 +23,8 @@ class UrutAbjadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.apply {
-//            option1.setOnTouchListener(ChoiceTouchListener())
-//            option2.setOnTouchListener(ChoiceTouchListener())
-//            option3.setOnTouchListener(ChoiceTouchListener())
-//
-//            choice1.setOnDragListener(ChoiceDragListener())
-//            choice2.setOnDragListener(ChoiceDragListener())
-//            choice3.setOnDragListener(ChoiceDragListener())
-
 
             opt1.setOnTouchListener(ChoiceTouchListener())
-            opt2.setOnTouchListener(ChoiceTouchListener())
-            opt3.setOnTouchListener(ChoiceTouchListener())
-            opt4.setOnTouchListener(ChoiceTouchListener())
-            opt5.setOnTouchListener(ChoiceTouchListener())
 
             cho1.setOnDragListener(ChoiceDragListener())
             cho2.setOnDragListener(ChoiceDragListener())
@@ -76,10 +64,7 @@ class UrutAbjadActivity : AppCompatActivity() {
     fun reset() {
         binding.apply {
             opt1.visibility = View.VISIBLE
-            opt2.visibility = View.VISIBLE
-            opt3.visibility = View.VISIBLE
-            opt4.visibility = View.VISIBLE
-            opt5.visibility = View.VISIBLE
+
             cho1.text = "A"
             cho2.text = "B"
             cho3.text = "C"
@@ -108,16 +93,16 @@ class UrutAbjadActivity : AppCompatActivity() {
             when (event.action) {
                 DragEvent.ACTION_DRAG_STARTED -> {
                     //change the text color to teal200
-                    Toast.makeText(this@UrutAbjadActivity, "Drag Started", Toast.LENGTH_SHORT).show()
+
                 }
                 DragEvent.ACTION_DRAG_ENTERED -> {
-                    Toast.makeText(this@UrutAbjadActivity, "Drag Entered", Toast.LENGTH_SHORT).show()
+
                 }
                 DragEvent.ACTION_DRAG_EXITED -> {
-                    Toast.makeText(this@UrutAbjadActivity, "Drag Exited", Toast.LENGTH_SHORT).show()
+
                 }
                 DragEvent.ACTION_DROP -> {
-                    Toast.makeText(this@UrutAbjadActivity, "Drop", Toast.LENGTH_SHORT).show()
+
 
                     //handle the dragged view being dropped over a drop view
                     val view = event.localState as View

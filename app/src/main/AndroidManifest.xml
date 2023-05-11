@@ -14,6 +14,27 @@
         android:theme="@style/Theme.BacaBacaBaca"
         tools:targetApi="31">
         <activity
+            android:name=".QuizBacaHurufActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.feat_student.list_student.ListStudentActivity"
             android:exported="false">
             <meta-data
@@ -76,7 +97,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.feat_dashboard.MainActivity"
+            android:name=".ui.feat_menu_utama.MainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
