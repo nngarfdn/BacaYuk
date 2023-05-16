@@ -25,6 +25,17 @@ class ListStudentViewModel(
     private val _students = MutableLiveData<Response<List<Student>>>()
     val students: LiveData<Response<List<Student>>> = _students
 
+    private val _isSuccess = MutableLiveData<Response<Boolean>>()
+    val isSuccess : MutableLiveData<Response<Boolean>> = _isSuccess
+
+    fun deleteStudentFirestore(idUser: String,idStudent: String) = viewModelScope.launch {
+        val result = studentUseCase.deleteStudentFromFirestore(idUser,idStudent)
+        if (result){
+            _isSuccess.postValue(Response.Success(result))
+        } else {
+            _isSuccess.postValue(Response.Error(null, "Galgal Menambahkan"))
+        }
+    }
 
     fun logOutUser() = viewModelScope.launch {
         authUseCase.logOut()

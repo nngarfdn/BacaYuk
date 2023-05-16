@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface StudentRepository {
     fun getAllUserFromFirestore(id: String): Flow<Response<List<Student>>>
     suspend fun addUpdateStudentToFirestore(idUser: String,user: Student): Boolean
+    suspend fun deleteStudentFromFirestore(idUser: String,idStudent: String): Boolean
 }

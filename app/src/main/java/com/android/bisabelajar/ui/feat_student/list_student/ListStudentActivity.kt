@@ -143,6 +143,16 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
             startActivity(intent)
         }
 
+        deleteSiswaText.setOnClickListener {
+            val uidUser = listStudentViewModel.getUID() ?: "-"
+            selectedStudent?.uuid?.let { it1 ->
+                listStudentViewModel.deleteStudentFirestore(uidUser,
+                    it1
+                )
+            }
+            onResume()
+        }
+
         if (isSelected) {
             editSiswaText.visible()
             deleteSiswaText.visible()

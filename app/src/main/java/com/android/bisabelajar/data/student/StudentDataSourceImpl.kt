@@ -44,5 +44,18 @@ class StudentDataSourceImpl: StudentDataSource {
             false // kembalikan nilai boolean false jika operasi gagal
         }
     }
+
+    override suspend fun deleteStudentFromFirestore(idUser: String, idStudent: String): Boolean {
+        return try {
+            val firestoreInstance = FirebaseFirestore.getInstance()
+            val documentReference = firestoreInstance.collection("Users").document(idUser)
+                .collection("Students").document(idStudent)
+            documentReference.delete().await()
+            true
+        }  catch (e: Exception) {
+            Log.e("UserDataSourceImpl", "Error Delete", e)
+            false // kembalikan nilai boolean false jika operasi gagal
+        }
+    }
 }
 
