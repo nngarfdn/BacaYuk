@@ -18,6 +18,7 @@
 
     <color name="neutral_700">#344054</color>
     <color name="neutral_200">#E4E7EC</color>
+    <color name="neutral_300">#D0D5DD</color>
     <!--    teal 600, 700, 600, 100-->
     <color name="teal_100">#E0F2F1</color>
     <color name="teal_600">#00ACC1</color>

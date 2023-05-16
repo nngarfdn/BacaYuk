@@ -20,6 +20,10 @@ class AuthRepositoryImpl(
         firebaseAuthDataSource.forgotPassword(email)
     }
 
+    override suspend fun logOut() {
+        firebaseAuthDataSource.logOut()
+    }
+
     override suspend fun register(email: String, password: String):  Flow<RegisterResponse>{
 
         return flow {

@@ -8,10 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.android.bisabelajar.data.model.Response
 import com.android.bisabelajar.data.model.User
 import com.android.bisabelajar.domain.usecase.AuthUseCase
+import com.android.bisabelajar.domain.usecase.UserUseCase
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(
     private val authUseCase: AuthUseCase,
+    private val userUseCase: UserUseCase
 ) : ViewModel(){
 
     private val _user = MutableLiveData<Response<User>>()
@@ -25,6 +27,7 @@ class RegisterViewModel(
             authUseCase.register(email, password).collect {
                 Log.d("MainViewModel", "login: success")
                 _user.value = it
+
             }
         } catch (e: Exception) {
             Log.d("MainViewModel", "login: fail")
@@ -32,5 +35,11 @@ class RegisterViewModel(
             e.printStackTrace()
         }
     }
+
+    fun addUserToFirestore(user: User) = viewModelScope.launch {
+        userUseCase.addUpdateUserToFirestore(user)
+    }
+
+
 
 }

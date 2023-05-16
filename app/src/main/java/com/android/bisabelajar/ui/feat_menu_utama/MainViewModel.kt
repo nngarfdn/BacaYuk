@@ -11,11 +11,12 @@ import com.android.bisabelajar.data.preferences.DataStoreRepository
 import com.android.bisabelajar.domain.usecase.AuthUseCase
 import com.android.bisabelajar.domain.usecase.UserUseCase
 import com.android.bisabelajar.utils.EMAIL
+import com.android.bisabelajar.utils.FULL_NAME_USER
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class MainViewModel(
-    private val repository: DataStoreRepository,
+    private val dataStoreRepository: DataStoreRepository,
     private val authUseCase: AuthUseCase,
     private val userUseCase: UserUseCase
     ) : ViewModel() {
@@ -25,6 +26,11 @@ class MainViewModel(
 
     fun saveUser(user: User) = viewModelScope.launch {
         userUseCase.addUpdateUserToFirestore(user)
+    }
+
+    fun logOutUser() = viewModelScope.launch {
+        authUseCase.logOut()
+        dataStoreRepository.clear()
     }
 
     fun getUser(id: String){
@@ -46,15 +52,28 @@ class MainViewModel(
         authUseCase.register(email, password)
     }
 
-    fun saveEmail(value: String) {
-        viewModelScope.launch {
-            repository.putString(EMAIL, value)
-        }
+    fun getEmail(): String? = runBlocking {
+        dataStoreRepository.getString(EMAIL)
+    }
+
+    fun getUID(): String? = runBlocking {
+        dataStoreRepository.getString(EMAIL)
+    }
+
+    fun getFullName(): String? = runBlocking {
+        dataStoreRepository.getString(FULL_NAME_USER)
     }
 
 
-    fun getEmail(): String? = runBlocking {
-        repository.getString(EMAIL)
+    fun getUserDataStore(): User? {
+        val uid = getUID()
+        val email = getEmail()
+        val fullName = getFullName()
+        return if (uid!= null && email!= null && fullName!= null) {
+            User(uid, email, fullName)
+        } else {
+            null
+        }
     }
 
 

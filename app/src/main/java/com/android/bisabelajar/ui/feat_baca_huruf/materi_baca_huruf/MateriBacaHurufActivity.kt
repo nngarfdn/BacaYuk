@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.android.bisabelajar.R
 import com.android.bisabelajar.data.model.Abjad
 import com.android.bisabelajar.databinding.ActivityMateriBacaHurufBinding
+import com.android.bisabelajar.ui.feat_baca_huruf.quiz_baca_huruf.QuizBacaHurufActivity
 import com.android.bisabelajar.ui.feat_urutabjad.UrutAbjadActivity
 import com.android.bisabelajar.utils.DATA
 import com.android.bisabelajar.utils.openActivity
@@ -39,7 +40,10 @@ class MateriBacaHurufActivity : AppCompatActivity() {
                 if (slideVP.currentItem < 2) {
                     slideVP.currentItem = slideVP.currentItem.plus(1)
                 } else {
-//                    openActivity(this@MateriBacaHurufActivity, UrutAbjadActivity::class.java)
+//                    openActivity(this@MateriBacaHurufActivity, QuizBacaHurufActivity::class.java)
+                    val intent = Intent(this@MateriBacaHurufActivity, QuizBacaHurufActivity::class.java)
+                        .apply { putExtra(DATA, dataAbjad as Abjad) }
+                    startActivity(intent)
                 }
             }
         }

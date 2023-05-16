@@ -33,12 +33,18 @@ class UserDataSourceImpl(private val firestore: FirebaseFirestore): UserDataSour
     override suspend fun addUpdateUserToFirestore(user: User): Boolean {
         return try {
             val firestoreInstance = FirebaseFirestore.getInstance()
-            val documentReference = firestoreInstance.collection("Users").document(user.uuid)
-            documentReference.set(user).await()
+            val documentReference = user.uuid?.let {
+                firestoreInstance.collection("Users").document(
+                    it
+                )
+            }
+            documentReference?.set(user)?.await()
             true // kembalikan nilai boolean true jika operasi berhasil
         } catch (e: Exception) {
             Log.e("UserDataSourceImpl", "Error adding or updating user to Firestore.", e)
             false // kembalikan nilai boolean false jika operasi gagal
         }
     }
+
+
 }

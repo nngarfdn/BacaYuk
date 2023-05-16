@@ -22,12 +22,14 @@ fun getAllDataAbjadKapital(): List<String>{
             "V","W","X","Y","Z")
 }
 
-fun getTwoRandomAbjadNonKapital(tidakDiambil: List<String>): List<String>? {
+fun getTwoRandomAbjadNonKapital(tidakDiambil: List<String>): List<String> {
     val abjadNonKapital = getAllDataAbjadNonKapital().filterNot { tidakDiambil.contains(it) }
+    val randomIndices = (abjadNonKapital.indices).shuffled().take(2)
+    return randomIndices.map { abjadNonKapital[it] }
+}
 
-    if (abjadNonKapital.size < 2) {
-        return null
-    }
+fun getTwoRandomAbjadKapital(tidakDiambil: List<String>): List<String> {
+    val abjadNonKapital = getAllDataAbjadKapital().filterNot { tidakDiambil.contains(it) }
     val randomIndices = (abjadNonKapital.indices).shuffled().take(2)
     return randomIndices.map { abjadNonKapital[it] }
 }

@@ -7,7 +7,11 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.android.bisabelajar.data.model.User
+import com.android.bisabelajar.utils.EMAIL
+import com.android.bisabelajar.utils.FULL_NAME_USER
 import com.android.bisabelajar.utils.PREFERENCES_NAME
+import com.android.bisabelajar.utils.UID
 import kotlinx.coroutines.flow.first
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = PREFERENCES_NAME)
@@ -48,6 +52,27 @@ class DataStoreRepositoryImpl (private val context: Context): DataStoreRepositor
             e.printStackTrace()
             null
         }
+    }
+
+    override suspend fun clear() {
+        context.dataStore.edit { preferences ->
+            preferences.clear()
+        }
+    }
+
+    override suspend fun putUser(key: String, user: User) {
+        user.apply {
+            uuid?.let { putString(UID, it) }
+            fullName?.let { putString(FULL_NAME_USER, it) }
+            email?.let { putString(EMAIL, it) }
+        }
+    }
+
+    override suspend fun getUser(): User? {
+        val uid = getString(UID)
+        val fullName = getString(FULL_NAME_USER)
+        val email = getString(EMAIL)
+        return User(uid, fullName, email)
     }
 
     override fun getDataStore(): DataStore<*> {

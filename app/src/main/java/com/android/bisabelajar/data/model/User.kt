@@ -1,9 +1,9 @@
 package com.android.bisabelajar.data.model
 
 data class User(
-    val uuid: String,
-    val email: String,
-    val fullName: String
+    val uuid: String?,
+    val email: String?,
+    var fullName: String?
 ){
     constructor() : this("", "", "")
 }

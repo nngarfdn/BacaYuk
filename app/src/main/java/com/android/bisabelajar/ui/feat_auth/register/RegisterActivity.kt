@@ -40,7 +40,11 @@ class RegisterActivity : AppCompatActivity() {
             when (response) {
                 is Response.Success -> {
                     Log.d("LoginActivity", "onCreate: ${response.data.email}")
-                    openActivity(this@RegisterActivity, MainActivity::class.java)
+                    Toast.makeText(this@RegisterActivity, "Berhasil mendaftar", Toast.LENGTH_SHORT).show()
+                    val user = response.data
+                    user.fullName = binding.edtName.text.toString()
+                    registerViewModel.addUserToFirestore(user)
+                    openActivity(this@RegisterActivity, LoginActivity::class.java)
                 }
                 is Response.Error -> {
                     Toast.makeText(this, "${response.e?.message}", Toast.LENGTH_SHORT).show()
@@ -254,6 +258,7 @@ class RegisterActivity : AppCompatActivity() {
                             edtEmail.text.toString(),
                             edtPassword.text.toString()
                         )
+
                     }
                 }
 

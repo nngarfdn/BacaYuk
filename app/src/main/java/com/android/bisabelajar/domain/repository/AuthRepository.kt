@@ -11,5 +11,6 @@ interface AuthRepository {
     suspend fun register(email: String, password: String): Flow<RegisterResponse>
     suspend fun login(email: String, password: String): Flow<LoginResponse>
     suspend fun forgotPassword(email: String)
+    suspend fun logOut()
 
 }

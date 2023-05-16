@@ -8,10 +8,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.bisabelajar.R
 import com.android.bisabelajar.data.model.Response
+import com.android.bisabelajar.data.model.User
 import com.android.bisabelajar.databinding.ActivityLoginBinding
 import com.android.bisabelajar.ui.feat_auth.forgot_password.ForgotPasswordActivity
 import com.android.bisabelajar.ui.feat_auth.register.RegisterActivity
-import com.android.bisabelajar.ui.feat_menu_utama.MainActivity
+import com.android.bisabelajar.ui.feat_student.list_student.ListStudentActivity
 import com.android.bisabelajar.utils.changeErrorStateEditText
 import com.android.bisabelajar.utils.isValidEmail
 import com.android.bisabelajar.utils.openActivity
@@ -38,11 +39,13 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+
         loginViewModel.user.observe(this@LoginActivity) { response ->
             when (response) {
                 is Response.Success -> {
                     Log.d("LoginActivity", "onCreate: ${response.data.email}")
-                    openActivity(this@LoginActivity, MainActivity::class.java)
+                    loginViewModel.saveUserToDataStore(response.data)
+                    getUserDataStore()
                 }
                 is Response.Error -> {
                     Toast.makeText(this, "${response.e?.message}", Toast.LENGTH_SHORT).show()
@@ -56,6 +59,13 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel.errorMessage.observe(this@LoginActivity) {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun getUserDataStore() {
+        val user: User? = loginViewModel.getUserDataStore()
+        if (user != null && user.email != "") {
+            openActivity(this@LoginActivity, ListStudentActivity::class.java)
         }
     }
 

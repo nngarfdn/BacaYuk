@@ -18,4 +18,7 @@ class AuthDataSource(private val firebaseAuth: FirebaseAuth) {
         firebaseAuth.sendPasswordResetEmail(email).await()
     }
 
+    suspend fun logOut() {
+        firebaseAuth.signOut()
+    }
 }

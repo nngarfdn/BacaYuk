@@ -11,4 +11,8 @@
     <item android:state_enabled="false"
         android:drawable="@drawable/button_rounded_disabled_purple" />
 
+    <item android:state_activated="false"
+        android:drawable="@drawable/button_rounded_disabled_purple" />
+
+
 </selector>

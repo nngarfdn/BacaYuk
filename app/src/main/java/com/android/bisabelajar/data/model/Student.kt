@@ -9,7 +9,7 @@ data class Student(
     val fullName: String="",
     val noAbsen: String="",
     val kelas: String="",
-    val angkatan: String="",
+    val tahunMasukSekolah: String="",
     val asalSekolah: String="",
     val profilPicture: String=""
 ): Parcelable

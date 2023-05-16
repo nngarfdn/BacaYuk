@@ -14,7 +14,14 @@
         android:theme="@style/Theme.BacaBacaBaca"
         tools:targetApi="31">
         <activity
-            android:name=".QuizBacaHurufActivity"
+            android:name=".ui.feat_student.add_edit_student.AddEditStudentActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.feat_baca_huruf.quiz_baca_huruf.QuizBacaHurufActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

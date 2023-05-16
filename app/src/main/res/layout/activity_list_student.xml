@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/layout_toolbar"/>
+        layout="@layout/layout_toolbar_action"/>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -24,7 +24,7 @@
                 tools:listitem="@layout/item_siswa"
                 android:id="@+id/rv_abjad_kapital"/>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
                 android:id="@+id/btn_select"
                 android:layout_marginTop="@dimen/_16sdp"
                 android:layout_width="match_parent"

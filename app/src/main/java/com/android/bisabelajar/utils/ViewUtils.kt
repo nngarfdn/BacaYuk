@@ -48,3 +48,4 @@ fun changeErrorStateEditText(context: Context, btn: AppCompatEditText, tv: TextV
     }
     btn.background = ContextCompat.getDrawable(context, R.drawable.normal_state_edittext_outline)
 }
+
