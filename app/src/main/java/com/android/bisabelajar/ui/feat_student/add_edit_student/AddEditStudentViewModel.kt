@@ -8,16 +8,37 @@ import androidx.lifecycle.viewModelScope
 import com.android.bisabelajar.data.model.Response
 import com.android.bisabelajar.data.model.Student
 import com.android.bisabelajar.data.model.User
+import com.android.bisabelajar.data.preferences.DataStoreRepository
 import com.android.bisabelajar.domain.usecase.StudentUseCase
+import com.android.bisabelajar.utils.EMAIL
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
-class AddEditStudentViewModel(val studentUseCase: StudentUseCase): ViewModel() {
+class AddEditStudentViewModel(
+    private val studentUseCase: StudentUseCase,
+    private val dataStore: DataStoreRepository,
+): ViewModel() {
 
     private val _students = MutableLiveData<Response<List<Student>>>()
     val students : LiveData<Response<List<Student>>> = _students
 
+    private val _isSuccess = MutableLiveData<Response<Boolean>>()
+    val isSuccess : MutableLiveData<Response<Boolean>> = _isSuccess
+
+
+
     fun addUserToFirestore(idUser: String,student: Student) = viewModelScope.launch {
-        studentUseCase.addUpdateStudentToFirestore(idUser, student)
+        val result = studentUseCase.addUpdateStudentToFirestore(idUser,student)
+        if (result){
+            _isSuccess.postValue(Response.Success(result))
+        } else {
+            _isSuccess.postValue(Response.Error(null, "Galgal Menambahkan"))
+        }
+
+    }
+
+    fun getUID(): String? = runBlocking {
+        dataStore.getString(EMAIL)
     }
 
     fun getAllStudent(id: String){

@@ -35,7 +35,7 @@ class StudentAdapter(val listener: AdapterListener): RecyclerView.Adapter<Studen
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
-    fun submitData(list: ArrayList<Student?>?) {
+    fun submitData(list: List<Student>) {
         differ.submitList(list)
     }
 

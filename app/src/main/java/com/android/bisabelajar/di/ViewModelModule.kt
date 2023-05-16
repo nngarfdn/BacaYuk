@@ -14,6 +14,6 @@ val viewModelModule = module {
     viewModel { LoginViewModel(get(),get()) }
     viewModel { RegisterViewModel(get(),get())}
     viewModel { ForgotPasswordViewModel(get())}
-    viewModel { ListStudentViewModel(get(), get()) }
-    viewModel { AddEditStudentViewModel(get())}
+    viewModel { ListStudentViewModel(get(), get(), get()) }
+    viewModel { AddEditStudentViewModel(get(), get())}
 }

@@ -8,12 +8,8 @@ import android.os.Looper
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.bisabelajar.R
-import com.android.bisabelajar.data.model.Abjad
+import com.android.bisabelajar.data.model.Response
 import com.android.bisabelajar.data.model.Student
 import com.android.bisabelajar.data.model.User
 import com.android.bisabelajar.databinding.ActivityListStudentBinding
@@ -52,10 +48,20 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
             }
         }
 
-        studentAdapter.submitData(getStudentList())
+
+        listStudentViewModel.students.observe(this@ListStudentActivity) { response ->
+            when (response) {
+                is Response.Success -> {
+                    studentAdapter.submitData(response.data)
+                }
+                is Response.Error -> {
+                    Toast.makeText(this@ListStudentActivity, response.message, Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
 
         binding.apply {
-
             toolbar.apply {
                 txtTitle.text = getString(R.string.pilih_siswa)
                 imgActionRight.setOnClickListener {
@@ -86,6 +92,11 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        val uidUser = listStudentViewModel.getUID() ?: "-"
+        listStudentViewModel.getAllStudent(uidUser)
+    }
     private fun showBalloon(isSelected: Boolean = false) {
 
         val height = if (isSelected) 140 else 70
@@ -124,7 +135,11 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
 
         editSiswaText.setOnClickListener {
             val intent = Intent(this@ListStudentActivity, AddEditStudentActivity::class.java)
-                .apply { putExtra(DATA, selectedStudent) }
+                .apply {
+                    putExtra(DATA, selectedStudent)
+                    putExtra(EDIT, true)
+
+                }
             startActivity(intent)
         }
 

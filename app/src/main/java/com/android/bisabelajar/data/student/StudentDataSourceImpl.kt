@@ -25,6 +25,7 @@ class StudentDataSourceImpl: StudentDataSource {
             emit(Response.Success(students))
         }.catch {
 //            emit(Response.Error(null,"Failed to fetch user data from Firestore."))
+
             Log.e("getAllUserFromFirestore", "Failed to fetch user data from Firestore.", it)
         }
     }
