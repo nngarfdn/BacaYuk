@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'com.android.bisabelajar'
+    namespace 'com.nara.bacayuk'
     compileSdk 33
 
     viewBinding {
@@ -21,7 +21,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.android.bisabelajar"
+        applicationId "com.nara.bacayuk"
         minSdk 21
         targetSdk 33
         versionCode 1

@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar_action"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/slideVP"
         android:layout_width="0dp"

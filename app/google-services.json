@@ -7,6 +7,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:555188726322:android:e5bfc96f8e308de674ea2b",
+        "android_client_info": {
+          "package_name": "com.android.bacayuk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555188726322-553f1k204busbnp518d1t92n9plak26q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.bacayuk",
+            "certificate_hash": "04e94bb88895901e7862c03319e35b248573275b"
+          }
+        },
+        {
+          "client_id": "555188726322-b7f6m3v4bjg9e9sv7lj9dmm70fur523t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf2eYJMPwdq6tmxzYiCH0xDVr_ZXTSMPg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555188726322-b7f6m3v4bjg9e9sv7lj9dmm70fur523t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:555188726322:android:7ec7b18e6ea99eed74ea2b",
         "android_client_info": {
           "package_name": "com.android.bisabelajar"
@@ -19,6 +56,43 @@
           "android_info": {
             "package_name": "com.android.bisabelajar",
             "certificate_hash": "04e94bb88895901e7862c03319e35b248573275b"
+          }
+        },
+        {
+          "client_id": "555188726322-b7f6m3v4bjg9e9sv7lj9dmm70fur523t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf2eYJMPwdq6tmxzYiCH0xDVr_ZXTSMPg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555188726322-b7f6m3v4bjg9e9sv7lj9dmm70fur523t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555188726322:android:e9e526ce55d7a55e74ea2b",
+        "android_client_info": {
+          "package_name": "com.nara.bacayuk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555188726322-94s253lhn8k6vosf9aigj1fr0qsh86c6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nara.bacayuk",
+            "certificate_hash": "a75b84e2229c640ea879a2a21a207b80385dcbf2"
           }
         },
         {
