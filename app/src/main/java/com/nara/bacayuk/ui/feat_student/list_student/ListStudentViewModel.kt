@@ -13,6 +13,7 @@ import com.nara.bacayuk.domain.usecase.AuthUseCase
 import com.nara.bacayuk.domain.usecase.StudentUseCase
 import com.nara.bacayuk.utils.EMAIL
 import com.nara.bacayuk.utils.FULL_NAME_USER
+import com.nara.bacayuk.utils.UID
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -62,7 +63,7 @@ class ListStudentViewModel(
     }
 
     fun getUID(): String? = runBlocking {
-        dataStoreRepository.getString(EMAIL)
+        dataStoreRepository.getString(UID)
     }
 
     fun getFullName(): String? = runBlocking {

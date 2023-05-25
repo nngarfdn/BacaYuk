@@ -1,11 +1,16 @@
 package com.nara.bacayuk.data.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class ReportHuruf(
     //format "Aa" , "Bb"
     val abjadName: String = "",
-    val materiHurufNonKapital:Boolean = false,
-    val materiHurufKapital: Boolean = false,
-    val quizHurufNonKapital: Boolean = false,
-    val quizHurufKapital: Boolean = false,
-)
+    var materiHurufNonKapital:Boolean = false,
+    var materiHurufKapital: Boolean = false,
+    var materiPerbedaanHuruf: Boolean = false,
+    var quizHurufNonKapital: Boolean = false,
+    var quizHurufKapital: Boolean = false,
+): Parcelable
 

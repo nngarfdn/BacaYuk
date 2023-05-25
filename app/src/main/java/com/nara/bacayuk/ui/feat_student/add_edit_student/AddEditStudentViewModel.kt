@@ -10,6 +10,7 @@ import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.data.preferences.DataStoreRepository
 import com.nara.bacayuk.domain.usecase.StudentUseCase
 import com.nara.bacayuk.utils.EMAIL
+import com.nara.bacayuk.utils.UID
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -37,7 +38,7 @@ class AddEditStudentViewModel(
     }
 
     fun getUID(): String? = runBlocking {
-        dataStore.getString(EMAIL)
+        dataStore.getString(UID)
     }
 
     fun getAllStudent(id: String){

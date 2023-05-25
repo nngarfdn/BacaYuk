@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import com.nara.bacayuk.databinding.ActivitySpashScreenBinding
 import com.nara.bacayuk.ui.feat_menu_utama.MainActivity
+import com.nara.bacayuk.ui.feat_student.list_student.ListStudentActivity
 
 class SpashScreenActivity : AppCompatActivity() {
 
@@ -23,7 +24,7 @@ class SpashScreenActivity : AppCompatActivity() {
 
             override fun onFinish() {
                 // Intent untuk berpindah ke MainActivity
-                val intent = Intent(this@SpashScreenActivity, MainActivity::class.java)
+                val intent = Intent(this@SpashScreenActivity, ListStudentActivity::class.java)
                 startActivity(intent)
                 finish()
             }

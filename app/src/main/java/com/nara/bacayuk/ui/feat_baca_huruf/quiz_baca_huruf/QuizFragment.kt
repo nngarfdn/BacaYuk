@@ -11,11 +11,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.nara.bacayuk.R
-import com.nara.bacayuk.data.model.Abjad
-import com.nara.bacayuk.data.model.getTwoRandomAbjadKapital
-import com.nara.bacayuk.data.model.getTwoRandomAbjadNonKapital
+import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.databinding.FragmentQuizBinding
 import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val ARG_PARAM1 = "param1"
 
@@ -33,6 +32,8 @@ class QuizFragment : Fragment() {
     private lateinit var wrongAnswerKapital: List<String>
     private var correctAnswerKapital: List<String>  = listOf()
     private var wrongAndCorrectAnswerKapital : List<String>  = listOf()
+
+    private val quizBacaHurufViewModel: QuizBacaHurufViewModel by viewModel()
 
     private var isKapital: Boolean = false
 
@@ -93,7 +94,6 @@ class QuizFragment : Fragment() {
                 }
                 "1" -> {
                     isKapital = true
-
                     reset(true)
                     txtAbjad.text = abjad?.abjadKapital
 
@@ -235,7 +235,16 @@ class QuizFragment : Fragment() {
                         //remove setOnDragListener by setting OnDragListener to null, so that no further drag & dropping on this TextView can be done
                         dropTarget.setOnDragListener(null)
                         //show toast
+                        val user: User? = quizBacaHurufViewModel.getUserDataStore()
                         Toast.makeText(context, "BENAR!", Toast.LENGTH_SHORT).show()
+                        if (isKapital) {
+                            abjad?.reportHuruf?.quizHurufKapital = true
+                        } else abjad?.reportHuruf?.quizHurufNonKapital = true
+                        val reportHuruf = abjad?.reportHuruf
+                        quizBacaHurufViewModel.updateReportHuruf(user?.uuid?: "-",
+                            QuizBacaHurufActivity.student?.uuid ?: "-",
+                            reportHuruf ?: ReportHuruf()
+                        )
                         reset(isKapital)
                     } else {
                         Toast.makeText(v.context, "SALAH!", Toast.LENGTH_SHORT).show()

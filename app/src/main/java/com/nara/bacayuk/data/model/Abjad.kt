@@ -9,7 +9,9 @@ data class Abjad(
     var id: String = "",
     var abjadNonKapital: String = "",
     var abjadKapital: String = "",
-    var suara: String = ""
+    var suara: String = "",
+    val abjadName: String = "",
+    val reportHuruf: ReportHuruf = ReportHuruf(),
 ): Parcelable
 
 fun getAllDataAbjadNonKapital(): List<String>{

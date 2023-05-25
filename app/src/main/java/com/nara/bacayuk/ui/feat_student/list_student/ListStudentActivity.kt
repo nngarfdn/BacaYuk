@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -61,6 +62,7 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
             }
         }
 
+
         binding.apply {
             toolbar.apply {
                 txtTitle.text = getString(R.string.pilih_siswa)
@@ -82,12 +84,10 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
             binding.btnSelect.isEnabled = selectedStudent!= null
 
             btnSelect.setOnClickListener {
-                Toast.makeText(
-                    this@ListStudentActivity,
-                    "${selectedStudent?.fullName}",
-                    Toast.LENGTH_SHORT
-                ).show()
-                openActivity(this@ListStudentActivity, MainActivity::class.java)
+                val intent = Intent(this@ListStudentActivity, MainActivity::class.java).apply {
+                    putExtra("student", selectedStudent)
+                }
+                startActivity(intent)
             }
         }
     }
@@ -95,6 +95,7 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
     override fun onResume() {
         super.onResume()
         val uidUser = listStudentViewModel.getUID() ?: "-"
+        Log.d("liststudent", "onResume: $uidUser")
         listStudentViewModel.getAllStudent(uidUser)
     }
     private fun showBalloon(isSelected: Boolean = false) {
@@ -162,22 +163,8 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
             deleteSiswaText.gone()
             addSiswaText.visible()
         }
-
-
     }
 
-    private fun getStudentList(): ArrayList<Student?>? {
-        val students = ArrayList<Student?>()
-        students.add(Student("1", "Ada", "Maria", "Ada"))
-        students.add(Student("2", "Joni", "Maria", "Abigail"))
-        students.add(Student("3", "Budi", "Maria", "Abigail"))
-        students.add(Student("4", "Andi", "Maria", "Abigail"))
-        students.add(Student("11", "Ada", "Maria", "Ada"))
-        students.add(Student("21", "Joni", "Maria", "Abigail"))
-        students.add(Student("31", "Budi", "Maria", "Abigail"))
-        students.add(Student("41", "Andi", "Maria", "Abigail"))
-        return students
-    }
 
     override fun onClick(data: Any?, position: Int?, view: View?) {
         selectedStudent = data as Student?

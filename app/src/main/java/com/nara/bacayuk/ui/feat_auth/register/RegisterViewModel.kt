@@ -9,6 +9,9 @@ import com.nara.bacayuk.data.model.Response
 import com.nara.bacayuk.data.model.User
 import com.nara.bacayuk.domain.usecase.AuthUseCase
 import com.nara.bacayuk.domain.usecase.UserUseCase
+import com.nara.bacayuk.utils.EMAIL
+import com.nara.bacayuk.utils.FULL_NAME_USER
+import com.nara.bacayuk.utils.UID
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(
@@ -21,6 +24,7 @@ class RegisterViewModel(
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
+
 
     fun register(email: String, password: String) = viewModelScope.launch {
         try {
@@ -39,6 +43,8 @@ class RegisterViewModel(
     fun addUserToFirestore(user: User) = viewModelScope.launch {
         userUseCase.addUpdateUserToFirestore(user)
     }
+
+
 
 
 

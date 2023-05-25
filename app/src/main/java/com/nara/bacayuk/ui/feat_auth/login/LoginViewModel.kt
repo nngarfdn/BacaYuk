@@ -9,10 +9,7 @@ import com.nara.bacayuk.data.model.Response
 import com.nara.bacayuk.data.model.User
 import com.nara.bacayuk.data.preferences.DataStoreRepository
 import com.nara.bacayuk.domain.usecase.AuthUseCase
-import com.nara.bacayuk.utils.EMAIL
-import com.nara.bacayuk.utils.FULL_NAME_USER
-import com.nara.bacayuk.utils.UID
-import com.nara.bacayuk.utils.USER
+import com.nara.bacayuk.utils.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -53,12 +50,13 @@ class LoginViewModel(
     }
 
     fun getUID(): String? = runBlocking {
-        dataStore.getString(EMAIL)
+        dataStore.getString(UID)
     }
 
     fun getFullName(): String? = runBlocking {
         dataStore.getString(FULL_NAME_USER)
     }
+
 
     fun getUserDataStore(): User? {
         val uid = getUID()

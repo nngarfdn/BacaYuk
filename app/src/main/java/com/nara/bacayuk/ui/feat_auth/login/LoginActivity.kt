@@ -104,6 +104,7 @@ class LoginActivity : AppCompatActivity() {
                         .isNotEmpty()
                 btnLogin.setOnClickListener {
                     loginViewModel.login(edtEmail.text.toString(), edtPassword.text.toString())
+                    loginViewModel.login(edtEmail.text.toString(), edtPassword.text.toString())
                 }
             }
 
@@ -151,6 +152,7 @@ class LoginActivity : AppCompatActivity() {
                     edtEmail.text.toString().isNotEmpty() && edtPassword.text.toString()
                         .isNotEmpty()
                 btnLogin.setOnClickListener {
+                    loginViewModel.login(edtEmail.text.toString(), edtPassword.text.toString())
                     loginViewModel.login(edtEmail.text.toString(), edtPassword.text.toString())
                 }
             }

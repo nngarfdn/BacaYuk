@@ -1,16 +1,19 @@
 package com.nara.bacayuk.ui.feat_baca_huruf.quiz_baca_huruf
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.Abjad
+import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityQuizBacaHurufBinding
 import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufActivity
 import com.nara.bacayuk.utils.DATA
 import com.nara.bacayuk.utils.invisible
 import com.nara.bacayuk.utils.openActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class QuizBacaHurufActivity : AppCompatActivity() {
 
@@ -18,15 +21,23 @@ class QuizBacaHurufActivity : AppCompatActivity() {
     private var name = ""
     companion object {
         var dataAbjad: Abjad? = null
+        var student: Student? = null
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        MateriBacaHurufActivity.dataAbjad = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        dataAbjad = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(DATA, Abjad::class.java)
         } else {
             intent.getParcelableExtra(DATA) as Abjad?
+        }
+
+        student = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra("student", Student::class.java)
+        } else {
+            intent.getParcelableExtra("student") as Student?
         }
 
         binding.apply {
@@ -48,12 +59,11 @@ class QuizBacaHurufActivity : AppCompatActivity() {
                 if (slideVP.currentItem < 1) {
                     slideVP.currentItem = slideVP.currentItem.plus(1)
                 } else {
-                    openActivity(this@QuizBacaHurufActivity, MenuBacaHurufActivity::class.java)
-                    finish()
 //                    openActivity(this@MateriBacaHurufActivity, QuizBacaHurufActivity::class.java)
-//                    val intent = Intent(this@MateriBacaHurufActivity, QuizBacaHurufActivity::class.java)
-//                        .apply { putExtra(DATA, MateriBacaHurufActivity.dataAbjad as Abjad) }
-//                    startActivity(intent)
+                    val intent = Intent(this@QuizBacaHurufActivity, MenuBacaHurufActivity::class.java)
+                        .apply { putExtra("student", student) }
+                    startActivity(intent)
+                    finish()
                 }
             }
         }

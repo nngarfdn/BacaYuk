@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.Abjad
+import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityMateriBacaHurufBinding
 import com.nara.bacayuk.ui.feat_baca_huruf.quiz_baca_huruf.QuizBacaHurufActivity
 import com.nara.bacayuk.utils.DATA
@@ -17,21 +18,25 @@ class MateriBacaHurufActivity : AppCompatActivity() {
     private var name = ""
     companion object {
         var dataAbjad: Abjad? = null
+        var student: Student? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-
         dataAbjad = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(DATA, Abjad::class.java)
         } else {
             intent.getParcelableExtra(DATA) as Abjad?
         }
 
-        binding.apply {
+        student = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra("student", Student::class.java)
+        } else {
+            intent.getParcelableExtra("student") as Student?
+        }
 
+        binding.apply {
             toolbar.apply {
                 txtTitle.text = getString(R.string.baca_huruf)
                 txtTitle.setTextColor(resources.getColor(R.color.teal_600))
@@ -49,19 +54,16 @@ class MateriBacaHurufActivity : AppCompatActivity() {
                 if (slideVP.currentItem < 2) {
                     slideVP.currentItem = slideVP.currentItem.plus(1)
                 } else {
-//                    openActivity(this@MateriBacaHurufActivity, QuizBacaHurufActivity::class.java)
                     val intent = Intent(this@MateriBacaHurufActivity, QuizBacaHurufActivity::class.java)
-                        .apply { putExtra(DATA, dataAbjad as Abjad) }
+                        .apply {
+                            putExtra(DATA, dataAbjad as Abjad)
+                            putExtra("student", student)
+                        }
                     startActivity(intent)
+
                 }
             }
         }
-
-
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-//        binding.slideVP.registerOnPageChangeCallback(switchButton)
-    }
 }

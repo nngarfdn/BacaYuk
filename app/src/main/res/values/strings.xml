@@ -30,4 +30,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lanjutkan">Lanjutkan</string>
+    <string name="ini_huruf_kecil">Ini huruf kecil</string>
+    <string name="ini_huruf_kapital">Ini huruf kapital/huruf besar</string>
+    <string name="ini_perbedaan_huruf">Ini perbedaan huruf besar dan huruf kecil</string>
 </resources>

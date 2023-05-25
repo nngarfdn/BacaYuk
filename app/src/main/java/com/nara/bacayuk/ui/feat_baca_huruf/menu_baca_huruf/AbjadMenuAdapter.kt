@@ -11,6 +11,7 @@ import com.nara.bacayuk.data.model.Abjad
 import com.nara.bacayuk.databinding.ItemAbjadMenuBinding
 import com.nara.bacayuk.ui.listener.adapter.AdapterListener
 import com.nara.bacayuk.utils.invisible
+import com.nara.bacayuk.utils.visible
 
 
 class AbjadMenuAdapter(val listener: AdapterListener): RecyclerView.Adapter<AbjadMenuAdapter.RecentAdapterViewHolder>() {
@@ -34,7 +35,7 @@ class AbjadMenuAdapter(val listener: AdapterListener): RecyclerView.Adapter<Abja
         differ.submitList(list) }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentAdapterViewHolder {
-        //return binding
+
         val binding = ItemAbjadMenuBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RecentAdapterViewHolder(binding.root)
     }
@@ -44,20 +45,23 @@ class AbjadMenuAdapter(val listener: AdapterListener): RecyclerView.Adapter<Abja
             val data = differ.currentList[position]
             Log.d("TAG", "onBindViewHolder: $data")
             val binding = ItemAbjadMenuBinding.bind(this)
-            binding.txtAbjad.text = data?.abjadKapital
+            binding.txtAbjad.text = data?.abjadNonKapital
             binding.imgChecklist.invisible()
-//            if (position < 10) {
-//                binding.imgChecklist.visible()
-//            } else {
-//                binding.imgChecklist.invisible()
-//            }
+            if (data?.reportHuruf?.materiHurufKapital == true
+                && data.reportHuruf.materiHurufNonKapital
+                && data.reportHuruf.materiPerbedaanHuruf
+                && data.reportHuruf.quizHurufKapital
+                && data.reportHuruf.quizHurufNonKapital
+            ) {
+                binding.imgChecklist.visible()
+            } else {
+                binding.imgChecklist.invisible()
+            }
             rootView.setOnClickListener {
                 listener.onClick(data, position, binding.root)
             }
         }
     }
-
-
 
     override fun getItemCount(): Int = differ.currentList.size
 
