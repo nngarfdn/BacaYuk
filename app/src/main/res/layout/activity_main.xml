@@ -37,6 +37,20 @@
                 android:text="@string/loading"
                 android:layout_marginTop="@dimen/_8sdp"/>
 
+            <Button
+                android:id="@+id/btn_riwayat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Riwayat Belajar"
+                android:fontFamily="@font/pjs_medium"
+                android:textAllCaps="false"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:paddingVertical="@dimen/_8sdp"
+                android:textColor="@color/neutral_500"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_baca_huruf"
                 android:layout_marginTop="@dimen/_48sdp"
@@ -72,8 +86,6 @@
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:text="Keluar"/>
-
-
 
 
         </LinearLayout>

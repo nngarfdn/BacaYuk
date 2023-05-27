@@ -4,13 +4,26 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class ViewPageAdapter(Fa: FragmentActivity, listener:(CharSequence)->Unit): FragmentStateAdapter(Fa) {
+class ViewPageAdapter(Fa: FragmentActivity, private val isKata:Boolean=false, listener:(CharSequence)->Unit,
+                       ): FragmentStateAdapter(Fa) {
     private val dataFragments= mutableListOf(
         Huruf1Fragment.newInstance("0",listener),
         Huruf1Fragment.newInstance("1",listener),
         Huruf1Fragment.newInstance("2",listener)
     )
-    override fun getItemCount(): Int =3
+    private val dataFragmentsKata= mutableListOf(
+        Huruf1Fragment.newInstanceKata("0",listener),
+        Huruf1Fragment.newInstanceKata("1",listener),
+        Huruf1Fragment.newInstanceKata("2",listener),
+        Huruf1Fragment.newInstanceKata("3",listener),
+        Huruf1Fragment.newInstanceKata("4",listener)
 
-    override fun createFragment(position: Int): Fragment =dataFragments[position]
+    )
+
+
+    override fun getItemCount(): Int =
+        if (isKata) 5 else 3
+
+    override fun createFragment(position: Int): Fragment =
+        if (isKata) dataFragmentsKata[position] else dataFragments[position]
 }

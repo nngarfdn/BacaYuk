@@ -85,7 +85,6 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
                 imageView.setOnClickListener {
                     finish()
                 }
-
             }
 
             rvAbjad.apply {

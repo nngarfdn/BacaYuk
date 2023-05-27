@@ -16,11 +16,13 @@ import com.nara.bacayuk.databinding.FragmentHuruf1Binding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
 class Huruf1Fragment : Fragment() {
     private var _binding: FragmentHuruf1Binding? = null
     val binding get() = _binding!!
     private var param1: String? = null
+    private var param2: String? = null
     private lateinit var listener: (CharSequence) -> Unit
     private var abjad: Abjad? = null
     private val materiBacaHurufViewModel: MateriBacaHurufViewModel by viewModel()
@@ -29,6 +31,7 @@ class Huruf1Fragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
         }
     }
 
@@ -58,8 +61,9 @@ class Huruf1Fragment : Fragment() {
                     Log.d("LoginActivity", "onCreate: ${response.data.email}")
                     if (!response.data.isReadyHurufDataSet) {
                         response.data.uuid?.let {
-                            materiBacaHurufViewModel.createReportHurufDataSets(true,
-                                it,MateriBacaHurufActivity.student?.uuid ?: "-"
+                            materiBacaHurufViewModel.createReportHurufDataSets(
+                                true,
+                                it, MateriBacaHurufActivity.student?.uuid ?: "-"
                             )
                         }
                     }
@@ -82,11 +86,12 @@ class Huruf1Fragment : Fragment() {
                     txtDesc.text = getString(R.string.ini_huruf_kecil)
                     abjad?.reportHuruf?.materiHurufNonKapital = true
                     val reportHuruf = abjad?.reportHuruf
-                    materiBacaHurufViewModel.updateReportHuruf(user?.uuid?: "-",
+                    materiBacaHurufViewModel.updateReportHuruf(
+                        user?.uuid ?: "-",
                         MateriBacaHurufActivity.student?.uuid ?: "-",
-                        reportHuruf ?: ReportHuruf())
+                        reportHuruf ?: ReportHuruf()
+                    )
                 }
-
             }
             "1" -> {
                 binding.materi.apply {
@@ -94,9 +99,11 @@ class Huruf1Fragment : Fragment() {
                     txtAbjad.text = abjad?.abjadKapital
                     abjad?.reportHuruf?.materiHurufKapital = true
                     val reportHuruf = abjad?.reportHuruf
-                    materiBacaHurufViewModel.updateReportHuruf(user?.uuid?: "-",
+                    materiBacaHurufViewModel.updateReportHuruf(
+                        user?.uuid ?: "-",
                         MateriBacaHurufActivity.student?.uuid ?: "-",
-                        reportHuruf ?: ReportHuruf())
+                        reportHuruf ?: ReportHuruf()
+                    )
                 }
             }
             "2" -> {
@@ -105,9 +112,44 @@ class Huruf1Fragment : Fragment() {
                     "${abjad?.abjadNonKapital} ${abjad?.abjadKapital}".also { txtAbjad.text = it }
                     abjad?.reportHuruf?.materiPerbedaanHuruf = true
                     val reportHuruf = abjad?.reportHuruf
-                    materiBacaHurufViewModel.updateReportHuruf(user?.uuid?: "-",
+                    materiBacaHurufViewModel.updateReportHuruf(
+                        user?.uuid ?: "-",
                         MateriBacaHurufActivity.student?.uuid ?: "-",
-                        reportHuruf ?: ReportHuruf())
+                        reportHuruf ?: ReportHuruf()
+                    )
+                }
+            }
+        }
+
+        when (param2) {
+            "0" -> {
+                binding.materi.apply {
+                    txtAbjad.text = "A a"
+                    txtDesc.text = getString(R.string.ini_huruf_vokal)
+                }
+            }
+            "1" -> {
+                binding.materi.apply {
+                    txtAbjad.text = "I i"
+                    txtDesc.text = getString(R.string.ini_huruf_vokal)
+                }
+            }
+            "2" -> {
+                binding.materi.apply {
+                    txtAbjad.text = "U u"
+                    txtDesc.text = getString(R.string.ini_huruf_vokal)
+                }
+            }
+            "3" -> {
+                binding.materi.apply {
+                    txtAbjad.text = "E e"
+                    txtDesc.text = getString(R.string.ini_huruf_vokal)
+                }
+            }
+            "4" -> {
+                binding.materi.apply {
+                    txtAbjad.text = "O o"
+                    txtDesc.text = getString(R.string.ini_huruf_vokal)
                 }
             }
         }
@@ -120,6 +162,16 @@ class Huruf1Fragment : Fragment() {
                 this.listener = listener
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
+                }
+            }
+
+
+        @JvmStatic
+        fun newInstanceKata(param1: String, listener: (CharSequence) -> Unit) =
+            Huruf1Fragment().apply {
+                this.listener = listener
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM2, param1)
                 }
             }
     }

@@ -27,5 +27,8 @@
     <color name="blue_50">#CAD7FA</color>
     <color name="blue_500">#2154D6</color>
     <color name="blue_700">#16388F</color>
+    <color name="unselected_vocal">#D3DDF7</color>
 
+<!--    neutral-->
+    <color name="neutral_500">#667085</color>
 </resources>

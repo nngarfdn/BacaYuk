@@ -45,8 +45,9 @@ class MateriBacaHurufActivity : AppCompatActivity() {
                     finish()
                 }
             }
+            val isKata = dataAbjad==null
 
-            val pagerAdapter = ViewPageAdapter(this@MateriBacaHurufActivity) { name = it.toString() }
+            val pagerAdapter = ViewPageAdapter(this@MateriBacaHurufActivity, isKata = isKata) { name = it.toString() }
             slideVP.adapter = pagerAdapter
             dotsIndicator.setViewPager2(slideVP)
 
