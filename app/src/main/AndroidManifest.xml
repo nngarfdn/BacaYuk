@@ -14,7 +14,14 @@
         android:theme="@style/Theme.BacaBacaBaca"
         tools:targetApi="31">
         <activity
-            android:name=".RiwayatHurufActivity"
+            android:name=".ui.feat_riwayat.menu.MenuRiwayatActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.feat_riwayat.huruf.RiwayatHurufActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

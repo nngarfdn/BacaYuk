@@ -34,4 +34,5 @@
     <string name="ini_huruf_kapital">Ini huruf kapital/huruf besar</string>
     <string name="ini_perbedaan_huruf">Ini perbedaan huruf besar dan huruf kecil</string>
     <string name="ini_huruf_vokal">Ini huruf vokal</string>
+    <string name="huruf">Huruf</string>
 </resources>

@@ -7,9 +7,11 @@ import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufView
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufViewModel
 import com.nara.bacayuk.ui.feat_baca_huruf.quiz_baca_huruf.QuizBacaHurufViewModel
 import com.nara.bacayuk.ui.feat_menu_utama.MainViewModel
+import com.nara.bacayuk.ui.feat_riwayat.huruf.RiwayatHurufViewModel
 import com.nara.bacayuk.ui.feat_student.add_edit_student.AddEditStudentViewModel
 import com.nara.bacayuk.ui.feat_student.list_student.ListStudentViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.scope.get
 import org.koin.dsl.module
 
 val viewModelModule = module {
@@ -22,4 +24,5 @@ val viewModelModule = module {
     viewModel { MateriBacaHurufViewModel(get(), get(), get()) }
     viewModel { MenuBacaHurufViewModel(get(), get(), get()) }
     viewModel { QuizBacaHurufViewModel(get(), get(), get()) }
+    viewModel { RiwayatHurufViewModel(get(), get(), get()) }
 }

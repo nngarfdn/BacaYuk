@@ -14,6 +14,7 @@ import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActi
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_kata.materi.MateriBacaVokalActivity
 import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizBacaKataActivity
+import com.nara.bacayuk.ui.feat_riwayat.menu.MenuRiwayatActivity
 import com.nara.bacayuk.utils.DATA
 import com.nara.bacayuk.utils.openActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -57,10 +58,15 @@ class MainActivity : AppCompatActivity() {
             btnBacaKata.setOnClickListener {
                 openActivity(this@MainActivity, QuizBacaKataActivity::class.java)
             }
+
+            btnRiwayat.setOnClickListener {
+                val intent = Intent(this@MainActivity, MenuRiwayatActivity::class.java).apply {
+                    putExtra("student", student)
+                }
+                startActivity(intent)
+            }
         }
-    }                //cooming soon
-//                Toast.makeText(this@MainActivity, "Cooming Soon", Toast.LENGTH_SHORT).show()
-//                openActivity(this@MainActivity, MateriBacaHurufActivity::class.java)
+    }
 
     private fun cekUser() {
         val user: User? = mainViewModel.getUserDataStore()
