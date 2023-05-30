@@ -51,32 +51,8 @@ class Huruf1Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val user: User? = materiBacaHurufViewModel.getUserDataStore()
         user?.uuid?.let { materiBacaHurufViewModel.getUser(it) }
-        Log.d("materihuruf", "${user?.uuid}, ${MateriBacaHurufActivity.student?.uuid}")
-        materiBacaHurufViewModel.user.observe(viewLifecycleOwner) { response ->
-            when (response) {
-                is Response.Success -> {
-                    Log.d("LoginActivity", "onCreate: ${response.data.email}")
-                    if (!response.data.isReadyHurufDataSet) {
-                        response.data.uuid?.let {
-                            materiBacaHurufViewModel.createReportHurufDataSets(
-                                true,
-                                it, MateriBacaHurufActivity.student?.uuid ?: "-"
-                            )
-                        }
-                    }
-                }
-                is Response.Error -> {
-                    Toast.makeText(context, "${response.e?.message}", Toast.LENGTH_SHORT).show()
-                    Log.d("LoginActivity", "onCreate: ${response.message}")
-                }
-                else -> {
-
-                }
-            }
-        }
 
         abjad = MateriBacaHurufActivity.dataAbjad
         when (param1) {

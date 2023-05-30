@@ -11,7 +11,8 @@ data class Student(
     val kelas: String="",
     val tahunMasukSekolah: String="",
     val asalSekolah: String="",
-    val profilPicture: String=""
+    val profilPicture: String="",
+    var isReadyHurufDataSet: Boolean = false,
 ): Parcelable
 
 

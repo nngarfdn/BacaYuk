@@ -33,6 +33,5 @@ class MenuRiwayatActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
     }
 }

@@ -11,12 +11,19 @@ data class Abjad(
     var abjadKapital: String = "",
     var suara: String = "",
     val abjadName: String = "",
-    val reportHuruf: ReportHuruf = ReportHuruf(),
+    val belajarSuku: BelajarSuku? = BelajarSuku(),
+    val reportHuruf: ReportHuruf? = ReportHuruf(),
+    val reportKata: ReportKata? = ReportKata(),
 ): Parcelable
 
 fun getAllDataAbjadNonKapital(): List<String>{
     return listOf("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u",
             "v","w","x","y","z")
+}
+
+fun getAllDataAbjadNonKapitalNonVokal(): List<String>{
+    return listOf("b","c","d","f","g","h","j","k","l","m","n","o","p","q","r","s","t",
+        "v","w","x","y","z")
 }
 
 fun getAllDataAbjadKapital(): List<String>{
@@ -44,138 +51,3 @@ fun getTwoRandomAbjadKapital(tidakDiambil: String): List<String> {
 }
 
 
-fun getDataAbjad(): ArrayList<Abjad> {
-    val list = ArrayList<Abjad>()
-    list.add(Abjad(
-        id = "Aa",
-        abjadNonKapital = "a",
-        abjadKapital = "A",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Bb",
-        abjadNonKapital = "b",
-        abjadKapital = "B",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Cc",
-        abjadNonKapital = "c",
-        abjadKapital = "C",
-        suara = "linksuara"
-    ))
-    list.add(Abjad(
-        id = "Dd",
-        abjadNonKapital = "d",
-        abjadKapital = "D",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Ee",
-        abjadNonKapital = "e",
-        abjadKapital = "E",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Ff",
-        abjadNonKapital = "f",
-        abjadKapital = "F",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Gg",
-        abjadNonKapital = "g",
-        abjadKapital = "G",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Hh",
-        abjadNonKapital = "h",
-        abjadKapital = "H",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Ii",
-        abjadNonKapital = "i",
-        abjadKapital = "I",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Jj",
-        abjadNonKapital = "j",
-        abjadKapital = "J",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Kk",
-        abjadNonKapital = "k",
-        abjadKapital = "K",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Ll",
-        abjadNonKapital = "l",
-        abjadKapital = "L",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Mm",
-        abjadNonKapital = "m",
-        abjadKapital = "M",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Nn",
-        abjadNonKapital = "n",
-        abjadKapital = "N",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Oo",
-        abjadNonKapital = "o",
-        abjadKapital = "O",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Pp",
-        abjadNonKapital = "p",
-        abjadKapital = "P",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Qq",
-        abjadNonKapital = "q",
-        abjadKapital = "Q",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Rr",
-        abjadNonKapital = "r",
-        abjadKapital = "R",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Ss",
-        abjadNonKapital = "s",
-        abjadKapital = "S",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Tt",
-        abjadNonKapital = "t",
-        abjadKapital = "T",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Uu",
-        abjadNonKapital = "u",
-        abjadKapital = "U",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Vv",
-        abjadNonKapital = "v",
-        abjadKapital = "V",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Ww",
-        abjadNonKapital = "w",
-        abjadKapital = "W",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Xx",
-        abjadNonKapital = "x",
-        abjadKapital = "X",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Yy",
-        abjadNonKapital = "y",
-        abjadKapital = "Y",
-        suara = "linksuara"))
-    list.add(Abjad(
-        id = "Zz",
-        abjadNonKapital = "z",
-        abjadKapital = "Z",
-        suara = "linksuara"))
-    return list
-}

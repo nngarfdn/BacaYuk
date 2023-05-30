@@ -25,6 +25,7 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
     var student: Student? = null
     private val menuBacaHurufViewModel: MenuBacaHurufViewModel by viewModel()
     private val listAbjadMenu = arrayListOf<Abjad>()
+    private var isBacaKata = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +37,40 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
             intent.getParcelableExtra("student") as Student?
         }
 
+        isBacaKata = intent.getBooleanExtra("isBacaKata", false)
+
         Log.d("menubaca", "${student?.uuid}")
 
-        menuBacaHurufViewModel.getAllReports(student?.uuid ?: "-")
+        if (isBacaKata) menuBacaHurufViewModel.getAllReportKataFromFirestore(student?.uuid ?: "-")
+        else menuBacaHurufViewModel.getAllReports(student?.uuid ?: "-")
+
+        menuBacaHurufViewModel.vokals.observe(this@MenuBacaHurufActivity) { response ->
+            when (response) {
+                is Response.Success -> {
+                    response.data.forEach {
+                        //get index 1 of string
+                        val abjad = Abjad(
+                            id = it.abjadName,
+                            abjadNonKapital = it.abjadName[1].toString(),
+                            abjadKapital = it.abjadName[0].toString(),
+                            suara = "-",
+                            reportHuruf = null,
+                            reportKata = null
+                        )
+                        listAbjadMenu.add(abjad)
+                    }
+                    adapterAbjadMenuAdapter.submitData(listAbjadMenu)
+                }
+
+                is Response.Error -> {
+                    response.message?.let {
+                        Log.d("menubaca", it)
+                    }
+                }
+
+                else -> {}
+            }
+        }
 
         menuBacaHurufViewModel.reports.observe(this@MenuBacaHurufActivity) { response ->
             when (response) {
@@ -96,6 +128,7 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
     }
 
     override fun onClick(data: Any?, position: Int?, view: View?) {
+        //todo: buat percabangan isKata
         val intent = Intent(this@MenuBacaHurufActivity, MateriBacaHurufActivity::class.java)
             .apply {
                 putExtra(DATA, data as Abjad)

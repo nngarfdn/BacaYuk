@@ -58,35 +58,35 @@ class RiwayatHurufAdapter :
                 txtMateriKapital.setCompoundDrawablesWithIntrinsicBounds(
                      ContextCompat.getDrawable(
                         context,
-                        if (report.materiHurufKapital) R.drawable.ic_finished else R.drawable.ic_unfinished
+                        if (report?.materiHurufKapital == true) R.drawable.ic_finished else R.drawable.ic_unfinished
                     ),  null, null, null
                 )
 
                 txtMateriNonkapital.setCompoundDrawablesWithIntrinsicBounds(
                      ContextCompat.getDrawable(
                         context,
-                        if (report.materiHurufNonKapital) R.drawable.ic_finished else R.drawable.ic_unfinished
+                        if (report?.materiHurufNonKapital == true) R.drawable.ic_finished else R.drawable.ic_unfinished
                     ), null, null, null
                 )
 
                 txtMateriPerbedaan.setCompoundDrawablesWithIntrinsicBounds(
                     ContextCompat.getDrawable(
                         context,
-                        if (report.materiPerbedaanHuruf) R.drawable.ic_finished else R.drawable.ic_unfinished
+                        if (report?.materiPerbedaanHuruf == true) R.drawable.ic_finished else R.drawable.ic_unfinished
                     ), null, null, null
                 )
 
                 txtQuizKapital.setCompoundDrawablesWithIntrinsicBounds(
                      ContextCompat.getDrawable(
                         context,
-                        if (report.quizHurufKapital) R.drawable.ic_finished else R.drawable.ic_unfinished
+                        if (report?.quizHurufKapital == true) R.drawable.ic_finished else R.drawable.ic_unfinished
                     ), null, null, null
                 )
 
                 txtQuizNonkapital.setCompoundDrawablesWithIntrinsicBounds(
                      ContextCompat.getDrawable(
                         context,
-                        if (report.quizHurufNonKapital) R.drawable.ic_finished else R.drawable.ic_unfinished
+                        if (report?.quizHurufNonKapital == true) R.drawable.ic_finished else R.drawable.ic_unfinished
                     ), null, null, null
                 )
 

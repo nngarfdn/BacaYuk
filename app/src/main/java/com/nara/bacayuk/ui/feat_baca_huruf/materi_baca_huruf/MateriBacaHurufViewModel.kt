@@ -26,26 +26,7 @@ class MateriBacaHurufViewModel(
     private val _user = MutableLiveData<Response<User>>()
     val user: LiveData<Response<User>> = _user
 
-    fun createReportHurufDataSets(
-        isFirstOpen: Boolean,
-        idUser: String,
-        idStudent: String
-    ) =
-        viewModelScope.launch {
-            val user = getUserDataStore()
-            try {
-                if (isFirstOpen) {
-                    user?.isReadyHurufDataSet = true
-                    user?.let { userUseCase.addUpdateUserToFirestore(it) }
-                    val status = reportUseCase.createReportHurufDataSets(idUser, idStudent)
-                    if (status) Log.d("createReport", "Report Huruf data set created")
-                    else Log.d("createReport", "Report Huruf data set creation failed")
-                }
-            } catch (e: Exception) {
-                Log.d("MainViewModel", "login: fail")
-                e.printStackTrace()
-            }
-        }
+
 
     fun updateReportHuruf(
         idUser: String,

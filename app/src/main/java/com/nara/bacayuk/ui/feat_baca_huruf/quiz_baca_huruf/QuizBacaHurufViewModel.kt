@@ -10,6 +10,7 @@ import com.nara.bacayuk.data.model.Response
 import com.nara.bacayuk.data.model.User
 import com.nara.bacayuk.data.preferences.DataStoreRepository
 import com.nara.bacayuk.domain.usecase.ReportUseCase
+import com.nara.bacayuk.domain.usecase.StudentUseCase
 import com.nara.bacayuk.domain.usecase.UserUseCase
 import com.nara.bacayuk.utils.EMAIL
 import com.nara.bacayuk.utils.FULL_NAME_USER
@@ -20,32 +21,12 @@ import kotlinx.coroutines.runBlocking
 class QuizBacaHurufViewModel(
     private val dataStore: DataStoreRepository,
     private val reportUseCase: ReportUseCase,
-    private val userUseCase: UserUseCase
+    private val userUseCase: UserUseCase,
 ) : ViewModel() {
 
     private val _user = MutableLiveData<Response<User>>()
     val user: LiveData<Response<User>> = _user
 
-    fun createReportHurufDataSets(
-        isFirstOpen: Boolean,
-        idUser: String,
-        idStudent: String
-    ) =
-        viewModelScope.launch {
-            val user = getUserDataStore()
-            try {
-                if (isFirstOpen) {
-                    user?.isReadyHurufDataSet = true
-                    user?.let { userUseCase.addUpdateUserToFirestore(it) }
-                    val status = reportUseCase.createReportHurufDataSets(idUser, idStudent)
-                    if (status) Log.d("createReport", "Report Huruf data set created")
-                    else Log.d("createReport", "Report Huruf data set creation failed")
-                }
-            } catch (e: Exception) {
-                Log.d("MainViewModel", "login: fail")
-                e.printStackTrace()
-            }
-        }
 
     fun updateReportHuruf(
         idUser: String,

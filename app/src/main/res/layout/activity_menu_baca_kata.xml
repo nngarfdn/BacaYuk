@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_500"
+    android:orientation="vertical"
+    >
+
+    <include
+        android:id="@+id/toolbar_action"
+        layout="@layout/layout_toolbar_action"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_action">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/_16sdp">
+
+
+            <Button
+                android:id="@+id/btn_vokal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/pjs_medium"
+                android:text="Belajar Vokal"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/blue_500"
+                app:layout_constraintTop_toBottomOf="@+id/btn_kata"
+                />
+
+            <Button
+                android:id="@+id/btn_suku_kata"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/pjs_medium"
+                android:text="Belajar Vokal"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/blue_500"
+                app:layout_constraintTop_toBottomOf="@+id/btn_kata"
+                />
+
+            <Button
+                android:id="@+id/btn_latihan_suku_kata"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/pjs_medium"
+                android:text="Latihan Suku Kata"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/blue_500"
+                app:layout_constraintTop_toBottomOf="@+id/btn_kata"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

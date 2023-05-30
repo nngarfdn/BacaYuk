@@ -1,7 +1,6 @@
 package com.nara.bacayuk.domain.usecase
 
-import com.nara.bacayuk.data.model.ReportHuruf
-import com.nara.bacayuk.data.model.Response
+import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.domain.repository.ReportRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -19,4 +18,23 @@ class ReportUseCase(private val repository: ReportRepository) {
         idUser: String,
         idStudent: String
     ): Flow<Response<List<ReportHuruf>>> = repository.getAllReportFromFirestore(idUser, idStudent)
+
+    suspend fun createReportKataDataSets(
+        idUser: String,
+        idStudent: String
+    ): Boolean = repository.createReportKataDataSets(idUser, idStudent)
+
+    suspend fun updateReportKata(
+        idUser: String,
+        idStudent: String,
+        reportHuruf: ReportKata
+    ): Boolean = repository.updateReportKata(idUser, idStudent, reportHuruf)
+
+    fun getAllReportKataFromFirestore(
+        idUser: String,
+        idStudent: String
+    ): Flow<Response<ReportKata>> = repository.getAllReportKataFromFirestore(idUser, idStudent)
+
+    fun getAllBelajarVokal(idUser: String, idStudent: String): Flow<Response<List<BelajarSuku>>>
+    = repository.getAllBelajarVokal(idUser, idStudent)
 }

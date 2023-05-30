@@ -14,7 +14,8 @@ import com.nara.bacayuk.utils.invisible
 import com.nara.bacayuk.utils.visible
 
 
-class AbjadMenuAdapter(val listener: AdapterListener): RecyclerView.Adapter<AbjadMenuAdapter.RecentAdapterViewHolder>() {
+class AbjadMenuAdapter(val listener: AdapterListener) :
+    RecyclerView.Adapter<AbjadMenuAdapter.RecentAdapterViewHolder>() {
     inner class RecentAdapterViewHolder(val view: View) :
         RecyclerView.ViewHolder(view)
 
@@ -32,11 +33,13 @@ class AbjadMenuAdapter(val listener: AdapterListener): RecyclerView.Adapter<Abja
 
     fun submitData(list: ArrayList<Abjad>) {
 
-        differ.submitList(list) }
+        differ.submitList(list)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentAdapterViewHolder {
 
-        val binding = ItemAbjadMenuBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemAbjadMenuBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RecentAdapterViewHolder(binding.root)
     }
 
@@ -47,16 +50,32 @@ class AbjadMenuAdapter(val listener: AdapterListener): RecyclerView.Adapter<Abja
             val binding = ItemAbjadMenuBinding.bind(this)
             binding.txtAbjad.text = data?.abjadNonKapital
             binding.imgChecklist.invisible()
-            if (data?.reportHuruf?.materiHurufKapital == true
-                && data.reportHuruf.materiHurufNonKapital
-                && data.reportHuruf.materiPerbedaanHuruf
-                && data.reportHuruf.quizHurufKapital
-                && data.reportHuruf.quizHurufNonKapital
-            ) {
-                binding.imgChecklist.visible()
-            } else {
-                binding.imgChecklist.invisible()
+            if (data?.reportHuruf != null) {
+                if (data?.reportHuruf?.materiHurufKapital == true
+                    && data.reportHuruf.materiHurufNonKapital
+                    && data.reportHuruf.materiPerbedaanHuruf
+                    && data.reportHuruf.quizHurufKapital
+                    && data.reportHuruf.quizHurufNonKapital
+                ) {
+                    binding.imgChecklist.visible()
+                } else {
+                    binding.imgChecklist.invisible()
+                }
             }
+            if (data?.reportKata != null) {
+
+                if (data.belajarSuku?.belajarVokal?.isADone == true
+                    && data.belajarSuku.belajarVokal.isEDone
+                    && data.belajarSuku.belajarVokal.isIDone
+                    && data.belajarSuku.belajarVokal.isODone
+                    && data.belajarSuku.belajarVokal.isUDone
+                ) {
+                    binding.imgChecklist.visible()
+                } else {
+                    binding.imgChecklist.invisible()
+                }
+            }
+
             rootView.setOnClickListener {
                 listener.onClick(data, position, binding.root)
             }

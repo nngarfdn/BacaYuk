@@ -2,8 +2,7 @@ package com.nara.bacayuk.data.report
 
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import com.nara.bacayuk.data.model.ReportHuruf
-import com.nara.bacayuk.data.model.Response
+import com.nara.bacayuk.data.model.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -44,6 +43,88 @@ class ReportDataSourceImpl: ReportDataSource {
         }
     }
 
+    override suspend fun createReportKataDataSets(
+        idUser: String,
+        idStudent: String
+    ): Boolean {
+        return try {
+            val firestoreInstance = FirebaseFirestore.getInstance()
+            val listData = createDataSetKata()
+            listData.forEach{
+                val documentReference =
+                    firestoreInstance.collection("Users").document(idUser)
+                        .collection("Students").document(idStudent)
+                        .collection("ReportKata").document("ReportKata")
+                        .collection("BelajarVokal").document(it.abjadName)
+                documentReference.set(it).await()
+            }
+
+            val documentReference2 =
+                firestoreInstance.collection("Users").document(idUser)
+                    .collection("Students").document(idStudent)
+                    .collection("ReportKata").document("ReportKata")
+            documentReference2.set(ReportKata()).await()
+            true // kembalikan nilai boolean true jika operasi berhasil
+        } catch (e: Exception) {
+            Log.e("UserDataSourceImpl", "Error adding or updating user to Firestore.", e)
+            false // kembalikan nilai boolean false jika operasi gagal
+        }
+    }
+
+    override suspend fun updateReportKata(
+        idUser: String,
+        idStudent: String,
+        reportHuruf: ReportKata
+    ): Boolean {
+        return try {
+            val firestoreInstance = FirebaseFirestore.getInstance()
+            val snapshot = firestoreInstance.collection("Users")
+                .document(idUser).collection("Students").document(idStudent)
+                .collection("ReportHuruf").document("ReportHuruf").set(reportHuruf).await()
+            true // kembalikan nilai boolean true jika operasi berhasil
+        } catch (e: Exception) {
+            Log.e("UserDataSourceImpl", "Error adding or updating user to Firestore.", e)
+            false // kembalikan nilai boolean false jika operasi gagal
+        }
+    }
+
+    override fun getAllReportKataFromFirestore(
+        idUser: String,
+        idStudent: String
+    ): Flow<Response<ReportKata>> {
+        return flow {
+            val firestoreInstance = FirebaseFirestore.getInstance()
+            val snapshot = firestoreInstance.collection("Users")
+                .document(idUser).collection("Students").document(idStudent)
+                .collection("ReportHuruf").document("ReportHuruf").get().await()
+            val report = snapshot.toObject(ReportKata::class.java)
+            emit(Response.Success(report ?: ReportKata()))
+        }.catch {
+            Log.e("getAllUserFromFirestore", "Failed to fetch user data from Firestore.", it)
+        }
+    }
+
+    override fun getAllBelajarVokal(
+        idUser: String,
+        idStudent: String
+    ): Flow<Response<List<BelajarSuku>>> {
+        return flow {
+            val firestoreInstance = FirebaseFirestore.getInstance()
+            val students = mutableListOf<BelajarSuku>()
+            val snapshot = firestoreInstance.collection("Users").document(idUser)
+                .collection("Students").document(idStudent)
+                .collection("ReportKata").document("ReportKata")
+                .collection("BelajarVokal").get().await()
+            //get list students
+            for (doc in snapshot.documents) {
+                doc.toObject(BelajarSuku::class.java)?.let { students.add(it) }
+            }
+            emit(Response.Success(students))
+        }.catch {
+            Log.e("getAllUserFromFirestore", "Failed to fetch user data from Firestore.", it)
+        }
+    }
+
     override suspend fun createReportHurufDataSets(idUser: String,idStudent: String): Boolean {
         return try {
             val datasets = createDataSet()
@@ -70,6 +151,16 @@ class ReportDataSourceImpl: ReportDataSource {
         for (i in 65..90) {
             val huruf = i.toChar().toString() + i.toChar().toLowerCase().toString()
             val reportHuruf = ReportHuruf(abjadName = huruf)
+            reportHurufs.add(reportHuruf)
+        }
+        return reportHurufs
+    }
+
+    private fun createDataSetKata(): List<BelajarSuku>{
+        val reportHurufs = mutableListOf<BelajarSuku>()
+        for (i in 65..90) {
+            val huruf = i.toChar().toString() + i.toChar().toLowerCase().toString()
+            val reportHuruf = BelajarSuku(abjadName = huruf)
             reportHurufs.add(reportHuruf)
         }
         return reportHurufs
