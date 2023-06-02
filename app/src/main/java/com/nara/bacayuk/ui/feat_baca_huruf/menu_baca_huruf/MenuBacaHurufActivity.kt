@@ -13,6 +13,8 @@ import com.nara.bacayuk.data.model.Response
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityMenuBacaHurufBinding
 import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
+import com.nara.bacayuk.ui.feat_baca_kata.materi.MateriBacaVokalActivity
+import com.nara.bacayuk.ui.feat_menu_utama.MainActivity
 import com.nara.bacayuk.ui.listener.adapter.AdapterListener
 import com.nara.bacayuk.utils.DATA
 import com.nara.bacayuk.utils.invisible
@@ -37,11 +39,11 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
             intent.getParcelableExtra("student") as Student?
         }
 
-        isBacaKata = intent.getBooleanExtra("isBacaKata", false)
+        isBacaKata = intent.getBooleanExtra("isKata", false)
 
         Log.d("menubaca", "${student?.uuid}")
 
-        if (isBacaKata) menuBacaHurufViewModel.getAllReportKataFromFirestore(student?.uuid ?: "-")
+        if (isBacaKata) menuBacaHurufViewModel.getAllBelajarVokal(student?.uuid ?: "-")
         else menuBacaHurufViewModel.getAllReports(student?.uuid ?: "-")
 
         menuBacaHurufViewModel.vokals.observe(this@MenuBacaHurufActivity) { response ->
@@ -59,7 +61,7 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
                         )
                         listAbjadMenu.add(abjad)
                     }
-                    adapterAbjadMenuAdapter.submitData(listAbjadMenu)
+                    adapterAbjadMenuAdapter.submitData(listAbjadMenu, "kata")
                 }
 
                 is Response.Error -> {
@@ -86,7 +88,7 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
                         )
                         listAbjadMenu.add(abjad)
                     }
-                    adapterAbjadMenuAdapter.submitData(listAbjadMenu)
+                    adapterAbjadMenuAdapter.submitData(listAbjadMenu, "huruf")
                 }
 
                 is Response.Error -> {
@@ -129,12 +131,18 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
 
     override fun onClick(data: Any?, position: Int?, view: View?) {
         //todo: buat percabangan isKata
-        val intent = Intent(this@MenuBacaHurufActivity, MateriBacaHurufActivity::class.java)
+        Log.d("menubaca", "onClick $isBacaKata")
+        val intent1 = Intent(this@MenuBacaHurufActivity, MateriBacaHurufActivity::class.java)
             .apply {
                 putExtra(DATA, data as Abjad)
                 putExtra("student", student)
             }
-        startActivity(intent)
+        val intent2 = Intent(this@MenuBacaHurufActivity, MateriBacaVokalActivity::class.java)
+            .apply {
+                putExtra(DATA, data as Abjad)
+                putExtra("student", student)
+            }
+        startActivity(if (isBacaKata) intent2 else intent1)
 
     }
 }

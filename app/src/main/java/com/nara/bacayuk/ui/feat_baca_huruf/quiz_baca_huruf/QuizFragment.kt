@@ -253,7 +253,6 @@ class QuizFragment : Fragment() {
                     }
 
 
-
                 }
                 DragEvent.ACTION_DRAG_ENDED -> {}
                 else -> {}

@@ -16,6 +16,7 @@ import com.nara.bacayuk.utils.visible
 
 class AbjadMenuAdapter(val listener: AdapterListener) :
     RecyclerView.Adapter<AbjadMenuAdapter.RecentAdapterViewHolder>() {
+
     inner class RecentAdapterViewHolder(val view: View) :
         RecyclerView.ViewHolder(view)
 
@@ -29,11 +30,13 @@ class AbjadMenuAdapter(val listener: AdapterListener) :
         }
     }
 
+
     private val differ = AsyncListDiffer(this, diffCallback)
+    private var typ = "-"
 
-    fun submitData(list: ArrayList<Abjad>) {
-
+    fun submitData(list: ArrayList<Abjad>, type: String) {
         differ.submitList(list)
+        typ = type
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentAdapterViewHolder {
@@ -50,29 +53,35 @@ class AbjadMenuAdapter(val listener: AdapterListener) :
             val binding = ItemAbjadMenuBinding.bind(this)
             binding.txtAbjad.text = data?.abjadNonKapital
             binding.imgChecklist.invisible()
-            if (data?.reportHuruf != null) {
-                if (data?.reportHuruf?.materiHurufKapital == true
-                    && data.reportHuruf.materiHurufNonKapital
-                    && data.reportHuruf.materiPerbedaanHuruf
-                    && data.reportHuruf.quizHurufKapital
-                    && data.reportHuruf.quizHurufNonKapital
-                ) {
-                    binding.imgChecklist.visible()
-                } else {
-                    binding.imgChecklist.invisible()
+            when(typ) {
+                "huruf" -> {
+                    if (data?.reportHuruf != null) {
+                        if (data?.reportHuruf?.materiHurufKapital == true
+                            && data.reportHuruf.materiHurufNonKapital
+                            && data.reportHuruf.materiPerbedaanHuruf
+                            && data.reportHuruf.quizHurufKapital
+                            && data.reportHuruf.quizHurufNonKapital
+                        ) {
+                            binding.imgChecklist.visible()
+                        } else {
+                            binding.imgChecklist.invisible()
+                        }
+                    }
                 }
-            }
-            if (data?.reportKata != null) {
+                "kata" -> {
+                    if (data?.reportKata != null) {
 
-                if (data.belajarSuku?.belajarVokal?.isADone == true
-                    && data.belajarSuku.belajarVokal.isEDone
-                    && data.belajarSuku.belajarVokal.isIDone
-                    && data.belajarSuku.belajarVokal.isODone
-                    && data.belajarSuku.belajarVokal.isUDone
-                ) {
-                    binding.imgChecklist.visible()
-                } else {
-                    binding.imgChecklist.invisible()
+                        if (data.belajarSuku?.belajarVokal?.isADone == true
+                            && data.belajarSuku.belajarVokal.isEDone
+                            && data.belajarSuku.belajarVokal.isIDone
+                            && data.belajarSuku.belajarVokal.isODone
+                            && data.belajarSuku.belajarVokal.isUDone
+                        ) {
+                            binding.imgChecklist.visible()
+                        } else {
+                            binding.imgChecklist.invisible()
+                        }
+                    }
                 }
             }
 

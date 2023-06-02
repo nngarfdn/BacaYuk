@@ -1,5 +1,6 @@
 package com.nara.bacayuk.ui.feat_baca_kata.menu
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +8,12 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityMenuBacaKataBinding
+import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
+import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufActivity
+import com.nara.bacayuk.ui.feat_baca_kata.materi.MateriBacaVokalActivity
+import com.nara.bacayuk.ui.feat_riwayat.huruf.RiwayatHurufActivity
 import com.nara.bacayuk.utils.invisible
+import com.nara.bacayuk.utils.openActivity
 
 class MenuBacaKataActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMenuBacaKataBinding.inflate(layoutInflater) }
@@ -41,6 +47,18 @@ class MenuBacaKataActivity : AppCompatActivity() {
                 intent.getParcelableExtra("student", Student::class.java)
             } else {
                 intent.getParcelableExtra("student") as Student?
+            }
+
+            btnVokal.setOnClickListener {
+                openActivity(this@MenuBacaKataActivity, MateriBacaHurufActivity::class.java)
+            }
+            btnSukuKata.setOnClickListener {
+                val intent = Intent(this@MenuBacaKataActivity,
+                    MenuBacaHurufActivity::class.java).apply {
+                    putExtra("student", student)
+                    putExtra("isKata", true)
+                }
+                startActivity(intent)
             }
 
 

@@ -76,6 +76,18 @@
                 android:text="@string/baca_kata"/>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_baca_kalimat"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_width="match_parent"
+                android:background="@drawable/button_rounded_blue_10px"
+                android:fontFamily="@font/pjs_medium"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:text="Baca Kalimat"/>
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_logout"
                 android:layout_marginTop="@dimen/_16sdp"
                 android:layout_width="match_parent"

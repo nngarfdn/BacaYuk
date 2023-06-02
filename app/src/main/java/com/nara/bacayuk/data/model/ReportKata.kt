@@ -16,6 +16,7 @@ data class SoalKata(
     //dipisah - //ex: ma-na-mu //kalo pilgan, sapi-babi-anjing
     val optionList: String = "",
     var isCorrect: Boolean = false,
+    var studentAnswer: String = "",
     val isAlreadyDone: Boolean = false,
 ): Parcelable
 @Parcelize
