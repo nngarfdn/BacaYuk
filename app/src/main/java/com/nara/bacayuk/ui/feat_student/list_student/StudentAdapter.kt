@@ -67,7 +67,7 @@ class StudentAdapter(val listener: AdapterListener): RecyclerView.Adapter<Studen
             rootView.setOnClickListener {
                 selectedStudent = data
                 notifyDataSetChanged()
-                listener.onClick(data, position, binding.root)
+                listener.onClick(data, position, binding.root,"")
             }
         }
     }

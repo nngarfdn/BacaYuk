@@ -166,7 +166,7 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
     }
 
 
-    override fun onClick(data: Any?, position: Int?, view: View?) {
+    override fun onClick(data: Any?, position: Int?, view: View?, type: String) {
         selectedStudent = data as Student?
         binding.btnSelect.isEnabled = selectedStudent!= null
     }

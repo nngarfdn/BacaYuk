@@ -22,7 +22,6 @@ fun addSusunKata(): ArrayList<SoalKata>{
     list.add(SoalKata(8, "sepeda", "se-pe-da-ko", false, "-", 0))
     list.add(SoalKata(9, "petani", "pe-ta-ni-xi", false, "-", 0))
     list.add(SoalKata(10, "celana", "ce-la-na-vo", false, "-", 0))
-
     return list
 }
 

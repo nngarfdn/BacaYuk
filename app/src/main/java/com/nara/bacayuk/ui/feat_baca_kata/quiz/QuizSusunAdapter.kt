@@ -7,26 +7,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.nara.bacayuk.data.model.SoalKata
 import com.nara.bacayuk.databinding.ItemAbjadMenuBinding
-import com.nara.bacayuk.ui.listener.adapter.AdapterListener
+import com.nara.bacayuk.databinding.ItemQuizSusunBinding
 import com.nara.bacayuk.ui.listener.adapter.AdapterQuizListener
+import com.nara.bacayuk.ui.listener.adapter.ViewPositionListener
 import com.nara.bacayuk.utils.invisible
-import com.nara.bacayuk.utils.visible
 
 
-class QuizMenuAdapter(val listener: AdapterListener, val type: String) :
-    RecyclerView.Adapter<QuizMenuAdapter.RecentAdapterViewHolder>() {
+class QuizSusunAdapter(val listener: AdapterQuizListener, val viewPosition: ViewPositionListener, val type: String) :
+    RecyclerView.Adapter<QuizSusunAdapter.RecentAdapterViewHolder>() {
 
     inner class RecentAdapterViewHolder(val view: View) :
         RecyclerView.ViewHolder(view)
 
-    private val diffCallback = object : DiffUtil.ItemCallback<SoalKata>() {
-        override fun areItemsTheSame(oldItem: SoalKata, newItem: SoalKata): Boolean {
-            return oldItem.level == newItem.level
+    private val diffCallback = object : DiffUtil.ItemCallback<String>() {
+        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+            return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: SoalKata, newItem: SoalKata): Boolean {
+        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
     }
@@ -34,14 +33,17 @@ class QuizMenuAdapter(val listener: AdapterListener, val type: String) :
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
-    fun submitData(list: ArrayList<SoalKata>) {
+    fun submitData(list: MutableList<String>) {
         differ.submitList(list)
     }
+
+    val items: MutableList<String> = differ.currentList.toMutableList()
+    val count = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentAdapterViewHolder {
 
         val binding =
-            ItemAbjadMenuBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemQuizSusunBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RecentAdapterViewHolder(binding.root)
 
     }
@@ -50,20 +52,12 @@ class QuizMenuAdapter(val listener: AdapterListener, val type: String) :
         holder.view.apply {
             val data = differ.currentList[position]
             Log.d("TAG", "onBindViewHolder: $data")
-            val binding = ItemAbjadMenuBinding.bind(this)
-            binding.txtAbjad.text = (position + 1).toString()
-            binding.imgChecklist.invisible()
-            Log.d("isDone", "onBindViewHolder: ${data.alreadyDone}")
-
-            if (data.alreadyDone == 1
-            ) {
-                binding.imgChecklist.visible()
-            } else {
-                binding.imgChecklist.invisible()
-            }
-
+            val binding = ItemQuizSusunBinding.bind(this)
+            binding.opt1.text = data
+            binding.jwb.text = data
+            viewPosition.getView(binding.root, type)
             rootView.setOnClickListener {
-                listener.onClick(data, position, binding.root,type)
+                listener.onClick(data, position, binding.opt1,binding.jwb, type)
             }
         }
     }

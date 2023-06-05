@@ -45,11 +45,10 @@ class AbjadAdapter(val listener: AdapterListener): RecyclerView.Adapter<AbjadAda
             val binding = ItemAbjadBinding.bind(this)
             binding.txtAbjad.text = data?.abjadKapital
             rootView.setOnClickListener {
-                listener.onClick(data?.abjadKapital, position, binding.root)
+                listener.onClick(data?.abjadKapital, position, binding.root,"")
             }
         }
     }
-
 
 
     override fun getItemCount(): Int = differ.currentList.size

@@ -129,8 +129,8 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
 
     }
 
-    override fun onClick(data: Any?, position: Int?, view: View?) {
-        //todo: buat percabangan isKata
+
+    override fun onClick(data: Any?, position: Int?, view: View?, type: String) {
         Log.d("menubaca", "onClick $isBacaKata")
         val intent1 = Intent(this@MenuBacaHurufActivity, MateriBacaHurufActivity::class.java)
             .apply {
@@ -143,6 +143,5 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
                 putExtra("student", student)
             }
         startActivity(if (isBacaKata) intent2 else intent1)
-
     }
 }

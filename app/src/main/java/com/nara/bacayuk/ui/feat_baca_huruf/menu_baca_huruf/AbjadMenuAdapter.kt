@@ -86,7 +86,7 @@ class AbjadMenuAdapter(val listener: AdapterListener) :
             }
 
             rootView.setOnClickListener {
-                listener.onClick(data, position, binding.root)
+                listener.onClick(data, position, binding.root,"")
             }
         }
     }

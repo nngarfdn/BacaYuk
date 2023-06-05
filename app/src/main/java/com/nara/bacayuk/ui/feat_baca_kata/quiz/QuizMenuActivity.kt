@@ -1,5 +1,6 @@
 package com.nara.bacayuk.ui.feat_baca_kata.quiz
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,10 +9,12 @@ import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.Response
+import com.nara.bacayuk.data.model.SoalKata
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.data.model.addSusunKata
 import com.nara.bacayuk.databinding.ActivityQuizMenuBinding
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.AbjadMenuAdapter
+import com.nara.bacayuk.ui.feat_baca_kata.menu.MenuBacaKataActivity
 import com.nara.bacayuk.ui.feat_belajar_kalimat.QuizKalimatActivity
 import com.nara.bacayuk.ui.feat_belajar_kalimat.QuizPilganKalimatActivity
 import com.nara.bacayuk.ui.listener.adapter.AdapterListener
@@ -20,7 +23,7 @@ import com.nara.bacayuk.utils.invisible
 import com.nara.bacayuk.utils.openActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class QuizMenuActivity : AppCompatActivity(), AdapterQuizListener {
+class QuizMenuActivity : AppCompatActivity(), AdapterListener {
 
     private val binding by lazy { ActivityQuizMenuBinding.inflate(layoutInflater) }
     private val adapterQuizMenuAdapter1 by lazy { QuizMenuAdapter(this@QuizMenuActivity, "susun") }
@@ -88,13 +91,23 @@ class QuizMenuActivity : AppCompatActivity(), AdapterQuizListener {
         }
     }
 
+
+
     override fun onClick(data: Any?, position: Int?, view: View?, type: String) {
         when(type) {
             "pilgan" -> {
-                openActivity(this@QuizMenuActivity, QuizPilganKalimatActivity::class.java)
+                val intent = Intent(this@QuizMenuActivity, QuizPilganKalimatActivity::class.java).apply {
+                    putExtra("student", student)
+                    putExtra("quiz", data as SoalKata)
+                }
+                startActivity(intent)
             }
             "susun" -> {
-                openActivity(this@QuizMenuActivity, QuizKalimatActivity::class.java)
+                val intent = Intent(this@QuizMenuActivity, QuizKalimatActivity::class.java).apply {
+                    putExtra("student", student)
+                    putExtra("quiz", data as SoalKata)
+                }
+                startActivity(intent)
             }
         }
     }

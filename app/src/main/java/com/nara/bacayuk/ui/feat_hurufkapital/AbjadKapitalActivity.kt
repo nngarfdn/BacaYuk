@@ -56,7 +56,7 @@ class AbjadKapitalActivity : AppCompatActivity(), AdapterListener {
 //        return abjadKapital
 //    }
 
-    override fun onClick(data: Any?, position: Int?, view: View?) {
+    override fun onClick(data: Any?, position: Int?, view: View?, type: String) {
         startActivity(Intent(this@AbjadKapitalActivity, DetailAbjadActivity::class.java))
     }
 }
