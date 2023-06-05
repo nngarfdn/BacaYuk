@@ -28,7 +28,6 @@ class MenuBacaHurufViewModel(
     private val _vokals = MutableLiveData<Response<List<BelajarSuku>>>()
     val vokals: LiveData<Response<List<BelajarSuku>>> = _vokals
 
-
     fun getAllReports(idStudent: String){
         viewModelScope.launch {
             try {

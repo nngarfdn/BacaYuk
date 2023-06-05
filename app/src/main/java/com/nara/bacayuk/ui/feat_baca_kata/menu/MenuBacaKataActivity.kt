@@ -11,6 +11,7 @@ import com.nara.bacayuk.databinding.ActivityMenuBacaKataBinding
 import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_kata.materi.MateriBacaVokalActivity
+import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizMenuActivity
 import com.nara.bacayuk.ui.feat_riwayat.huruf.RiwayatHurufActivity
 import com.nara.bacayuk.utils.invisible
 import com.nara.bacayuk.utils.openActivity
@@ -60,7 +61,13 @@ class MenuBacaKataActivity : AppCompatActivity() {
                 }
                 startActivity(intent)
             }
-
+            btnLatihanSukuKata.setOnClickListener {
+                val intent = Intent(this@MenuBacaKataActivity,
+                    QuizMenuActivity::class.java).apply {
+                    putExtra("student", student)
+                }
+                startActivity(intent)
+            }
 
         }
     }

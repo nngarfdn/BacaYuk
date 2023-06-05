@@ -96,8 +96,10 @@ class ReportDataSourceImpl: ReportDataSource {
             val firestoreInstance = FirebaseFirestore.getInstance()
             val snapshot = firestoreInstance.collection("Users")
                 .document(idUser).collection("Students").document(idStudent)
-                .collection("ReportHuruf").document("ReportHuruf").get().await()
+                .collection("ReportKata").document("ReportKata").get().await()
+
             val report = snapshot.toObject(ReportKata::class.java)
+            Log.d("getAllReport", report.toString())
             emit(Response.Success(report ?: ReportKata()))
         }.catch {
             Log.e("getAllUserFromFirestore", "Failed to fetch user data from Firestore.", it)

@@ -26,8 +26,6 @@ class QuizPilganKalimatActivity : AppCompatActivity() {
                 }
 
             }
-
-
         }
     }
 }
