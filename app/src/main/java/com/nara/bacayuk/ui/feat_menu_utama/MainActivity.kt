@@ -18,6 +18,7 @@ import com.nara.bacayuk.ui.feat_baca_huruf.quiz_baca_huruf.SusunSukuKataActivity
 import com.nara.bacayuk.ui.feat_baca_kata.materi.MateriBacaVokalActivity
 import com.nara.bacayuk.ui.feat_baca_kata.menu.MenuBacaKataActivity
 import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizBacaKataActivity
+import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizMenuActivity
 import com.nara.bacayuk.ui.feat_belajar_kalimat.QuizKalimatActivity
 import com.nara.bacayuk.ui.feat_belajar_kalimat.QuizPilganKalimatActivity
 import com.nara.bacayuk.ui.feat_riwayat.menu.MenuRiwayatActivity
@@ -76,8 +77,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             btnBacaKalimat.setOnClickListener {
-                val intent = Intent(this@MainActivity, QuizPilganKalimatActivity::class.java).apply {
+                val intent = Intent(this@MainActivity,
+                    QuizMenuActivity::class.java).apply {
                     putExtra("student", student)
+                    putExtra("isKata", false)
                 }
                 startActivity(intent)
             }

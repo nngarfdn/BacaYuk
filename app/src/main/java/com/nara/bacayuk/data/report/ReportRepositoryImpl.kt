@@ -1,9 +1,6 @@
 package com.nara.bacayuk.data.report
 
-import com.nara.bacayuk.data.model.BelajarSuku
-import com.nara.bacayuk.data.model.ReportHuruf
-import com.nara.bacayuk.data.model.ReportKata
-import com.nara.bacayuk.data.model.Response
+import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.domain.repository.ReportRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -55,4 +52,20 @@ class ReportRepositoryImpl(private val dataSource: ReportDataSource) :ReportRepo
     ): Flow<Response<List<BelajarSuku>>> {
         return dataSource.getAllBelajarVokal(idUser, idStudent)
     }
+
+    override suspend fun addUpdateReportKalimat(
+        idUser: String,
+        idStudent: String,
+        reportHuruf: ReportKalimat
+    ): Boolean {
+        return dataSource.addUpdateReportKalimat(idUser, idStudent, reportHuruf)
+    }
+
+    override fun getAllReportKalimatFromFirestore(
+        idUser: String,
+        idStudent: String
+    ): Flow<Response<ReportKalimat>> {
+        return dataSource.getAllReportKalimatFromFirestore(idUser, idStudent)
+    }
 }
+

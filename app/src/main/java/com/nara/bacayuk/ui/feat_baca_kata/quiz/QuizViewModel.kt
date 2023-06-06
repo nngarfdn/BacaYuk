@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nara.bacayuk.data.model.ReportHuruf
+import com.nara.bacayuk.data.model.ReportKalimat
 import com.nara.bacayuk.data.model.ReportKata
 import com.nara.bacayuk.data.model.Response
 import com.nara.bacayuk.data.preferences.DataStoreRepository
@@ -22,12 +23,29 @@ class QuizViewModel(
     private val _reportKatas = MutableLiveData<Response<ReportKata>>()
     val reportKatas: LiveData<Response<ReportKata>> = _reportKatas
 
+    private val _reportKalimat = MutableLiveData<Response<ReportKalimat>>()
+    val reportKalimat: LiveData<Response<ReportKalimat>> = _reportKalimat
+
     fun getAllReportKataFromFirestore(idStudent: String){
         viewModelScope.launch {
             try {
                 reportUseCase.getAllReportKataFromFirestore(getUID() ?: "-", idStudent).collect {
                     Log.d("ListStudentViewModel", "getUser: success")
                     _reportKatas.value = it
+                }
+            } catch (e: Exception) {
+                Log.d("ListStudentViewModel", "getUser: fail")
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun getAllReportKalimatFromFirestore(idStudent: String){
+        viewModelScope.launch {
+            try {
+                reportUseCase.getAllReportKalimatFromFirestore(getUID() ?: "-", idStudent).collect {
+                    Log.d("ListStudentViewModel", "getUser: success")
+                    _reportKalimat.value = it
                 }
             } catch (e: Exception) {
                 Log.d("ListStudentViewModel", "getUser: fail")

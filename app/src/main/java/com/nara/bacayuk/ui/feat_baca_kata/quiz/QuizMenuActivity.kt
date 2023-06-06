@@ -30,6 +30,7 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
     private val adapterQuizMenuAdapter2 by lazy { QuizMenuAdapter(this@QuizMenuActivity,"pilgan") }
     private val quizViewModel: QuizViewModel by viewModel()
     var student: Student? = null
+    var isKata = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +42,16 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
             intent.getParcelableExtra("student") as Student?
         }
 
+        isKata = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getBooleanExtra("isKata",false)
+        } else {
+            intent.getBooleanExtra("isKata",false)
+        }
+
         Log.d("idstudent", "onCreate ${student?.uuid}")
 
-        quizViewModel.getAllReportKataFromFirestore(student?.uuid ?: "-")
+        if (isKata) quizViewModel.getAllReportKataFromFirestore(student?.uuid ?: "-")
+        else quizViewModel.getAllReportKalimatFromFirestore(student?.uuid?: "-")
 
         binding.apply {
             toolbarAction.apply {
@@ -89,6 +97,19 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
                 }
             }
         }
+
+        quizViewModel.reportKalimat.observe(this@QuizMenuActivity) { response ->
+            when (response) {
+                is Response.Success -> {
+                    adapterQuizMenuAdapter1.submitData(response.data.quizSusunKata)
+                    adapterQuizMenuAdapter2.submitData(response.data.quizPilganKata)
+                    Log.d("reportKatas", response.data.quizSusunKata.toString())
+                }
+                else -> {
+
+                }
+            }
+        }
     }
 
 
@@ -106,6 +127,7 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
                 val intent = Intent(this@QuizMenuActivity, QuizKalimatActivity::class.java).apply {
                     putExtra("student", student)
                     putExtra("quiz", data as SoalKata)
+                    putExtra("isKata", isKata)
                 }
                 startActivity(intent)
             }

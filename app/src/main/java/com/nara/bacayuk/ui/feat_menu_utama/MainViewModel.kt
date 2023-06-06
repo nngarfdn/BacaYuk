@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nara.bacayuk.data.model.ReportKalimat
 import com.nara.bacayuk.data.model.Response
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.data.model.User
@@ -37,16 +38,19 @@ class MainViewModel(
             val user = getUserDataStore()
             try {
                 if (isFirstOpen) {
-                    student?.isReadyHurufDataSet = true
+                    student.isReadyHurufDataSet = true
                     user?.let {
                         val changedStudent = student
                         changedStudent.isReadyHurufDataSet = true
                         studentUseCase.addUpdateStudentToFirestore(it.uuid ?: "-", changedStudent) }
                     val status = reportUseCase.createReportHurufDataSets(idUser, idStudent)
                     val statusKata = reportUseCase.createReportKataDataSets(idUser, idStudent)
+                    val statusKalimat = reportUseCase.addUpdateReportKalimat(idUser, idStudent, ReportKalimat())
                     if (status) Log.d("createReport", "Report Huruf data set created")
                     else Log.d("createReport", "Report Huruf data set creation failed")
                     if (statusKata) Log.d("createReport", "Report Kata data set created")
+                    else Log.d("createReport", "Report Kata data set creation failed")
+                    if (statusKalimat) Log.d("createReport", "Report Kata data set created")
                     else Log.d("createReport", "Report Kata data set creation failed")
                 }
             } catch (e: Exception) {

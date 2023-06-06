@@ -65,6 +65,7 @@ class MenuBacaKataActivity : AppCompatActivity() {
                 val intent = Intent(this@MenuBacaKataActivity,
                     QuizMenuActivity::class.java).apply {
                     putExtra("student", student)
+                    putExtra("isKata", true)
                 }
                 startActivity(intent)
             }

@@ -127,6 +127,41 @@ class ReportDataSourceImpl: ReportDataSource {
         }
     }
 
+
+    override suspend fun addUpdateReportKalimat(
+        idUser: String,
+        idStudent: String,
+        reportHuruf: ReportKalimat
+    ): Boolean {
+        return try {
+            val firestoreInstance = FirebaseFirestore.getInstance()
+            val snapshot = firestoreInstance.collection("Users")
+                .document(idUser).collection("Students").document(idStudent)
+                .collection("ReportKalimat").document("ReportKalimat").set(reportHuruf).await()
+            true // kembalikan nilai boolean true jika operasi berhasil
+        } catch (e: Exception) {
+            Log.e("UserDataSourceImpl", "Error adding or updating user to Firestore.", e)
+            false // kembalikan nilai boolean false jika operasi gagal
+        }
+    }
+
+    override fun getAllReportKalimatFromFirestore(
+        idUser: String,
+        idStudent: String
+    ): Flow<Response<ReportKalimat>> {
+        return flow {
+            val firestoreInstance = FirebaseFirestore.getInstance()
+            val snapshot = firestoreInstance.collection("Users")
+                .document(idUser).collection("Students").document(idStudent)
+                .collection("ReportKalimat").document("ReportKalimat").get().await()
+            val report = snapshot.toObject(ReportKalimat::class.java)
+            Log.d("getAllReport", report.toString())
+            emit(Response.Success(report ?: ReportKalimat()))
+        }.catch {
+            Log.e("getAllUserFromFirestore", "Failed to fetch user data from Firestore.", it)
+        }
+    }
+
     override suspend fun createReportHurufDataSets(idUser: String,idStudent: String): Boolean {
         return try {
             val datasets = createDataSet()

@@ -54,10 +54,9 @@ class QuizSusunAdapter(val listener: AdapterQuizListener, val viewPosition: View
             Log.d("TAG", "onBindViewHolder: $data")
             val binding = ItemQuizSusunBinding.bind(this)
             binding.opt1.text = data
-            binding.jwb.text = data
             viewPosition.getView(binding.root, type)
             rootView.setOnClickListener {
-                listener.onClick(data, position, binding.opt1,binding.jwb, type)
+                listener.onClick(data, position, binding.opt1,binding.opt1, type)
             }
         }
     }

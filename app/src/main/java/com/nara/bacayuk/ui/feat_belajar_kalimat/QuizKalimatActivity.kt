@@ -3,6 +3,7 @@ package com.nara.bacayuk.ui.feat_belajar_kalimat
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat.animate
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +29,7 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
     var count = 0
     var lastOptionView: View? = null
     var lastAnswerView: View? = null
+    var isKata = false
     private val adapterOption by lazy {
         QuizSusunAdapter(
             this@QuizKalimatActivity,
@@ -47,6 +49,12 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        isKata = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getBooleanExtra("isKata",false)
+        } else {
+            intent.getBooleanExtra("isKata",false)
+        }
+
         student = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra("student", Student::class.java)
         } else {
@@ -63,12 +71,12 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
         listQuestions.shuffle()
         sizeQuestion = listQuestions.size
 
+
+
         binding.apply {
 
 //            adapterOption.submitData(listQuestions)
 //            adapterAnswer.submitData(listAnswer)
-
-
 
             for (data in listQuestions) {
                 val item = ItemQuizSusunBinding.inflate(layoutInflater)
@@ -78,8 +86,10 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                     listAnswer.add(data as String)
                     item.opt1.animate().alpha(1.0f)
                     .setDuration(800)
-                    .setStartDelay((50).toLong())
-                    .withEndAction { binding.txtAnswer.text = listAnswer.joinToString("") }
+                    .setStartDelay((10).toLong())
+                    .withEndAction {
+                        binding.txtAnswer.text = listAnswer.joinToString(if (isKata) "" else " ")
+                    }
                     .start()
                 }
                 placeholder.addView(item.root)
@@ -97,6 +107,10 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                     LinearLayoutManager.HORIZONTAL,
                     false
                 )
+            }
+            btnLogin.setOnClickListener {
+                if (txtAnswer.text == soalKata?.correctAnswer) Toast.makeText(this@QuizKalimatActivity, "Correct!", Toast.LENGTH_SHORT).show()
+                else Toast.makeText(this@QuizKalimatActivity, "Wrong!", Toast.LENGTH_SHORT).show()
             }
         }
 

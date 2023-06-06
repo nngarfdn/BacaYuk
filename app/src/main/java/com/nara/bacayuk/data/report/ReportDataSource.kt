@@ -15,4 +15,9 @@ interface ReportDataSource {
     fun getAllReportKataFromFirestore(idUser: String, idStudent: String): Flow<Response<ReportKata>>
     fun getAllBelajarVokal(idUser: String, idStudent: String): Flow<Response<List<BelajarSuku>>>
 
+    //kalimat
+    suspend fun addUpdateReportKalimat(idUser: String,idStudent: String,reportHuruf: ReportKalimat): Boolean
+    fun getAllReportKalimatFromFirestore(idUser: String, idStudent: String): Flow<Response<ReportKalimat>>
+
+
 }
