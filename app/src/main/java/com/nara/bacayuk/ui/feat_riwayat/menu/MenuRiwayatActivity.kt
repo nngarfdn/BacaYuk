@@ -8,6 +8,8 @@ import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityMenuRiwayatBinding
 import com.nara.bacayuk.ui.feat_riwayat.huruf.RiwayatHurufActivity
+import com.nara.bacayuk.ui.feat_riwayat.kalimat.RiwayatKalimatActivity
+import com.nara.bacayuk.ui.feat_riwayat.kata.RiwayatKataActivity
 
 class MenuRiwayatActivity : AppCompatActivity() {
 
@@ -28,6 +30,20 @@ class MenuRiwayatActivity : AppCompatActivity() {
             textView.text = student?.fullName
             btnHuruf.setOnClickListener {
                 val intent = Intent(this@MenuRiwayatActivity, RiwayatHurufActivity::class.java).apply {
+                    putExtra("student", student)
+                }
+                startActivity(intent)
+            }
+
+            btnKata.setOnClickListener {
+                val intent = Intent(this@MenuRiwayatActivity, RiwayatKataActivity::class.java).apply {
+                    putExtra("student", student)
+                }
+                startActivity(intent)
+            }
+
+            btnKalimat.setOnClickListener {
+                val intent = Intent(this@MenuRiwayatActivity, RiwayatKalimatActivity::class.java).apply {
                     putExtra("student", student)
                 }
                 startActivity(intent)

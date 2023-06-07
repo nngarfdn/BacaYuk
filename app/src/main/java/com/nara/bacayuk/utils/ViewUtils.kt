@@ -28,11 +28,11 @@ fun isValidEmail(email: String): Boolean {
 
 //extention function load image glide
 fun ImageView.loadImage(context: Context, url: String){
-    Glide.with(context).load(url)
+    Glide.with(context).load(url).into(this)
 }
 
 fun CircleImageView.loadImage(context: Context, url: String){
-    Glide.with(context).load(url)
+    Glide.with(context).load(url).into(this)
 }
 
 fun changeErrorStateEditText(context: Context, btn: AppCompatEditText, tv: TextView, errorMsg: String,

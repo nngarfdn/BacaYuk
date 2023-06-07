@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.Abjad
 import com.nara.bacayuk.data.model.Response
 import com.nara.bacayuk.data.model.Student
@@ -15,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class RiwayatHurufActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityRiwayatHurufBinding.inflate(layoutInflater) }
-    private val riwayatHurufViewModel: RiwayatHurufViewModel by viewModel()
+    private val riwayatViewModel: RiwayatViewModel by viewModel()
     private val riwayatHurufAdapter by lazy { RiwayatHurufAdapter() }
     var student: Student? = null
     private val listAbjadMenu = arrayListOf<Abjad>()
@@ -31,9 +30,8 @@ class RiwayatHurufActivity : AppCompatActivity() {
             intent.getParcelableExtra("student") as Student?
         }
 
-
-        riwayatHurufViewModel.getAllReports(student?.uuid ?: "-")
-        riwayatHurufViewModel.reports.observe(this@RiwayatHurufActivity) { response ->
+        riwayatViewModel.getAllReports(student?.uuid ?: "-")
+        riwayatViewModel.reports.observe(this@RiwayatHurufActivity) { response ->
             when (response) {
                 is Response.Success -> {
                     response.data.forEach {

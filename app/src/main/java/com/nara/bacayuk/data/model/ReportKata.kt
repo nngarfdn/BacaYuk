@@ -12,16 +12,16 @@ data class ReportKata (
 
 fun addSusunKata(): ArrayList<SoalKata>{
     val list = arrayListOf<SoalKata>()
-    list.add(SoalKata(1, "bola", "bo-la-ha", false, "-", 0))
-    list.add(SoalKata(2, "mata", "ma-ta-du", false, "-", 0))
-    list.add(SoalKata(3, "siku", "si-ku-na", false, "-", 0))
-    list.add(SoalKata(4, "kaki", "ka-ki-ro", false, "-", 0))
-    list.add(SoalKata(5, "meja", "me-ja-fa", false, "-", 0))
-    list.add(SoalKata(6, "buku", "bu-ku-ti", false, "-", 0))
-    list.add(SoalKata(7, "baju", "ba-ju-re", false, "-", 0))
-    list.add(SoalKata(8, "sepeda", "se-pe-da-ko", false, "-", 0))
-    list.add(SoalKata(9, "petani", "pe-ta-ni-xi", false, "-", 0))
-    list.add(SoalKata(10, "celana", "ce-la-na-vo", false, "-", 0))
+    list.add(SoalKata(1, "bola", "bo-la-ha", false, "-", 0,"url"))
+    list.add(SoalKata(2, "mata", "ma-ta-du", false, "-", 0,"url"))
+    list.add(SoalKata(3, "siku", "si-ku-na", false, "-", 0,"url"))
+    list.add(SoalKata(4, "kaki", "ka-ki-ro", false, "-", 0,"url"))
+    list.add(SoalKata(5, "meja", "me-ja-fa", false, "-", 0,"url"))
+    list.add(SoalKata(6, "buku", "bu-ku-ti", false, "-", 0,"url"))
+    list.add(SoalKata(7, "baju", "ba-ju-re", false, "-", 0,"url"))
+    list.add(SoalKata(8, "sepeda", "se-pe-da-ko", false, "-", 0,"url"))
+    list.add(SoalKata(9, "petani", "pe-ta-ni-xi", false, "-", 0,"url"))
+    list.add(SoalKata(10, "celana", "ce-la-na-vo", false, "-", 0,"url"))
     return list
 }
 

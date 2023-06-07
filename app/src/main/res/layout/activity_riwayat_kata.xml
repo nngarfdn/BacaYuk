@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar"/>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_16sdp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Belajar Huruf Vokal"
+                style="@style/TextViewH16SemiBold"/>
+            <LinearLayout
+                android:id="@+id/placeholder_belajar_vokal"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/txt_a"
+                    layout="@layout/item_riwayat"/>
+                <include
+                    android:id="@+id/txt_i"
+                    layout="@layout/item_riwayat"/>
+                <include
+                    android:id="@+id/txt_u"
+                    layout="@layout/item_riwayat"/>
+                <include
+                    android:id="@+id/txt_e"
+                    layout="@layout/item_riwayat"/>
+                <include
+                    android:id="@+id/txt_o"
+                    layout="@layout/item_riwayat"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Belajar Suku Kata"
+                android:textColor="@color/black"
+                android:layout_marginTop="16dp"
+                style="@style/TextViewH16SemiBold"/>
+            <LinearLayout
+                android:id="@+id/placeholder_belajar_suku"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Latihan Suku Kata"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                style="@style/TextViewH16SemiBold"/>
+            <LinearLayout
+                android:id="@+id/placeholder_latihan_suku"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Latihan Baca Kata"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                style="@style/TextViewH16SemiBold"/>
+            <LinearLayout
+                android:id="@+id/placeholder_latihan_baca"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

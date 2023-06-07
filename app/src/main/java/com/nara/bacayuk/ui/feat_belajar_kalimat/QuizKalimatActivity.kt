@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat.animate
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nara.bacayuk.data.model.SoalKata
 import com.nara.bacayuk.data.model.Student
@@ -16,8 +15,7 @@ import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizSusunAdapter
 import com.nara.bacayuk.ui.listener.adapter.AdapterQuizListener
 import com.nara.bacayuk.ui.listener.adapter.ViewPositionListener
 import com.nara.bacayuk.utils.invisible
-
-
+import com.nara.bacayuk.utils.loadImage
 
 class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositionListener {
     private val binding by lazy { ActivityQuizKalimatBinding.inflate(layoutInflater) }
@@ -72,12 +70,9 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
         sizeQuestion = listQuestions.size
 
 
-
         binding.apply {
 
-//            adapterOption.submitData(listQuestions)
-//            adapterAnswer.submitData(listAnswer)
-
+            imageView4.loadImage(this@QuizKalimatActivity, "https://firebasestorage.googleapis.com/v0/b/bisabelajar-b0579.appspot.com/o/susunKalimat%20-%202.png?alt=media&token=bda19bc2-c307-44c5-b770-23c961297bcf")
             for (data in listQuestions) {
                 val item = ItemQuizSusunBinding.inflate(layoutInflater)
                 item.opt1.text = data
