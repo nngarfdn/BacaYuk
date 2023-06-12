@@ -51,7 +51,12 @@ class MenuBacaKataActivity : AppCompatActivity() {
             }
 
             btnVokal.setOnClickListener {
-                openActivity(this@MenuBacaKataActivity, MateriBacaHurufActivity::class.java)
+//                openActivity(this@MenuBacaKataActivity, MateriBacaHurufActivity::class.java)
+                val intent = Intent(this@MenuBacaKataActivity,
+                    MateriBacaHurufActivity::class.java).apply {
+                    putExtra("student", student)
+                }
+                startActivity(intent)
             }
             btnSukuKata.setOnClickListener {
                 val intent = Intent(this@MenuBacaKataActivity,

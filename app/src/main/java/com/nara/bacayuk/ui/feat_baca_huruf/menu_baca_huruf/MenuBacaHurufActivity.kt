@@ -48,11 +48,9 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
         else menuBacaHurufViewModel.getAllReports(student?.uuid ?: "-")
 
 
-
         menuBacaHurufViewModel.vokals.observe(this@MenuBacaHurufActivity) { response ->
             when (response) {
                 is Response.Success -> {
-
                     response.data.forEach {
                         //get index 1 of string
                         val abjad = Abjad(

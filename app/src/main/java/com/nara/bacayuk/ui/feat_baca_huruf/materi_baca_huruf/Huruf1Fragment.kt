@@ -8,10 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.nara.bacayuk.R
-import com.nara.bacayuk.data.model.Abjad
-import com.nara.bacayuk.data.model.ReportHuruf
-import com.nara.bacayuk.data.model.Response
-import com.nara.bacayuk.data.model.User
+import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.databinding.FragmentHuruf1Binding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,6 +22,8 @@ class Huruf1Fragment : Fragment() {
     private var param2: String? = null
     private lateinit var listener: (CharSequence) -> Unit
     private var abjad: Abjad? = null
+    var reportKata: ReportKata? = null
+
     private val materiBacaHurufViewModel: MateriBacaHurufViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +32,8 @@ class Huruf1Fragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(
@@ -40,6 +41,7 @@ class Huruf1Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+
         _binding = FragmentHuruf1Binding.inflate(inflater, container, false)
         return binding.root
     }
@@ -53,6 +55,8 @@ class Huruf1Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val user: User? = materiBacaHurufViewModel.getUserDataStore()
         user?.uuid?.let { materiBacaHurufViewModel.getUser(it) }
+
+
 
         abjad = MateriBacaHurufActivity.dataAbjad
         when (param1) {
@@ -97,38 +101,81 @@ class Huruf1Fragment : Fragment() {
             }
         }
 
-        when (param2) {
-            "0" -> {
-                binding.materi.apply {
-                    txtAbjad.text = "A a"
-                    txtDesc.text = getString(R.string.ini_huruf_vokal)
+        materiBacaHurufViewModel.getAllReportKataFromFirestore(MateriBacaHurufActivity.student?.uuid ?: "-")
+        materiBacaHurufViewModel.reportKatas.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Success -> {
+                    reportKata = response.data
+                    Log.d("reportabjadparam2", response.data.belajarVokal.toString())
+                    when (param2) {
+                        "0" -> {
+                            binding.materi.apply {
+                                txtAbjad.text = "A a"
+                                txtDesc.text = getString(R.string.ini_huruf_vokal)
+                                reportKata?.belajarVokal?.isADone = true
+
+                                Log.d("abjadparam2", "${MateriBacaHurufActivity.student?.uuid} - ${reportKata?.belajarVokal?.isADone}")
+
+                                materiBacaHurufViewModel.updateReportKata(
+                                    MateriBacaHurufActivity.student?.uuid ?: "-",
+                                    reportKata ?: ReportKata()
+                                )
+                            }
+
+                        }
+                        "1" -> {
+                            binding.materi.apply {
+                                txtAbjad.text = "I i"
+                                txtDesc.text = getString(R.string.ini_huruf_vokal)
+                            }
+                            reportKata?.belajarVokal?.isIDone = true
+                            materiBacaHurufViewModel.updateReportKata(
+                                MateriBacaHurufActivity.student?.uuid ?: "-",
+                                reportKata ?: ReportKata()
+                            )
+                        }
+                        "2" -> {
+                            binding.materi.apply {
+                                txtAbjad.text = "U u"
+                                txtDesc.text = getString(R.string.ini_huruf_vokal)
+                            }
+                            reportKata?.belajarVokal?.isUDone = true
+                            materiBacaHurufViewModel.updateReportKata(
+                                MateriBacaHurufActivity.student?.uuid ?: "-",
+                                reportKata ?: ReportKata()
+                            )
+                        }
+                        "3" -> {
+                            binding.materi.apply {
+                                txtAbjad.text = "E e"
+                                txtDesc.text = getString(R.string.ini_huruf_vokal)
+                            }
+                            reportKata?.belajarVokal?.isEDone = true
+                            materiBacaHurufViewModel.updateReportKata(
+                                MateriBacaHurufActivity.student?.uuid ?: "-",
+                                reportKata ?: ReportKata()
+                            )
+                        }
+                        "4" -> {
+                            binding.materi.apply {
+                                txtAbjad.text = "O o"
+                                txtDesc.text = getString(R.string.ini_huruf_vokal)
+                            }
+                            reportKata?.belajarVokal?.isODone = true
+                            materiBacaHurufViewModel.updateReportKata(
+                                MateriBacaHurufActivity.student?.uuid ?: "-",
+                                reportKata ?: ReportKata()
+                            )
+                        }
+                    }
                 }
-            }
-            "1" -> {
-                binding.materi.apply {
-                    txtAbjad.text = "I i"
-                    txtDesc.text = getString(R.string.ini_huruf_vokal)
-                }
-            }
-            "2" -> {
-                binding.materi.apply {
-                    txtAbjad.text = "U u"
-                    txtDesc.text = getString(R.string.ini_huruf_vokal)
-                }
-            }
-            "3" -> {
-                binding.materi.apply {
-                    txtAbjad.text = "E e"
-                    txtDesc.text = getString(R.string.ini_huruf_vokal)
-                }
-            }
-            "4" -> {
-                binding.materi.apply {
-                    txtAbjad.text = "O o"
-                    txtDesc.text = getString(R.string.ini_huruf_vokal)
+                else -> {
+
                 }
             }
         }
+
+
     }
 
     companion object {

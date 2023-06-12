@@ -5,9 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nara.bacayuk.data.model.ReportHuruf
-import com.nara.bacayuk.data.model.Response
-import com.nara.bacayuk.data.model.User
+import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.data.preferences.DataStoreRepository
 import com.nara.bacayuk.domain.usecase.ReportUseCase
 import com.nara.bacayuk.domain.usecase.UserUseCase
@@ -25,8 +23,34 @@ class MateriBacaHurufViewModel(
 
     private val _user = MutableLiveData<Response<User>>()
     val user: LiveData<Response<User>> = _user
+    private val _reportKatas = MutableLiveData<Response<ReportKata>>()
+    val reportKatas: LiveData<Response<ReportKata>> = _reportKatas
 
+    fun updateReportKata(
+        idStudent: String,
+        reportHuruf: ReportKata
+    ) = viewModelScope.launch {
+        try {
+            reportUseCase.updateReportKata(getUID()?: "", idStudent, reportHuruf)
+        } catch (e: Exception) {
+            Log.d("MainViewModel", "login: fail")
+            e.printStackTrace()
+        }
+    }
 
+    fun getAllReportKataFromFirestore(idStudent: String){
+        viewModelScope.launch {
+            try {
+                reportUseCase.getAllReportKataFromFirestore(getUID() ?: "-", idStudent).collect {
+                    Log.d("ListStudentViewModel", "getUser: success")
+                    _reportKatas.value = it
+                }
+            } catch (e: Exception) {
+                Log.d("ListStudentViewModel", "getUser: fail")
+                e.printStackTrace()
+            }
+        }
+    }
 
     fun updateReportHuruf(
         idUser: String,

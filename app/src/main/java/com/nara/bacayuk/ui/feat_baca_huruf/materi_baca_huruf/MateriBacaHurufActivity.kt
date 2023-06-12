@@ -8,9 +8,11 @@ import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.Abjad
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityMateriBacaHurufBinding
+import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufViewModel
 import com.nara.bacayuk.ui.feat_baca_huruf.quiz_baca_huruf.QuizBacaHurufActivity
 import com.nara.bacayuk.utils.DATA
 import com.nara.bacayuk.utils.invisible
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MateriBacaHurufActivity : AppCompatActivity() {
 
