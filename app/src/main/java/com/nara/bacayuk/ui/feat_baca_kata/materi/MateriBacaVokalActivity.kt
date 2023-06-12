@@ -15,13 +15,15 @@ import androidx.core.math.MathUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
-import com.nara.bacayuk.data.model.Abjad
-import com.nara.bacayuk.data.model.Student
+import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.databinding.ActivityMateriBacaVokalBinding
 import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
+import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufViewModel
+import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizViewModel
 
 import com.nara.bacayuk.ui.listener.adapter.AdapterListener
 import com.nara.bacayuk.utils.DATA
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import sh.tyy.wheelpicker.core.BaseWheelPickerView
 import sh.tyy.wheelpicker.core.WheelPickerRecyclerView
 
@@ -32,6 +34,8 @@ class MateriBacaVokalActivity : AppCompatActivity(), AdapterListener,
     private val bacaVocalAdapter by lazy { BacaVokalAdapter(this@MateriBacaVokalActivity) }
     var student: Student? = null
     var dataAbjad: Abjad? = null
+    private val menuBacaHurufViewModel: MenuBacaHurufViewModel by viewModel()
+    private var listBelajarSuku = mutableListOf<BelajarSuku>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +53,24 @@ class MateriBacaVokalActivity : AppCompatActivity(), AdapterListener,
             intent.getParcelableExtra("student") as Student?
         }
 
+        menuBacaHurufViewModel.getAllBelajarVokal(student?.uuid ?: "-")
+
+        menuBacaHurufViewModel.vokals.observe(this@MateriBacaVokalActivity) { response ->
+            when (response) {
+                is Response.Success -> {
+                    listBelajarSuku = response.data.toMutableList()
+                }
+
+                is Response.Error -> {
+                    response.message?.let {
+                        Log.d("menubaca", it)
+                    }
+                }
+
+                else -> {}
+            }
+        }
+
         binding.apply {
 
             txtAbjad.text = dataAbjad?.abjadNonKapital
@@ -60,6 +82,22 @@ class MateriBacaVokalActivity : AppCompatActivity(), AdapterListener,
             }
 
             rvAbjadKapital.setWheelListener(this@MateriBacaVokalActivity)
+
+            btnSelect.setOnClickListener {
+                Log.d("menubaca", "select luar: ${dataAbjad?.abjadNonKapital} ")
+                for(item in listBelajarSuku){
+                    if (dataAbjad?.abjadNonKapital == item.abjadName[1].toString()) {
+                        //todo call viewmodel update
+                        Log.d("menubaca", "select luar: ${dataAbjad?.abjadName}  ${item.abjadName}")
+                        item.belajarVokal.isADone = true
+                        item.belajarVokal.isIDone = true
+                        item.belajarVokal.isUDone = true
+                        item.belajarVokal.isEDone = true
+                        item.belajarVokal.isODone = true
+                        menuBacaHurufViewModel.updateBelajarSuku(student?.uuid?: "-", item)
+                    }
+                }
+            }
         }
 
     }
@@ -93,7 +131,7 @@ class MateriBacaVokalActivity : AppCompatActivity(), AdapterListener,
     }
 
     override fun onClick(data: Any?, position: Int?, view: View?, type: String) {
-        Log.d("onclick", "onClick:  $position")
+        Log.d("menubaca", "data clicked")
 
     }
 

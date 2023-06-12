@@ -80,7 +80,25 @@ class ReportDataSourceImpl: ReportDataSource {
             val firestoreInstance = FirebaseFirestore.getInstance()
             val snapshot = firestoreInstance.collection("Users")
                 .document(idUser).collection("Students").document(idStudent)
-                .collection("ReportHuruf").document("ReportHuruf").set(reportHuruf).await()
+                .collection("ReportKata").document("ReportKata").set(reportHuruf).await()
+            true // kembalikan nilai boolean true jika operasi berhasil
+        } catch (e: Exception) {
+            Log.e("UserDataSourceImpl", "Error adding or updating user to Firestore.", e)
+            false // kembalikan nilai boolean false jika operasi gagal
+        }
+    }
+
+    override suspend fun updateBelajarSuku(
+        idUser: String,
+        idStudent: String,
+        reportHuruf: BelajarSuku
+    ): Boolean {
+        return try {
+            val firestoreInstance = FirebaseFirestore.getInstance()
+            val snapshot = firestoreInstance.collection("Users").document(idUser)
+                .collection("Students").document(idStudent)
+                .collection("ReportKata").document("ReportKata")
+                .collection("BelajarVokal").document(reportHuruf.abjadName).set(reportHuruf).await()
             true // kembalikan nilai boolean true jika operasi berhasil
         } catch (e: Exception) {
             Log.e("UserDataSourceImpl", "Error adding or updating user to Firestore.", e)

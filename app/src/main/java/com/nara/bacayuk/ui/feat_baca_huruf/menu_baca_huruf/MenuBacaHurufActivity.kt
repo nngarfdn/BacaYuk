@@ -8,9 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import com.nara.bacayuk.R
-import com.nara.bacayuk.data.model.Abjad
-import com.nara.bacayuk.data.model.Response
-import com.nara.bacayuk.data.model.Student
+import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.databinding.ActivityMenuBacaHurufBinding
 import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_kata.materi.MateriBacaVokalActivity
@@ -27,6 +25,7 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
     var student: Student? = null
     private val menuBacaHurufViewModel: MenuBacaHurufViewModel by viewModel()
     private val listAbjadMenu = arrayListOf<Abjad>()
+
     private var isBacaKata = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,12 +42,17 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
 
         Log.d("menubaca", "${student?.uuid}")
 
-        if (isBacaKata) menuBacaHurufViewModel.getAllBelajarVokal(student?.uuid ?: "-")
+        if (isBacaKata) {
+            menuBacaHurufViewModel.getAllBelajarVokal(student?.uuid ?: "-")
+        }
         else menuBacaHurufViewModel.getAllReports(student?.uuid ?: "-")
+
+
 
         menuBacaHurufViewModel.vokals.observe(this@MenuBacaHurufActivity) { response ->
             when (response) {
                 is Response.Success -> {
+
                     response.data.forEach {
                         //get index 1 of string
                         val abjad = Abjad(
@@ -77,6 +81,7 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
         menuBacaHurufViewModel.reports.observe(this@MenuBacaHurufActivity) { response ->
             when (response) {
                 is Response.Success -> {
+
                     response.data.forEach {
                         //get index 1 of string
                         val abjad = Abjad(

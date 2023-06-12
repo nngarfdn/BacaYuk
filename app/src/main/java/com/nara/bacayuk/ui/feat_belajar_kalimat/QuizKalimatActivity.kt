@@ -2,20 +2,25 @@ package com.nara.bacayuk.ui.feat_belajar_kalimat
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nara.bacayuk.data.model.ReportKalimat
+import com.nara.bacayuk.data.model.ReportKata
 import com.nara.bacayuk.data.model.SoalKata
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityQuizKalimatBinding
 import com.nara.bacayuk.databinding.ItemQuizSusunBinding
 import com.nara.bacayuk.ui.customview.CenterLinearLayoutManager
 import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizSusunAdapter
+import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizViewModel
 import com.nara.bacayuk.ui.listener.adapter.AdapterQuizListener
 import com.nara.bacayuk.ui.listener.adapter.ViewPositionListener
 import com.nara.bacayuk.utils.invisible
 import com.nara.bacayuk.utils.loadImage
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositionListener {
     private val binding by lazy { ActivityQuizKalimatBinding.inflate(layoutInflater) }
@@ -27,7 +32,10 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
     var count = 0
     var lastOptionView: View? = null
     var lastAnswerView: View? = null
-    var isKata = false
+    var isKata: Boolean = false
+    var reportKata: ReportKata? = null
+    var reportKalimat: ReportKalimat? = null
+    private val quizViewModel: QuizViewModel by viewModel()
     private val adapterOption by lazy {
         QuizSusunAdapter(
             this@QuizKalimatActivity,
@@ -65,14 +73,26 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
             intent.getParcelableExtra("quiz") as SoalKata?
         }
 
+        if (isKata) {
+            reportKata = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra("data", ReportKata::class.java)
+            } else {
+                intent.getParcelableExtra("data" ) as ReportKata?
+            }
+        } else {
+            reportKalimat = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra("data", ReportKalimat::class.java)
+            } else {
+                intent.getParcelableExtra("data" ) as ReportKalimat?
+            }
+        }
+
         listQuestions = stringToList(soalKata?.optionList ?: "", "-")
         listQuestions.shuffle()
         sizeQuestion = listQuestions.size
 
-
         binding.apply {
-
-            imageView4.loadImage(this@QuizKalimatActivity, "https://firebasestorage.googleapis.com/v0/b/bisabelajar-b0579.appspot.com/o/susunKalimat%20-%202.png?alt=media&token=bda19bc2-c307-44c5-b770-23c961297bcf")
+            imageView4.loadImage(this@QuizKalimatActivity, soalKata?.imageUrl?:"")
             for (data in listQuestions) {
                 val item = ItemQuizSusunBinding.inflate(layoutInflater)
                 item.opt1.text = data
@@ -104,7 +124,36 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                 )
             }
             btnLogin.setOnClickListener {
-                if (txtAnswer.text == soalKata?.correctAnswer) Toast.makeText(this@QuizKalimatActivity, "Correct!", Toast.LENGTH_SHORT).show()
+                Log.d("quizsusun", "$isKata- $reportKata- $reportKalimat- ${student?.uuid ?: "-"}")
+                if (txtAnswer.text == soalKata?.correctAnswer){
+                    if (reportKata!= null) {
+                        for(item in reportKata!!.quizPilganKata){
+                            if (item.level == soalKata!!.level){
+                                item.isCorrect = true
+                                val index = item.level - 1
+                                reportKata!!.quizSusunKata[index]= item
+                                quizViewModel.updateReportKata(
+                                    student?.uuid ?: "-", reportKata!!
+                                )
+                            }
+                        }
+                    }
+
+                    if (reportKalimat!= null) {
+                        for(item in reportKalimat!!.quizPilganKata){
+                            if (item.level == soalKata!!.level){
+                                item.isCorrect = true
+                                val index = item.level - 1
+                                reportKalimat!!.quizSusunKata[index]= item
+                                quizViewModel.updateReportKalimat(
+                                    student?.uuid ?: "-", reportKalimat!!
+                                )
+                            }
+                        }
+                    }
+                    Toast.makeText(this@QuizKalimatActivity, "Correct!", Toast.LENGTH_SHORT).show()
+                }
+
                 else Toast.makeText(this@QuizKalimatActivity, "Wrong!", Toast.LENGTH_SHORT).show()
             }
         }

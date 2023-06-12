@@ -12,6 +12,7 @@ interface ReportRepository {
     suspend fun updateReportKata(idUser: String,idStudent: String,reportHuruf: ReportKata): Boolean
     fun getAllReportKataFromFirestore(idUser: String, idStudent: String): Flow<Response<ReportKata>>
     fun getAllBelajarVokal(idUser: String, idStudent: String): Flow<Response<List<BelajarSuku>>>
+    suspend fun updateBelajarSuku(idUser: String,idStudent: String,reportHuruf: BelajarSuku): Boolean
 
     suspend fun addUpdateReportKalimat(idUser: String,idStudent: String,reportHuruf: ReportKalimat): Boolean
     fun getAllReportKalimatFromFirestore(idUser: String, idStudent: String): Flow<Response<ReportKalimat>>

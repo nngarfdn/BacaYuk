@@ -8,10 +8,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import com.nara.bacayuk.R
-import com.nara.bacayuk.data.model.Response
-import com.nara.bacayuk.data.model.SoalKata
-import com.nara.bacayuk.data.model.Student
-import com.nara.bacayuk.data.model.addSusunKata
+import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.databinding.ActivityQuizMenuBinding
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.AbjadMenuAdapter
 import com.nara.bacayuk.ui.feat_baca_kata.menu.MenuBacaKataActivity
@@ -29,6 +26,8 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
     private val adapterQuizMenuAdapter1 by lazy { QuizMenuAdapter(this@QuizMenuActivity, "susun") }
     private val adapterQuizMenuAdapter2 by lazy { QuizMenuAdapter(this@QuizMenuActivity,"pilgan") }
     private val quizViewModel: QuizViewModel by viewModel()
+    var reportKata: ReportKata? = null
+    var reportKalimat: ReportKalimat? = null
     var student: Student? = null
     var isKata = false
 
@@ -88,8 +87,10 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
         quizViewModel.reportKatas.observe(this@QuizMenuActivity) { response ->
             when (response) {
                 is Response.Success -> {
+                    reportKata = response.data
                     adapterQuizMenuAdapter1.submitData(response.data.quizSusunKata)
                     adapterQuizMenuAdapter2.submitData(response.data.quizPilganKata)
+
                     Log.d("reportKatas", response.data.quizSusunKata.toString())
                 }
                 else -> {
@@ -101,6 +102,7 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
         quizViewModel.reportKalimat.observe(this@QuizMenuActivity) { response ->
             when (response) {
                 is Response.Success -> {
+                    reportKalimat = response.data
                     adapterQuizMenuAdapter1.submitData(response.data.quizSusunKata)
                     adapterQuizMenuAdapter2.submitData(response.data.quizPilganKata)
                     Log.d("reportKatas", response.data.quizSusunKata.toString())
@@ -113,13 +115,14 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
     }
 
 
-
     override fun onClick(data: Any?, position: Int?, view: View?, type: String) {
         when(type) {
             "pilgan" -> {
                 val intent = Intent(this@QuizMenuActivity, QuizPilganKalimatActivity::class.java).apply {
                     putExtra("student", student)
                     putExtra("quiz", data as SoalKata)
+                    putExtra("isKata", isKata)
+                    putExtra("data", if (isKata) reportKata else reportKalimat)
                 }
                 startActivity(intent)
             }
@@ -128,6 +131,7 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
                     putExtra("student", student)
                     putExtra("quiz", data as SoalKata)
                     putExtra("isKata", isKata)
+                    putExtra("data", if (isKata) reportKata else reportKalimat)
                 }
                 startActivity(intent)
             }

@@ -28,6 +28,18 @@ class MenuBacaHurufViewModel(
     private val _vokals = MutableLiveData<Response<List<BelajarSuku>>>()
     val vokals: LiveData<Response<List<BelajarSuku>>> = _vokals
 
+    fun updateBelajarSuku(
+        idStudent: String,
+        reportHuruf: BelajarSuku
+    ) = viewModelScope.launch {
+        try {
+            reportUseCase.updateBelajarSuku(getUID()?: "", idStudent, reportHuruf)
+        } catch (e: Exception) {
+            Log.d("MainViewModel", "login: fail")
+            e.printStackTrace()
+        }
+    }
+
     fun getAllReports(idStudent: String){
         viewModelScope.launch {
             try {

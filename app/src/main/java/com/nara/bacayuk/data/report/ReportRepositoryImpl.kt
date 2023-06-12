@@ -53,6 +53,14 @@ class ReportRepositoryImpl(private val dataSource: ReportDataSource) :ReportRepo
         return dataSource.getAllBelajarVokal(idUser, idStudent)
     }
 
+    override suspend fun updateBelajarSuku(
+        idUser: String,
+        idStudent: String,
+        reportHuruf: BelajarSuku
+    ): Boolean {
+        return dataSource.updateBelajarSuku(idUser, idStudent, reportHuruf)
+    }
+
     override suspend fun addUpdateReportKalimat(
         idUser: String,
         idStudent: String,

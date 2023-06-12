@@ -26,6 +26,30 @@ class QuizViewModel(
     private val _reportKalimat = MutableLiveData<Response<ReportKalimat>>()
     val reportKalimat: LiveData<Response<ReportKalimat>> = _reportKalimat
 
+    fun updateReportKata(
+        idStudent: String,
+        reportHuruf: ReportKata
+    ) = viewModelScope.launch {
+        try {
+            reportUseCase.updateReportKata(getUID()?: "", idStudent, reportHuruf)
+        } catch (e: Exception) {
+            Log.d("MainViewModel", "login: fail")
+            e.printStackTrace()
+        }
+    }
+
+    fun updateReportKalimat(
+        idStudent: String,
+        reportHuruf: ReportKalimat
+    ) = viewModelScope.launch {
+        try {
+            reportUseCase.addUpdateReportKalimat(getUID()?: "", idStudent, reportHuruf)
+        } catch (e: Exception) {
+            Log.d("MainViewModel", "login: fail")
+            e.printStackTrace()
+        }
+    }
+
     fun getAllReportKataFromFirestore(idStudent: String){
         viewModelScope.launch {
             try {

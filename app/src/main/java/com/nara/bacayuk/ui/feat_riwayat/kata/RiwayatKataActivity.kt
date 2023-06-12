@@ -116,8 +116,6 @@ class RiwayatKataActivity : AppCompatActivity() {
                     if (isFinished) R.drawable.ic_finished else R.drawable.ic_unfinished
                 ), null, null, null
             )
-
-
     }
 
     private fun addViewVokal(list: MutableList<BelajarSuku>, status: Boolean) {
@@ -138,8 +136,5 @@ class RiwayatKataActivity : AppCompatActivity() {
             )
             binding.placeholderBelajarSuku.addView(view.root)
         }
-
     }
-
-
 }

@@ -12,6 +12,7 @@ interface ReportDataSource {
     //kata
     suspend fun createReportKataDataSets(idUser: String,idStudent: String): Boolean
     suspend fun updateReportKata(idUser: String,idStudent: String,reportHuruf: ReportKata): Boolean
+    suspend fun updateBelajarSuku(idUser: String,idStudent: String,reportHuruf: BelajarSuku): Boolean
     fun getAllReportKataFromFirestore(idUser: String, idStudent: String): Flow<Response<ReportKata>>
     fun getAllBelajarVokal(idUser: String, idStudent: String): Flow<Response<List<BelajarSuku>>>
 
