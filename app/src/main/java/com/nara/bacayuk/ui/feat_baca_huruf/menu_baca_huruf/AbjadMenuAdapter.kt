@@ -17,8 +17,7 @@ import com.nara.bacayuk.utils.visible
 class AbjadMenuAdapter(val listener: AdapterListener) :
     RecyclerView.Adapter<AbjadMenuAdapter.RecentAdapterViewHolder>() {
 
-    inner class RecentAdapterViewHolder(val view: View) :
-        RecyclerView.ViewHolder(view)
+    inner class RecentAdapterViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
     private val diffCallback = object : DiffUtil.ItemCallback<Abjad>() {
         override fun areItemsTheSame(oldItem: Abjad, newItem: Abjad): Boolean {
@@ -53,15 +52,14 @@ class AbjadMenuAdapter(val listener: AdapterListener) :
             val binding = ItemAbjadMenuBinding.bind(this)
             binding.txtAbjad.text = data?.abjadNonKapital
             binding.imgChecklist.invisible()
-            when(typ) {
+            when (typ) {
                 "huruf" -> {
                     if (data?.reportHuruf != null) {
-                        if (data?.reportHuruf?.materiHurufKapital == true
+                        if (data.reportHuruf.materiHurufKapital
                             && data.reportHuruf.materiHurufNonKapital
                             && data.reportHuruf.materiPerbedaanHuruf
                             && data.reportHuruf.quizHurufKapital
-                            && data.reportHuruf.quizHurufNonKapital
-                        ) {
+                            && data.reportHuruf.quizHurufNonKapital) {
                             binding.imgChecklist.visible()
                         } else {
                             binding.imgChecklist.invisible()
@@ -69,14 +67,13 @@ class AbjadMenuAdapter(val listener: AdapterListener) :
                     }
                 }
                 "kata" -> {
-                    if (data?.reportKata != null) {
+                    if (data?.belajarSuku != null) {
 
                         if (data.belajarSuku?.belajarVokal?.isADone == true
                             && data.belajarSuku.belajarVokal.isEDone
                             && data.belajarSuku.belajarVokal.isIDone
                             && data.belajarSuku.belajarVokal.isODone
-                            && data.belajarSuku.belajarVokal.isUDone
-                        ) {
+                            && data.belajarSuku.belajarVokal.isUDone) {
                             binding.imgChecklist.visible()
                         } else {
                             binding.imgChecklist.invisible()
@@ -86,7 +83,7 @@ class AbjadMenuAdapter(val listener: AdapterListener) :
             }
 
             rootView.setOnClickListener {
-                listener.onClick(data, position, binding.root,"")
+                listener.onClick(data, position, binding.root, "")
             }
         }
     }

@@ -59,7 +59,7 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
                             abjadKapital = it.abjadName[0].toString(),
                             suara = "-",
                             reportHuruf = null,
-                            reportKata = null
+                            belajarSuku = it
                         )
                         listAbjadMenu.add(abjad)
                     }

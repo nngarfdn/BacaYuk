@@ -55,7 +55,7 @@ class QuizMenuAdapter(val listener: AdapterListener, val type: String) :
             binding.imgChecklist.invisible()
             Log.d("isDone", "onBindViewHolder: ${data.alreadyDone}")
 
-            if (data.alreadyDone == 1
+            if (data.isCorrect
             ) {
                 binding.imgChecklist.visible()
             } else {
