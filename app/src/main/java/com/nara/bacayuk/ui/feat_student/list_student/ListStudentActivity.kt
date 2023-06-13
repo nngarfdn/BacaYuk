@@ -14,6 +14,7 @@ import com.nara.bacayuk.data.model.Response
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.data.model.User
 import com.nara.bacayuk.databinding.ActivityListStudentBinding
+import com.nara.bacayuk.ui.customview.ConfirmationDialogRedStyle
 import com.nara.bacayuk.ui.feat_auth.login.LoginActivity
 import com.nara.bacayuk.ui.feat_menu_utama.MainActivity
 import com.nara.bacayuk.ui.feat_student.add_edit_student.AddEditStudentActivity
@@ -53,7 +54,12 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         listStudentViewModel.students.observe(this@ListStudentActivity) { response ->
             when (response) {
                 is Response.Success -> {
-                    studentAdapter.submitData(response.data)
+                    if (response.data.isEmpty()){
+                        handleEmptyState(true)
+                    } else {
+                        handleEmptyState(false)
+                        studentAdapter.submitData(response.data)
+                    }
                 }
                 is Response.Error -> {
                     Toast.makeText(this@ListStudentActivity, response.message, Toast.LENGTH_SHORT).show()
@@ -66,6 +72,7 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         binding.apply {
             toolbar.apply {
                 txtTitle.text = getString(R.string.pilih_siswa)
+                imageView.invisible()
                 imgActionRight.setOnClickListener {
                     if (selectedStudent != null) {
                         showBalloon(true)
@@ -75,19 +82,23 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
                 }
             }
 
-            rvAbjadKapital.apply {
+            layoutStudent.rvAbjadKapital.apply {
                 adapter = this@ListStudentActivity.studentAdapter
                 layoutManager =
                     androidx.recyclerview.widget.GridLayoutManager(this@ListStudentActivity, 4)
             }
 
-            binding.btnSelect.isEnabled = selectedStudent!= null
+            binding.layoutStudent.btnSelect.isEnabled = selectedStudent!= null
 
-            btnSelect.setOnClickListener {
+            layoutStudent.btnSelect.setOnClickListener {
                 val intent = Intent(this@ListStudentActivity, MainActivity::class.java).apply {
                     putExtra("student", selectedStudent)
                 }
                 startActivity(intent)
+            }
+
+            layoutEmpty.btnSelect.setOnClickListener {
+                openActivity(this@ListStudentActivity, AddEditStudentActivity::class.java)
             }
         }
     }
@@ -101,9 +112,6 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
     private fun showBalloon(isSelected: Boolean = false) {
 
         val height = if (isSelected) 140 else 70
-
-//        val height = if (isSelected) 175 else 105
-
         balloon = createBalloon(this@ListStudentActivity) {
             setArrowSize(10)
             setWidth(BalloonSizeSpec.WRAP)
@@ -145,13 +153,23 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         }
 
         deleteSiswaText.setOnClickListener {
-            val uidUser = listStudentViewModel.getUID() ?: "-"
-            selectedStudent?.uuid?.let { it1 ->
-                listStudentViewModel.deleteStudentFirestore(uidUser,
-                    it1
-                )
-            }
-            onResume()
+            val dialog = ConfirmationDialogRedStyle(
+                this@ListStudentActivity,
+                icon = R.drawable.ic_baseline_delete_24,
+                title = "Apakah Anda yakin akan menghapus profil siswa ini?",
+                message = "Profil siswa akan dihapus permanen",
+                onConfirmClickListener = {
+                    val uidUser = listStudentViewModel.getUID() ?: "-"
+                    selectedStudent?.uuid?.let { it1 ->
+                        listStudentViewModel.deleteStudentFirestore(uidUser,
+                            it1
+                        )
+                    }
+                    onResume()
+                }
+            )
+            dialog.show()
+
         }
 
         if (isSelected) {
@@ -165,9 +183,19 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         }
     }
 
+    fun handleEmptyState(isEmpty: Boolean) {
+        if (isEmpty) {
+            binding.layoutEmpty.root.visible()
+            binding.layoutStudent.root.gone()
+        } else {
+            binding.layoutEmpty.root.gone()
+            binding.layoutStudent.root.visible()
+        }
+    }
+
 
     override fun onClick(data: Any?, position: Int?, view: View?, type: String) {
         selectedStudent = data as Student?
-        binding.btnSelect.isEnabled = selectedStudent!= null
+        binding.layoutStudent.btnSelect.isEnabled = selectedStudent!= null
     }
 }

@@ -50,7 +50,7 @@ class StudentAdapter(val listener: AdapterListener): RecyclerView.Adapter<Studen
             val data = differ.currentList[position]
             Log.d("TAG", "onBindViewHolder: $data")
             val binding = ItemSiswaBinding.bind(this)
-            binding.imgProfile.loadImage(holder.view.context,data.profilPicture)
+//            binding.imgProfile.loadImage(holder.view.context,data.profilPicture)
             binding.txtName.text = data.fullName
 
             //if selected change border image and background text to primary_500

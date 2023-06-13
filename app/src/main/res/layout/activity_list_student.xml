@@ -18,22 +18,15 @@
             android:orientation="vertical"
             android:padding="@dimen/_16sdp"
             android:layout_height="wrap_content">
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/item_siswa"
-                android:id="@+id/rv_abjad_kapital"/>
 
-            <Button
-                android:id="@+id/btn_select"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:layout_width="match_parent"
-                android:background="@drawable/button_rounded_purple_10px"
-                android:fontFamily="@font/pjs_medium"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/_8sdp"
-                android:textColor="@color/white"
-                android:text="@string/pilih"/>
+            <include
+                android:id="@+id/layout_empty"
+                android:visibility="gone"
+                layout="@layout/layout_empty_state_student"/>
+
+            <include
+                android:id="@+id/layout_student"
+                layout="@layout/layout_list_student"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

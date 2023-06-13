@@ -13,4 +13,3 @@ data class ReportHuruf(
     var quizHurufNonKapital: Boolean = false,
     var quizHurufKapital: Boolean = false,
 ): Parcelable
-

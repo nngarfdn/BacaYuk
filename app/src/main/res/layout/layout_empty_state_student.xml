@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_empty_student"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextViewH18Bold"
+        android:text="Belum Ada Siswa Terdaftar"
+        android:textColor="@color/neutral_700"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        style="@style/TextViewH14Regular"
+        android:textAlignment="center"
+        android:text="Tambahkan siswa untuk melihat progres belajar"
+        android:textColor="@color/neutral_700"/>
+    <Button
+        android:id="@+id/btn_select"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_width="match_parent"
+        android:background="@drawable/button_rounded_purple_10px"
+        android:fontFamily="@font/pjs_medium"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/_8sdp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:text="Tambahkan Siswa"/>
+
+</LinearLayout>

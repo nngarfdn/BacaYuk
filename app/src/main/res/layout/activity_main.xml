@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/layout_toolbar"/>
+        layout="@layout/layout_toolbar_action"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -79,7 +79,7 @@
                 android:id="@+id/btn_baca_kalimat"
                 android:layout_marginTop="@dimen/_16sdp"
                 android:layout_width="match_parent"
-                android:background="@drawable/button_rounded_blue_10px"
+                android:background="@drawable/button_rounded_purple_10px"
                 android:fontFamily="@font/pjs_medium"
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/_8sdp"
@@ -95,6 +95,7 @@
                 android:fontFamily="@font/pjs_medium"
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/_8sdp"
+                android:visibility="invisible"
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:text="Keluar"/>

@@ -208,6 +208,9 @@ class ReportDataSourceImpl: ReportDataSource {
             val reportHuruf = ReportHuruf(abjadName = huruf)
             reportHurufs.add(reportHuruf)
         }
+        val audioHurufDataSets = mutableListOf<String>(
+            "audio1Url","audio2Url","dst"
+        )
         return reportHurufs
     }
 
