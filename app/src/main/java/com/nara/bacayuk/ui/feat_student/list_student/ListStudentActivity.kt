@@ -40,8 +40,6 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         setContentView(binding.root)
 
         val user: User? = listStudentViewModel.getUserDataStore()
-
-
         if (user == null || user.email == "") {
             openActivity(this@ListStudentActivity, LoginActivity::class.java)
         } else {
@@ -49,7 +47,6 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
                 Toast.makeText(this@ListStudentActivity, uuid, Toast.LENGTH_SHORT).show()
             }
         }
-
 
         listStudentViewModel.students.observe(this@ListStudentActivity) { response ->
             when (response) {

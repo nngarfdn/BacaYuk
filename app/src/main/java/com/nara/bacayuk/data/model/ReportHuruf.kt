@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class ReportHuruf(
     //format "Aa" , "Bb"
     val abjadName: String = "",
+    var audioUrl: String = "",
     var materiHurufNonKapital:Boolean = false,
     var materiHurufKapital: Boolean = false,
     var materiPerbedaanHuruf: Boolean = false,

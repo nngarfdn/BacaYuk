@@ -203,24 +203,27 @@ class ReportDataSourceImpl: ReportDataSource {
 
     private fun createDataSet(): List<ReportHuruf>{
         val reportHurufs = mutableListOf<ReportHuruf>()
+        val audioHuruf = generateAudioAbjad()
         for (i in 65..90) {
             val huruf = i.toChar().toString() + i.toChar().toLowerCase().toString()
             val reportHuruf = ReportHuruf(abjadName = huruf)
             reportHurufs.add(reportHuruf)
         }
-        val audioHurufDataSets = mutableListOf<String>(
-            "audio1Url","audio2Url","dst"
-        )
+        for (i in audioHuruf.indices){
+            reportHurufs[i].audioUrl = audioHuruf[i].urlAudio
+        }
         return reportHurufs
     }
 
     private fun createDataSetKata(): List<BelajarSuku>{
         val reportHurufs = mutableListOf<BelajarSuku>()
+
         for (i in 65..90) {
             val huruf = i.toChar().toString() + i.toChar().toLowerCase().toString()
             val reportHuruf = BelajarSuku(abjadName = huruf)
             reportHurufs.add(reportHuruf)
         }
+
         return reportHurufs
     }
 }

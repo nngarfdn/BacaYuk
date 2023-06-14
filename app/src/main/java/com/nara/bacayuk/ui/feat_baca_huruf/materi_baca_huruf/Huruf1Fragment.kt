@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.databinding.FragmentHuruf1Binding
+import com.nara.bacayuk.utils.playAudioFromUrl
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val ARG_PARAM1 = "param1"
@@ -66,6 +67,9 @@ class Huruf1Fragment : Fragment() {
                     txtDesc.text = getString(R.string.ini_huruf_kecil)
                     abjad?.reportHuruf?.materiHurufNonKapital = true
                     val reportHuruf = abjad?.reportHuruf
+                    imgSound.setOnClickListener {
+                        playAudioFromUrl(abjad?.reportHuruf?.audioUrl ?: "")
+                    }
                     materiBacaHurufViewModel.updateReportHuruf(
                         user?.uuid ?: "-",
                         MateriBacaHurufActivity.student?.uuid ?: "-",
@@ -79,6 +83,9 @@ class Huruf1Fragment : Fragment() {
                     txtAbjad.text = abjad?.abjadKapital
                     abjad?.reportHuruf?.materiHurufKapital = true
                     val reportHuruf = abjad?.reportHuruf
+                    imgSound.setOnClickListener {
+                        playAudioFromUrl(abjad?.reportHuruf?.audioUrl ?: "")
+                    }
                     materiBacaHurufViewModel.updateReportHuruf(
                         user?.uuid ?: "-",
                         MateriBacaHurufActivity.student?.uuid ?: "-",
@@ -91,6 +98,9 @@ class Huruf1Fragment : Fragment() {
                     txtDesc.text = getString(R.string.ini_perbedaan_huruf)
                     "${abjad?.abjadNonKapital} ${abjad?.abjadKapital}".also { txtAbjad.text = it }
                     abjad?.reportHuruf?.materiPerbedaanHuruf = true
+                    imgSound.setOnClickListener {
+                        playAudioFromUrl(abjad?.reportHuruf?.audioUrl ?: "")
+                    }
                     val reportHuruf = abjad?.reportHuruf
                     materiBacaHurufViewModel.updateReportHuruf(
                         user?.uuid ?: "-",
@@ -100,6 +110,7 @@ class Huruf1Fragment : Fragment() {
                 }
             }
         }
+
 
         materiBacaHurufViewModel.getAllReportKataFromFirestore(MateriBacaHurufActivity.student?.uuid ?: "-")
         materiBacaHurufViewModel.reportKatas.observe(viewLifecycleOwner) { response ->
@@ -113,7 +124,9 @@ class Huruf1Fragment : Fragment() {
                                 txtAbjad.text = "A a"
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
                                 reportKata?.belajarVokal?.isADone = true
-
+                                imgSound.setOnClickListener {
+                                    playAudioFromUrl("https://firebasestorage.googleapis.com/v0/b/bisabelajar-b0579.appspot.com/o/Huruf%20A.m4a?alt=media&token=499b04e1-e499-4279-ac82-89d085e36a44")
+                                }
                                 Log.d("abjadparam2", "${MateriBacaHurufActivity.student?.uuid} - ${reportKata?.belajarVokal?.isADone}")
 
                                 materiBacaHurufViewModel.updateReportKata(
@@ -127,8 +140,12 @@ class Huruf1Fragment : Fragment() {
                             binding.materi.apply {
                                 txtAbjad.text = "I i"
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
+                                imgSound.setOnClickListener {
+                                    playAudioFromUrl("https://firebasestorage.googleapis.com/v0/b/bisabelajar-b0579.appspot.com/o/Huruf%20I.m4a?alt=media&token=9b10c553-e0c0-40f0-b498-094cf9295c04")
+                                }
                             }
                             reportKata?.belajarVokal?.isIDone = true
+
                             materiBacaHurufViewModel.updateReportKata(
                                 MateriBacaHurufActivity.student?.uuid ?: "-",
                                 reportKata ?: ReportKata()
@@ -138,6 +155,9 @@ class Huruf1Fragment : Fragment() {
                             binding.materi.apply {
                                 txtAbjad.text = "U u"
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
+                                imgSound.setOnClickListener {
+                                    playAudioFromUrl("https://firebasestorage.googleapis.com/v0/b/bisabelajar-b0579.appspot.com/o/Huruf%20U.m4a?alt=media&token=0757db6e-d39a-48ee-a5cd-7c81c044016c")
+                                }
                             }
                             reportKata?.belajarVokal?.isUDone = true
                             materiBacaHurufViewModel.updateReportKata(
@@ -149,6 +169,9 @@ class Huruf1Fragment : Fragment() {
                             binding.materi.apply {
                                 txtAbjad.text = "E e"
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
+                                imgSound.setOnClickListener {
+                                    playAudioFromUrl("https://firebasestorage.googleapis.com/v0/b/bisabelajar-b0579.appspot.com/o/Huruf%20E.m4a?alt=media&token=f0f726f4-6707-4a47-b3fb-0f5a9cc24167")
+                                }
                             }
                             reportKata?.belajarVokal?.isEDone = true
                             materiBacaHurufViewModel.updateReportKata(
@@ -160,6 +183,9 @@ class Huruf1Fragment : Fragment() {
                             binding.materi.apply {
                                 txtAbjad.text = "O o"
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
+                                imgSound.setOnClickListener {
+                                    playAudioFromUrl("https://firebasestorage.googleapis.com/v0/b/bisabelajar-b0579.appspot.com/o/Huruf%20O.m4a?alt=media&token=cb7b3958-bb38-4175-ba4e-4e6417cef6ee")
+                                }
                             }
                             reportKata?.belajarVokal?.isODone = true
                             materiBacaHurufViewModel.updateReportKata(

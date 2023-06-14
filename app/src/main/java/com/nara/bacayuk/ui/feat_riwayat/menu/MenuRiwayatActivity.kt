@@ -10,6 +10,7 @@ import com.nara.bacayuk.databinding.ActivityMenuRiwayatBinding
 import com.nara.bacayuk.ui.feat_riwayat.huruf.RiwayatHurufActivity
 import com.nara.bacayuk.ui.feat_riwayat.kalimat.RiwayatKalimatActivity
 import com.nara.bacayuk.ui.feat_riwayat.kata.RiwayatKataActivity
+import com.nara.bacayuk.utils.invisible
 
 class MenuRiwayatActivity : AppCompatActivity() {
 
@@ -28,6 +29,10 @@ class MenuRiwayatActivity : AppCompatActivity() {
 
         binding.apply {
             textView.text = student?.fullName
+            "${student?.kelas ?: "-"} ${student?.asalSekolah ?: "-"}".also { txtDesc.text = it }
+            toolbar.txtTitle.text = "Riwayat Belajar"
+            toolbar.imageView.setOnClickListener { onBackPressed() }
+            toolbar.imgActionRight.invisible()
             btnHuruf.setOnClickListener {
                 val intent = Intent(this@MenuRiwayatActivity, RiwayatHurufActivity::class.java).apply {
                     putExtra("student", student)

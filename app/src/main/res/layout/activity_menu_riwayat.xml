@@ -8,7 +8,7 @@
     >
     <include
         android:id="@+id/toolbar"
-        layout="@layout/layout_toolbar"/>
+        layout="@layout/layout_toolbar_action"/>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -44,6 +44,7 @@
                 app:layout_constraintTop_toTopOf="@+id/img_profile" />
 
             <TextView
+                android:id="@+id/txt_desc"
                 style="@style/TextViewH14Regular"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

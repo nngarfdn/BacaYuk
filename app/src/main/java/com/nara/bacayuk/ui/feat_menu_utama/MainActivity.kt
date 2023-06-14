@@ -47,14 +47,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.apply {
-
             toolbar.txtTitle.text = "Menu Utama"
             toolbar.imgActionRight.setOnClickListener {
                 showBalloon()
             }
+            toolbar.imageView.setOnClickListener {
+                onBackPressed()
+            }
             val user: User? = mainViewModel.getUserDataStore()
             user?.uuid?.let { mainViewModel.getUser(it) }
-
             txtName.text = student?.fullName ?: "Guest"
             btnBacaHuruf.setOnClickListener {
                 val intent = Intent(this@MainActivity, MenuBacaHurufActivity::class.java).apply {

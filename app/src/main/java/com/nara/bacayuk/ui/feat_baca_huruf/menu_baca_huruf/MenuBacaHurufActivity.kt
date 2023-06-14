@@ -3,6 +3,7 @@ package com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -13,9 +14,12 @@ import com.nara.bacayuk.databinding.ActivityMenuBacaHurufBinding
 import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_kata.materi.MateriBacaVokalActivity
 import com.nara.bacayuk.ui.feat_menu_utama.MainActivity
+import com.nara.bacayuk.ui.feat_student.list_student.ListStudentActivity
 import com.nara.bacayuk.ui.listener.adapter.AdapterListener
 import com.nara.bacayuk.utils.DATA
+import com.nara.bacayuk.utils.gone
 import com.nara.bacayuk.utils.invisible
+import com.nara.bacayuk.utils.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
@@ -46,7 +50,6 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
             menuBacaHurufViewModel.getAllBelajarVokal(student?.uuid ?: "-")
         }
         else menuBacaHurufViewModel.getAllReports(student?.uuid ?: "-")
-
 
         menuBacaHurufViewModel.vokals.observe(this@MenuBacaHurufActivity) { response ->
             when (response) {
@@ -129,9 +132,15 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
                 layoutManager = androidx.recyclerview.widget.GridLayoutManager(this@MenuBacaHurufActivity, 4)
             }
         }
-
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (isBacaKata) {
+            menuBacaHurufViewModel.getAllBelajarVokal(student?.uuid ?: "-")
+        }
+        else menuBacaHurufViewModel.getAllReports(student?.uuid ?: "-")
+    }
 
     override fun onClick(data: Any?, position: Int?, view: View?, type: String) {
         Log.d("menubaca", "onClick $isBacaKata")
