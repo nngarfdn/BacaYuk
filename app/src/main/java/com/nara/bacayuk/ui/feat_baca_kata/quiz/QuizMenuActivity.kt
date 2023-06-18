@@ -49,11 +49,15 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
 
         Log.d("idstudent", "onCreate ${student?.uuid}")
 
-        if (isKata) quizViewModel.getAllReportKataFromFirestore(student?.uuid ?: "-")
-        else quizViewModel.getAllReportKalimatFromFirestore(student?.uuid?: "-")
 
         binding.apply {
             toolbarAction.apply {
+                txtTitle.text =if(isKata) "Baca Kata" else "Baca Kalimat"
+                imageView.setOnClickListener { onBackPressed() }
+                imgActionRight.invisible()
+                txtSusun.text = if(isKata) "Susun Kata" else "Susun Kalimat"
+                txtBaca.text = if(isKata) "Latihan Baca Kata" else "Latihan Baca Kalimat"
+
                 //change bg rootview to teal_600
                 imgActionRight.invisible()
                 rootView.backgroundTintList = AppCompatResources.getColorStateList(this@QuizMenuActivity,
@@ -67,7 +71,6 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
                     AppCompatResources.getColorStateList(this@QuizMenuActivity,
                         R.color.white))
 
-                txtTitle.text = "Baca Kata"
                 imageView.setOnClickListener {
                     finish()
                 }
@@ -114,6 +117,11 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (isKata) quizViewModel.getAllReportKataFromFirestore(student?.uuid ?: "-")
+        else quizViewModel.getAllReportKalimatFromFirestore(student?.uuid?: "-")
+    }
 
     override fun onClick(data: Any?, position: Int?, view: View?, type: String) {
         when(type) {

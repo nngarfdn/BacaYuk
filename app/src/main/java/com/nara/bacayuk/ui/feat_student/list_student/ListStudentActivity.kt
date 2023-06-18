@@ -1,14 +1,15 @@
 package com.nara.bacayuk.ui.feat_student.list_student
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.Response
 import com.nara.bacayuk.data.model.Student
@@ -24,7 +25,10 @@ import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.createBalloon
+import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip
+import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltipUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class ListStudentActivity : AppCompatActivity(), AdapterListener {
     private val binding: ActivityListStudentBinding by lazy {
@@ -42,10 +46,6 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         val user: User? = listStudentViewModel.getUserDataStore()
         if (user == null || user.email == "") {
             openActivity(this@ListStudentActivity, LoginActivity::class.java)
-        } else {
-            user.apply {
-                Toast.makeText(this@ListStudentActivity, uuid, Toast.LENGTH_SHORT).show()
-            }
         }
 
         listStudentViewModel.students.observe(this@ListStudentActivity) { response ->
@@ -68,13 +68,13 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
 
         binding.apply {
             toolbar.apply {
-                txtTitle.text = getString(R.string.pilih_siswa)
+                txtTitle.text = getString(com.nara.bacayuk.R.string.pilih_siswa)
                 imageView.invisible()
                 imgActionRight.setOnClickListener {
                     if (selectedStudent != null) {
-                        showBalloon(true)
+                        showTip(true)
                     } else {
-                        showBalloon(false)
+                        showTip(false)
                     }
                 }
             }
@@ -106,35 +106,27 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         Log.d("liststudent", "onResume: $uidUser")
         listStudentViewModel.getAllStudent(uidUser)
     }
-    private fun showBalloon(isSelected: Boolean = false) {
 
-        val height = if (isSelected) 140 else 70
-        balloon = createBalloon(this@ListStudentActivity) {
-            setArrowSize(10)
-            setWidth(BalloonSizeSpec.WRAP)
-            setHeight(height)
-            setArrowPosition(0.8f)
-            setCornerRadius(4f)
-            setAlpha(0.9f)
-            setPaddingHorizontal(8)
-            setPaddingVertical(4)
-            setBackgroundColorResource(R.color.white)
-            setMarginHorizontal(24)
-            setLayout(R.layout.layout_action_siswa)
-            setTextColorResource(R.color.white)
-            setTextIsHtml(true)
-            setBackgroundColorResource(R.color.white)
-            setBalloonAnimation(BalloonAnimation.FADE)
-            setLifecycleOwner(lifecycleOwner)
+    private fun showTip(isSelected: Boolean = false){
+        val tooltip: SimpleTooltip = SimpleTooltip.Builder(this)
+            .anchorView(binding.toolbar.imgActionRight)
+            .gravity(Gravity.BOTTOM)
+            .dismissOnOutsideTouch(true)
+            .dismissOnInsideTouch(false)
+            .modal(false)
+            .animated(false)
+            .showArrow(false)
+            .margin(16f)
+            .backgroundColor(resources.getColor(R.color.white))
+            .contentView(com.nara.bacayuk.R.layout.layout_action_siswa)
+            .focusable(true)
+            .build()
+        tooltip.show()
 
-            balloon?.showAlignBottom(binding.toolbar.imgActionRight)
-            Handler(Looper.getMainLooper()).postDelayed({ balloon?.dismiss() }, 2000)
-        }
-
-        val editSiswaText: TextView = balloon?.getContentView()?.findViewById(R.id.txt_edit_siswa)!!
-        val addSiswaText: TextView = balloon?.getContentView()?.findViewById(R.id.txt_add_siswa)!!
+        val editSiswaText: TextView = tooltip?.findViewById(com.nara.bacayuk.R.id.txt_edit_siswa)!!
+        val addSiswaText: TextView = tooltip?.findViewById(com.nara.bacayuk.R.id.txt_add_siswa)!!
         val deleteSiswaText: TextView =
-            balloon?.getContentView()?.findViewById(R.id.txt_delete_siswa)!!
+            tooltip?.findViewById(com.nara.bacayuk.R.id.txt_delete_siswa)!!
         addSiswaText.setOnClickListener {
             openActivity(this@ListStudentActivity, AddEditStudentActivity::class.java)
         }
@@ -152,7 +144,7 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         deleteSiswaText.setOnClickListener {
             val dialog = ConfirmationDialogRedStyle(
                 this@ListStudentActivity,
-                icon = R.drawable.ic_baseline_delete_24,
+                icon = com.nara.bacayuk.R.drawable.ic_baseline_delete_24,
                 title = "Apakah Anda yakin akan menghapus profil siswa ini?",
                 message = "Profil siswa akan dihapus permanen",
                 onConfirmClickListener = {
@@ -178,6 +170,36 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
             deleteSiswaText.gone()
             addSiswaText.visible()
         }
+
+
+    }
+
+    private fun showBalloon(isSelected: Boolean = false) {
+
+        val height = if (isSelected) 140 else 70
+        balloon = createBalloon(this@ListStudentActivity) {
+            setArrowSize(10)
+            setWidth(BalloonSizeSpec.WRAP)
+            setHeight(height)
+            setArrowPosition(0.8f)
+            setCornerRadius(4f)
+            setAlpha(0.9f)
+            setPaddingHorizontal(8)
+            setPaddingVertical(4)
+            setBackgroundColorResource(com.nara.bacayuk.R.color.white)
+            setMarginHorizontal(24)
+            setLayout(com.nara.bacayuk.R.layout.layout_action_siswa)
+            setTextColorResource(com.nara.bacayuk.R.color.white)
+            setTextIsHtml(true)
+            setBackgroundColorResource(com.nara.bacayuk.R.color.white)
+            setBalloonAnimation(BalloonAnimation.FADE)
+            setLifecycleOwner(lifecycleOwner)
+
+            balloon?.showAlignBottom(binding.toolbar.imgActionRight)
+            Handler(Looper.getMainLooper()).postDelayed({ balloon?.dismiss() }, 2000)
+        }
+
+
     }
 
     fun handleEmptyState(isEmpty: Boolean) {

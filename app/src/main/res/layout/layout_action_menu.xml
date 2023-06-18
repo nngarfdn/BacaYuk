@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:id="@+id/rootAction"
     android:padding="@dimen/_8sdp"
+    android:background="@color/white"
     android:paddingEnd="@dimen/_42sdp"
     >
 

@@ -118,7 +118,10 @@ dependencies {
 
     implementation 'sh.tyy:wheelpicker:0.4.0'
 
+    implementation 'com.github.douglasjunior:android-simple-tooltip:1.1.0'
+    implementation 'com.github.IgnacioCarrionN:WheelPicker:0.0.1-Alpha04'
 
+    implementation 'com.yarolegovich:discrete-scrollview:1.5.1'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

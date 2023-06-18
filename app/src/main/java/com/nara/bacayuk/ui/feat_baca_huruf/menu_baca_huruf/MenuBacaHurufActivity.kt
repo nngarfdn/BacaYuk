@@ -46,11 +46,6 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
 
         Log.d("menubaca", "${student?.uuid}")
 
-        if (isBacaKata) {
-            menuBacaHurufViewModel.getAllBelajarVokal(student?.uuid ?: "-")
-        }
-        else menuBacaHurufViewModel.getAllReports(student?.uuid ?: "-")
-
         menuBacaHurufViewModel.vokals.observe(this@MenuBacaHurufActivity) { response ->
             when (response) {
                 is Response.Success -> {
@@ -64,9 +59,10 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
                             reportHuruf = null,
                             belajarSuku = it
                         )
-                        listAbjadMenu.add(abjad)
+                        if (!(listAbjadMenu.contains(abjad)))
+                            listAbjadMenu.add(abjad)
                     }
-                    adapterAbjadMenuAdapter.submitData(listAbjadMenu, "kata")
+                    if (isBacaKata) adapterAbjadMenuAdapter.submitData(listAbjadMenu, "kata")
                 }
 
                 is Response.Error -> {
@@ -94,7 +90,7 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
                         )
                         listAbjadMenu.add(abjad)
                     }
-                    adapterAbjadMenuAdapter.submitData(listAbjadMenu, "huruf")
+                    if (!isBacaKata) adapterAbjadMenuAdapter.submitData(listAbjadMenu, "huruf")
                 }
 
                 is Response.Error -> {
@@ -121,7 +117,7 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
                 txtTitle.setTextColor(AppCompatResources.getColorStateList(this@MenuBacaHurufActivity,
                         R.color.white))
 
-                txtTitle.text = getString(R.string.baca_huruf)
+                txtTitle.text = if (isBacaKata) "Baca Kata" else getString(R.string.baca_huruf)
                 imageView.setOnClickListener {
                     finish()
                 }

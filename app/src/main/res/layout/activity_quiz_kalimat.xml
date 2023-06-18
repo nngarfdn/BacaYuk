@@ -76,13 +76,32 @@
             <LinearLayout
                 android:id="@+id/placeholder"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_below="@+id/textView2"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView2"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="@dimen/_16sdp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
-               />
+               >
+
+                <include
+                    android:id="@+id/opta"
+                    layout="@layout/item_quiz_susun"/>
+
+                <include
+                    android:id="@+id/opti"
+                    layout="@layout/item_quiz_susun"/>
+
+                <include
+                    android:id="@+id/optu"
+                    layout="@layout/item_quiz_susun"/>
+
+                <include
+                    android:id="@+id/opte"
+                    layout="@layout/item_quiz_susun"/>
+
+
+            </LinearLayout>
 
 
             <androidx.recyclerview.widget.RecyclerView

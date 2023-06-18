@@ -3,6 +3,7 @@ package com.nara.bacayuk.ui.feat_belajar_kalimat
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.RadioGroup.OnCheckedChangeListener
@@ -13,7 +14,9 @@ import com.nara.bacayuk.data.model.ReportKata
 import com.nara.bacayuk.data.model.SoalKata
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityQuizPilganKalimatBinding
+import com.nara.bacayuk.ui.customview.AnswerStatusDialog
 import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizViewModel
+import com.nara.bacayuk.utils.invisible
 import com.nara.bacayuk.utils.loadImage
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -72,6 +75,11 @@ class QuizPilganKalimatActivity : AppCompatActivity() {
         sizeQuestion = listQuestions.size
 
         binding.apply {
+            toolbar.apply {
+                txtTitle.text =if(isKata) "Baca Kata" else "Baca Kalimat"
+                imageView.setOnClickListener { onBackPressed() }
+                imgActionRight.invisible()
+            }
             opt1.setText(listQuestions[0])
             opt2.setText(listQuestions[1])
             opt3.setText(listQuestions[2])
@@ -108,8 +116,32 @@ class QuizPilganKalimatActivity : AppCompatActivity() {
                             }
                         }
 
-                        Toast.makeText(this@QuizPilganKalimatActivity, "Benarr", Toast.LENGTH_SHORT).show()
-                    } else Toast.makeText(this@QuizPilganKalimatActivity, "Kamu memilih $selectedText", Toast.LENGTH_SHORT).show()
+                        val dialog = AnswerStatusDialog(
+                            this@QuizPilganKalimatActivity,
+                            icon = R.drawable.ic_checklist,
+                            status =  "Benar"
+                        )
+                        dialog.show()
+                        val layoutParams = WindowManager.LayoutParams()
+                        layoutParams.copyFrom(dialog.getWindow()?.getAttributes())
+                        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
+                        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
+                        dialog.getWindow()?.setAttributes(layoutParams)
+                    }
+
+                    else {
+                        val dialog = AnswerStatusDialog(
+                            this@QuizPilganKalimatActivity,
+                            icon = R.drawable.ic_wrong_answer,
+                            status =  "Salah"
+                        )
+                        dialog.show()
+                        val layoutParams = WindowManager.LayoutParams()
+                        layoutParams.copyFrom(dialog.getWindow()?.getAttributes())
+                        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
+                        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
+                        dialog.getWindow()?.setAttributes(layoutParams)
+                    }
                 }
             }
         }

@@ -4,15 +4,18 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.ReportKalimat
 import com.nara.bacayuk.data.model.ReportKata
 import com.nara.bacayuk.data.model.SoalKata
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityQuizKalimatBinding
 import com.nara.bacayuk.databinding.ItemQuizSusunBinding
+import com.nara.bacayuk.ui.customview.AnswerStatusDialog
 import com.nara.bacayuk.ui.customview.CenterLinearLayoutManager
 import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizSusunAdapter
 import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizViewModel
@@ -92,6 +95,11 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
         sizeQuestion = listQuestions.size
 
         binding.apply {
+            binding.toolbar.apply {
+                txtTitle.text =if(isKata) "Baca Kata" else "Baca Kalimat"
+                imageView.setOnClickListener { onBackPressed() }
+                imgActionRight.invisible()
+            }
             imageView4.loadImage(this@QuizKalimatActivity, soalKata?.imageUrl?:"")
             for (data in listQuestions) {
                 val item = ItemQuizSusunBinding.inflate(layoutInflater)
@@ -127,7 +135,7 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                 Log.d("quizsusun", "$isKata- $reportKata- $reportKalimat- ${student?.uuid ?: "-"}")
                 if (txtAnswer.text == soalKata?.correctAnswer){
                     if (reportKata!= null) {
-                        for(item in reportKata!!.quizPilganKata){
+                        for(item in reportKata!!.quizSusunKata){
                             if (item.level == soalKata!!.level){
                                 item.isCorrect = true
                                 val index = item.level - 1
@@ -140,7 +148,7 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                     }
 
                     if (reportKalimat!= null) {
-                        for(item in reportKalimat!!.quizPilganKata){
+                        for(item in reportKalimat!!.quizSusunKata){
                             if (item.level == soalKata!!.level){
                                 item.isCorrect = true
                                 val index = item.level - 1
@@ -151,10 +159,32 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                             }
                         }
                     }
-                    Toast.makeText(this@QuizKalimatActivity, "Correct!", Toast.LENGTH_SHORT).show()
+                    val dialog = AnswerStatusDialog(
+                        this@QuizKalimatActivity,
+                        icon = R.drawable.ic_checklist,
+                        status =  "Benar"
+                    )
+                    dialog.show()
+                    val layoutParams = WindowManager.LayoutParams()
+                    layoutParams.copyFrom(dialog.getWindow()?.getAttributes())
+                    layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
+                    layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
+                    dialog.getWindow()?.setAttributes(layoutParams)
                 }
 
-                else Toast.makeText(this@QuizKalimatActivity, "Wrong!", Toast.LENGTH_SHORT).show()
+                else {
+                    val dialog = AnswerStatusDialog(
+                        this@QuizKalimatActivity,
+                        icon = R.drawable.ic_wrong_answer,
+                        status =  "Salah"
+                    )
+                    dialog.show()
+                    val layoutParams = WindowManager.LayoutParams()
+                    layoutParams.copyFrom(dialog.getWindow()?.getAttributes())
+                    layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
+                    layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
+                    dialog.getWindow()?.setAttributes(layoutParams)
+                }
             }
         }
 

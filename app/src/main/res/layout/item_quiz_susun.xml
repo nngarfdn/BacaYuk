@@ -3,20 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-
-    android:padding="@dimen/_8sdp"
-    android:layout_margin="@dimen/_8sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/opt1"
+        android:layout_margin="@dimen/_8sdp"
         android:background="@drawable/button_outline_rounded_focused_purple"
         style="@style/TextViewH16Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/_12sdp"
         android:paddingVertical="@dimen/_8sdp"
-        android:text="Text 1"
+        android:text="Aa"
         android:textColor="@color/primary_500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

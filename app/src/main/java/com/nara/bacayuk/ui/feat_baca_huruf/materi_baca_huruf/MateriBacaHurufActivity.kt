@@ -12,6 +12,7 @@ import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufViewMode
 import com.nara.bacayuk.ui.feat_baca_huruf.quiz_baca_huruf.QuizBacaHurufActivity
 import com.nara.bacayuk.utils.DATA
 import com.nara.bacayuk.utils.invisible
+import com.nara.bacayuk.utils.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MateriBacaHurufActivity : AppCompatActivity() {
@@ -40,7 +41,7 @@ class MateriBacaHurufActivity : AppCompatActivity() {
 
         binding.apply {
             toolbar.apply {
-                txtTitle.text = getString(R.string.baca_huruf)
+                txtTitle.text = if (dataAbjad==null) "Baca Kata" else getString(R.string.baca_huruf)
                 txtTitle.setTextColor(resources.getColor(R.color.teal_600))
                 imgActionRight.invisible()
                 imageView.setOnClickListener {
@@ -53,17 +54,22 @@ class MateriBacaHurufActivity : AppCompatActivity() {
             slideVP.adapter = pagerAdapter
             dotsIndicator.setViewPager2(slideVP)
 
+
             buttonNext.setOnClickListener {
-                if (slideVP.currentItem < 2) {
+                val n = if (isKata) 4 else 2
+                if (slideVP.currentItem < n) {
                     slideVP.currentItem = slideVP.currentItem.plus(1)
                 } else {
-                    val intent = Intent(this@MateriBacaHurufActivity, QuizBacaHurufActivity::class.java)
-                        .apply {
-                            putExtra(DATA, dataAbjad as Abjad)
-                            putExtra("student", student)
-                        }
-                    startActivity(intent)
-
+                    if (!isKata) {
+                        val intent = Intent(this@MateriBacaHurufActivity, QuizBacaHurufActivity::class.java)
+                            .apply {
+                                putExtra(DATA, dataAbjad as Abjad)
+                                putExtra("student", student)
+                            }
+                        startActivity(intent)
+                    } else {
+                        finish()
+                    }
                 }
             }
         }

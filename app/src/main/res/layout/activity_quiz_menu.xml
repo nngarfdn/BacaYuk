@@ -28,6 +28,7 @@
         android:padding="@dimen/_16sdp">
 
         <TextView
+            android:id="@+id/txt_susun"
             style="@style/TextViewH18Bold"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
@@ -41,6 +42,7 @@
             tools:itemCount="5"/>
 
         <TextView
+            android:id="@+id/txt_baca"
             style="@style/TextViewH18Bold"
             android:textColor="@color/white"
             android:layout_width="wrap_content"

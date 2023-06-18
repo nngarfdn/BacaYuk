@@ -6,15 +6,16 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.databinding.FragmentQuizBinding
+import com.nara.bacayuk.ui.customview.AnswerStatusDialog
 import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 private const val ARG_PARAM1 = "param1"
 
@@ -236,7 +237,18 @@ class QuizFragment : Fragment() {
                         dropTarget.setOnDragListener(null)
                         //show toast
                         val user: User? = quizBacaHurufViewModel.getUserDataStore()
-                        Toast.makeText(context, "BENAR!", Toast.LENGTH_SHORT).show()
+
+                        val dialog = AnswerStatusDialog(
+                            v.context,
+                            icon = R.drawable.ic_checklist,
+                             status =  "Benar"
+                        )
+                        dialog.show()
+                        val layoutParams = WindowManager.LayoutParams()
+                        layoutParams.copyFrom(dialog.getWindow()?.getAttributes())
+                        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
+                        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
+                        dialog.getWindow()?.setAttributes(layoutParams)
                         if (isKapital) {
                             abjad?.reportHuruf?.quizHurufKapital = true
                         } else abjad?.reportHuruf?.quizHurufNonKapital = true
@@ -247,7 +259,17 @@ class QuizFragment : Fragment() {
                         )
                         reset(isKapital)
                     } else {
-                        Toast.makeText(v.context, "SALAH!", Toast.LENGTH_SHORT).show()
+                        val dialog = AnswerStatusDialog(
+                            v.context,
+                            icon = R.drawable.ic_wrong_answer,
+                            status =  "Salah"
+                        )
+                        dialog.show()
+                        val layoutParams = WindowManager.LayoutParams()
+                        layoutParams.copyFrom(dialog.getWindow()?.getAttributes())
+                        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
+                        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
+                        dialog.getWindow()?.setAttributes(layoutParams)
                         reset(isKapital)
                     //displays message if first character of dropTarget is not equal to first character of dropped
                     }

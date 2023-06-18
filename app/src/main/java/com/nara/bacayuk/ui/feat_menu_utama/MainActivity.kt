@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.Gravity
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +28,7 @@ import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.createBalloon
+import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -49,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             toolbar.txtTitle.text = "Menu Utama"
             toolbar.imgActionRight.setOnClickListener {
-                showBalloon()
+                showTip()
             }
             toolbar.imageView.setOnClickListener {
                 onBackPressed()
@@ -125,6 +127,52 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun showTip() {
+        val tooltip: SimpleTooltip = SimpleTooltip.Builder(this)
+            .anchorView(binding.toolbar.imgActionRight)
+            .gravity(Gravity.BOTTOM)
+            .dismissOnOutsideTouch(true)
+            .dismissOnInsideTouch(false)
+            .modal(false)
+            .animated(false)
+            .showArrow(false)
+            .margin(16f)
+            .backgroundColor(resources.getColor(R.color.white))
+            .contentView(com.nara.bacayuk.R.layout.layout_action_menu)
+            .focusable(true)
+            .build()
+        tooltip.show()
+
+        val editSiswaText: TextView = tooltip?.findViewById(R.id.txt_edit_menu)!!
+
+        editSiswaText.setText("Lihat Data Siswa")
+        val deleteSiswaText: TextView =
+            tooltip?.findViewById(R.id.txt_delete_menu)!!
+        deleteSiswaText.setText("Keluar")
+
+
+        editSiswaText.setOnClickListener {
+            val intent = Intent(this@MainActivity, ListStudentActivity::class.java)
+            startActivity(intent)
+        }
+
+        deleteSiswaText.setOnClickListener {
+            //todo: show log out dialog
+            val dialog = ConfirmationDialogRedStyle(
+                this@MainActivity,
+                icon = R.drawable.ic_baseline_exit_to_app_24,
+                title = "Konfirmasi Keluar",
+                message = "Apakah anda yakin ingin keluar akun ?",
+                onConfirmClickListener = {
+                    mainViewModel.logOutUser()
+                    openActivity(this@MainActivity, LoginActivity::class.java)
+                    finish()
+                }
+            )
+            dialog.show()
+        }
+    }
+
     private fun showBalloon() {
 
         val height =  120
@@ -151,34 +199,7 @@ class MainActivity : AppCompatActivity() {
             Handler(Looper.getMainLooper()).postDelayed({ balloon?.dismiss() }, 2000)
         }
 
-        val editSiswaText: TextView = balloon?.getContentView()?.findViewById(R.id.txt_edit_menu)!!
 
-        editSiswaText.setText("Lihat Data Siswa")
-        val deleteSiswaText: TextView =
-            balloon?.getContentView()?.findViewById(R.id.txt_delete_menu)!!
-        deleteSiswaText.setText("Keluar")
-
-
-        editSiswaText.setOnClickListener {
-            val intent = Intent(this@MainActivity, ListStudentActivity::class.java)
-            startActivity(intent)
-        }
-
-        deleteSiswaText.setOnClickListener {
-            //todo: show log out dialog
-            val dialog = ConfirmationDialogRedStyle(
-                this@MainActivity,
-                icon = R.drawable.ic_baseline_exit_to_app_24,
-                title = "Konfirmasi Keluar",
-                message = "Apakah anda yakin ingin keluar akun ?",
-                onConfirmClickListener = {
-                    mainViewModel.logOutUser()
-                    openActivity(this@MainActivity, LoginActivity::class.java)
-                    finish()
-                }
-            )
-            dialog.show()
-        }
 
     }
 
