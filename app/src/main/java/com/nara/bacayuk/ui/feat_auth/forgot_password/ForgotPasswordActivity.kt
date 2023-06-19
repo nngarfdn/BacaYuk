@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.nara.bacayuk.databinding.ActivityForgotPasswordBinding
 import com.nara.bacayuk.ui.customview.ConfirmationDialog
+import com.nara.bacayuk.utils.invisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ForgotPasswordActivity : AppCompatActivity() {
@@ -16,6 +17,11 @@ class ForgotPasswordActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.apply {
+            toolbarAction.apply {
+                imageView.setOnClickListener { finish() }
+                imgActionRight.invisible()
+                txtTitle.text = "Lupa Katasandi"
+            }
             btnLogin.setOnClickListener {
                 val dialog = ConfirmationDialog(
                     this@ForgotPasswordActivity,
@@ -30,6 +36,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 dialog.show()
             }
         }
+    }
 
+    override fun onBackPressed() {
+        finish()
     }
 }

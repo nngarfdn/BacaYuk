@@ -168,4 +168,8 @@ class LoginActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
     }
+
+    override fun onBackPressed() {
+        Log.d("onback", "onBackPressed")
+    }
 }

@@ -1,5 +1,6 @@
 package com.nara.bacayuk.ui.feat_menu_utama
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -37,6 +38,9 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val mainViewModel: MainViewModel by viewModel()
     private var balloon: Balloon? = null
+    private val progressMax = 150
+    private var currentProgress = 0
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,6 +111,30 @@ class MainActivity : AppCompatActivity() {
                 is Response.Success -> {
                     Log.d("LoginActivity", "onCreate: ${student?.isReadyHurufDataSet}")
                     if (student?.isReadyHurufDataSet == false) {
+                        progressDialog = ProgressDialog(this)
+                        progressDialog.setCancelable(false)
+                        progressDialog.setMessage("Sedang mempersiapkan data..")
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
+                        progressDialog.max = progressMax
+
+                        // Tampilkan ProgressDialog
+                        progressDialog.show()
+
+                        // Mulai update progress setiap detik
+                        val handler = Handler()
+                        handler.postDelayed(object : Runnable {
+                            override fun run() {
+                                if (currentProgress >= progressMax) {
+                                    // Jika progress mencapai batas maksimal, tutup ProgressDialog
+                                    progressDialog.dismiss()
+                                } else {
+                                    // Update progress dan lanjutkan perulangan setiap detik
+                                    currentProgress++
+                                    progressDialog.progress = currentProgress
+                                    handler.postDelayed(this, 1000)
+                                }
+                            }
+                        }, 1000)
                         response.data.uuid?.let {
                             mainViewModel.createReportHurufDataSets(
                                 true,

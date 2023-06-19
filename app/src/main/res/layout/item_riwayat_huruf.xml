@@ -2,43 +2,48 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="@dimen/_8sdp"
-    android:background="@drawable/normal_state_edittext_outline"
-    android:layout_height="wrap_content">
+    android:background="@drawable/normal_state_edittext_outline">
 
     <TextView
         android:id="@+id/text_huruf"
         style="@style/TextViewH14Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/huruf"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/txt_abjad"
-        app:layout_constraintEnd_toEndOf="@+id/txt_abjad"
-        app:layout_constraintStart_toStartOf="@+id/txt_abjad" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txt_abjad"
         style="@style/TextViewH48Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         android:text="A"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txt_materi_kapital"
+        style="@style/TextViewH12Medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         android:drawableStart="@drawable/ic_finished"
         android:drawablePadding="@dimen/_6sdp"
         android:text="Materi Huruf Kapital"
-        style="@style/TextViewH12Medium"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txt_abjad"
@@ -46,29 +51,31 @@
 
     <TextView
         android:id="@+id/txt_materi_nonkapital"
+        style="@style/TextViewH12Medium"
         android:layout_width="0dp"
-        android:layout_marginStart="24dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:drawableStart="@drawable/ic_finished"
         android:drawablePadding="@dimen/_6sdp"
         android:text="Materi Huruf Non Kapital"
-        app:layout_constraintEnd_toEndOf="parent"
-        style="@style/TextViewH12Medium"
         android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txt_abjad"
         app:layout_constraintTop_toBottomOf="@+id/txt_materi_kapital" />
 
     <TextView
         android:id="@+id/txt_materi_perbedaan"
+        style="@style/TextViewH12Medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:drawableStart="@drawable/ic_finished"
         android:drawablePadding="@dimen/_6sdp"
         android:text="Membedakan Kapital dan Non Kapital"
-        style="@style/TextViewH12Medium"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txt_abjad"
@@ -76,37 +83,44 @@
 
     <TextView
         android:id="@+id/txt_quiz_kapital"
+        style="@style/TextViewH12Medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        style="@style/TextViewH12Medium"
-        android:textColor="@color/black"
+        android:layout_marginEnd="16dp"
         android:drawableStart="@drawable/ic_finished"
-        android:text="Materi Huruf Kapital"
         android:drawablePadding="@dimen/_6sdp"
+        android:text="Materi Huruf Kapital"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txt_abjad"
-        app:layout_constraintTop_toBottomOf="@+id/txt_materi_perbedaan"
-      />
+        app:layout_constraintTop_toBottomOf="@+id/txt_materi_perbedaan" />
 
     <TextView
         android:id="@+id/txt_quiz_nonkapital"
-        android:layout_width="0dp"
         style="@style/TextViewH12Medium"
-        android:textColor="@color/black"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="32dp"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
         android:drawableStart="@drawable/ic_finished"
         android:drawablePadding="@dimen/_6sdp"
         android:text="Materi Huruf Non Kapital"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txt_abjad"
         app:layout_constraintTop_toBottomOf="@+id/txt_quiz_kapital" />
 
-    
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

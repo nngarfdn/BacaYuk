@@ -32,10 +32,12 @@
                 app:placeholderText="@string/masukan_nama_lengkap"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="@dimen/_4sdp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edt_name"
                     android:layout_width="match_parent"
+                    android:textSize="@dimen/_14ssp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/normal_state_edittext_outline"
                     android:paddingVertical="12dp" />
@@ -56,11 +58,13 @@
                 app:placeholderText="Masukan Kelas"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="@dimen/_4sdp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edt_kelas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/_14ssp"
                     android:background="@drawable/normal_state_edittext_outline"
                     android:paddingVertical="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -79,11 +83,14 @@
                 app:placeholderText="Masukan No Absen"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="@dimen/_4sdp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edt_noabsen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/_14ssp"
+                    android:inputType="phone"
                     android:background="@drawable/normal_state_edittext_outline"
                     android:paddingVertical="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -100,12 +107,14 @@
                 android:layout_width="match_parent"
                 app:endIconMode="clear_text"
                 app:placeholderText="Masukan Asal Sekolah"
+                android:textSize="@dimen/_14ssp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edt_asal_sekolah"
                     android:layout_width="match_parent"
+                    android:textSize="@dimen/_14ssp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/normal_state_edittext_outline"
                     android:paddingVertical="12dp" />
@@ -125,11 +134,14 @@
                 app:placeholderText="Masukan Tahun Masuk Sekolah"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="@dimen/_4sdp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edt_tahun_masuk_sekolah"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:textSize="@dimen/_14ssp"
                     android:background="@drawable/normal_state_edittext_outline"
                     android:paddingVertical="12dp" />
             </com.google.android.material.textfield.TextInputLayout>

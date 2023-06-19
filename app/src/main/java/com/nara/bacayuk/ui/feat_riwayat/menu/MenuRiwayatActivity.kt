@@ -29,7 +29,7 @@ class MenuRiwayatActivity : AppCompatActivity() {
 
         binding.apply {
             textView.text = student?.fullName
-            "${student?.kelas ?: "-"} ${student?.asalSekolah ?: "-"}".also { txtDesc.text = it }
+            "${student?.kelas ?: "-"} - ${student?.asalSekolah ?: "-"}".also { txtDesc.text = it }
             toolbar.txtTitle.text = "Riwayat Belajar"
             toolbar.imageView.setOnClickListener { onBackPressed() }
             toolbar.imgActionRight.invisible()

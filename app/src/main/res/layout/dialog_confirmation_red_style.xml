@@ -49,6 +49,7 @@
             android:layout_weight="1"
             android:textColor="@color/primary_500"
             android:textAllCaps="false"
+            android:textSize="@dimen/_12ssp"
             android:paddingVertical="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_8sdp"
             android:background="@drawable/button_outline_rounded_purple_10px"
@@ -64,6 +65,7 @@
             android:textColor="@color/white"
             android:layout_marginStart="@dimen/_8sdp"
             android:backgroundTint="#D04242"
+            android:textSize="@dimen/_12ssp"
             android:background="@drawable/button_rounded_purple_10px"
             android:text="@string/ya"/>
     </LinearLayout>

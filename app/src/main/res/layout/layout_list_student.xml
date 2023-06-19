@@ -20,6 +20,8 @@
         android:background="@drawable/button_rounded_purple_10px"
         android:fontFamily="@font/pjs_medium"
         android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:textSize="@dimen/_12ssp"
         android:paddingVertical="@dimen/_8sdp"
         android:textColor="@color/white"
         android:text="@string/pilih"/>

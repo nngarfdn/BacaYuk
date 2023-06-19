@@ -8,6 +8,7 @@ import com.nara.bacayuk.data.model.Response
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityAddEditStudentBinding
 import com.nara.bacayuk.utils.DATA
+import com.nara.bacayuk.utils.invisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -32,6 +33,11 @@ class AddEditStudentActivity : AppCompatActivity() {
 
         binding.apply {
 
+            toolbar.apply {
+                imgActionRight.invisible()
+                imageView.setOnClickListener { finish() }
+                txtTitle.text = if (dataStudent!=null) "Edit Siswa" else "Tambah Siswa"
+            }
             if (dataStudent!=null) {
                 isEditStudent = true
                 edtName.setText(dataStudent!!.fullName)
@@ -52,16 +58,21 @@ class AddEditStudentActivity : AppCompatActivity() {
                 val randomUid = UUID.randomUUID().toString()
                 val uuid = if (isEditStudent) dataStudent?.uuid else randomUid
 
-                val student = Student(
-                    uuid = uuid ?: "-",
-                    fullName = name,
-                    kelas = kelas,
-                    noAbsen = noAbsen,
-                    asalSekolah = asalSekolah,
-                    tahunMasukSekolah = thMasukSekolah,
-                )
-                val uidUser = addEditStudentViewModel.getUID() ?: "-"
-                addEditStudentViewModel.addUserToFirestore(uidUser, student)
+                if (name=="" || name.isEmpty()){
+                    edtName.setError("Wajib diisi")
+                }else {
+                    val student = Student(
+                        uuid = uuid ?: "-",
+                        fullName = name,
+                        kelas = kelas,
+                        noAbsen = noAbsen,
+                        asalSekolah = asalSekolah,
+                        tahunMasukSekolah = thMasukSekolah,
+                    )
+                    val uidUser = addEditStudentViewModel.getUID() ?: "-"
+                    addEditStudentViewModel.addUserToFirestore(uidUser, student)
+                }
+
             }
 
             addEditStudentViewModel.isSuccess.observe(this@AddEditStudentActivity) { response ->

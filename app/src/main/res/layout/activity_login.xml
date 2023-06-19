@@ -39,6 +39,7 @@
                 android:layout_width="match_parent"
                 app:endIconMode="clear_text"
                 app:placeholderText="@string/masukan_email"
+                android:textSize="@dimen/_14sdp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:layout_height="wrap_content">
@@ -46,6 +47,7 @@
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/_14sdp"
                 android:inputType="textEmailAddress"
                 android:background="@drawable/normal_state_edittext_outline"
                 android:paddingVertical="12dp" />
@@ -70,6 +72,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 app:endIconMode="password_toggle"
+                android:textSize="@dimen/_14sdp"
                 app:placeholderText="@string/masukan_katasandi"
                 android:layout_marginTop="@dimen/_4sdp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -78,6 +81,7 @@
                     android:id="@+id/edt_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/_14sdp"
                     android:background="@drawable/normal_state_edittext_outline"
                     android:paddingHorizontal="8dp"
                     android:inputType="textPassword"
@@ -108,7 +112,9 @@
                 android:background="@drawable/button_rounded_purple_10px"
                 android:fontFamily="@font/pjs_medium"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/_14ssp"
                 android:paddingVertical="@dimen/_8sdp"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:text="@string/masuk"/>
 
@@ -117,6 +123,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
+                android:layout_marginBottom="@dimen/_48sdp"
                 android:layout_marginTop="@dimen/_16sdp">
                 <TextView
                     android:id="@+id/txt_capt_belum_punya_akun"
