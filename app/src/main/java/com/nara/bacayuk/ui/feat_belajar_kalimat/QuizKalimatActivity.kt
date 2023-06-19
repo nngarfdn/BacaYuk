@@ -21,8 +21,10 @@ import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizSusunAdapter
 import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizViewModel
 import com.nara.bacayuk.ui.listener.adapter.AdapterQuizListener
 import com.nara.bacayuk.ui.listener.adapter.ViewPositionListener
+import com.nara.bacayuk.utils.gone
 import com.nara.bacayuk.utils.invisible
 import com.nara.bacayuk.utils.loadImage
+import com.nara.bacayuk.utils.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositionListener {
@@ -59,9 +61,9 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
         setContentView(binding.root)
 
         isKata = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getBooleanExtra("isKata",false)
+            intent.getBooleanExtra("isKata", false)
         } else {
-            intent.getBooleanExtra("isKata",false)
+            intent.getBooleanExtra("isKata", false)
         }
 
         student = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -80,13 +82,13 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
             reportKata = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 intent.getParcelableExtra("data", ReportKata::class.java)
             } else {
-                intent.getParcelableExtra("data" ) as ReportKata?
+                intent.getParcelableExtra("data") as ReportKata?
             }
         } else {
             reportKalimat = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 intent.getParcelableExtra("data", ReportKalimat::class.java)
             } else {
-                intent.getParcelableExtra("data" ) as ReportKalimat?
+                intent.getParcelableExtra("data") as ReportKalimat?
             }
         }
 
@@ -96,31 +98,80 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
 
         binding.apply {
             binding.toolbar.apply {
-                txtTitle.text =if(isKata) "Baca Kata" else "Baca Kalimat"
+                txtTitle.text = if (isKata) "Baca Kata" else "Baca Kalimat"
                 imageView.setOnClickListener { onBackPressed() }
                 imgActionRight.invisible()
             }
-            imageView4.loadImage(this@QuizKalimatActivity, soalKata?.imageUrl?:"")
-            for (data in listQuestions) {
-                val item = ItemQuizSusunBinding.inflate(layoutInflater)
-                item.opt1.text = data
-                item.opt1.setOnClickListener {
-                    it.invisible()
-                    listAnswer.add(data as String)
-                    item.opt1.animate().alpha(1.0f)
-                    .setDuration(800)
-                    .setStartDelay((10).toLong())
-                    .withEndAction {
-                        binding.txtAnswer.text = listAnswer.joinToString(if (isKata) "" else " ")
-                    }
-                    .start()
+            imageView4.loadImage(this@QuizKalimatActivity, soalKata?.imageUrl ?: "")
+            opta.opt1.apply {
+                text = listQuestions[0]
+                setOnClickListener {
+                    opta.opt1.invisible()
+                    listAnswer.add(listQuestions[0])
+                    binding.txtAnswer.text = listAnswer.joinToString(if (isKata) "" else " ")
                 }
-                placeholder.addView(item.root)
             }
+            opti.opt1.apply {
+                text = listQuestions[1]
+                setOnClickListener {
+                    opti.opt1.invisible()
+                    listAnswer.add(listQuestions[1])
+                    binding.txtAnswer.text = listAnswer.joinToString(if (isKata) "" else " ")
+                }
+            }
+
+            optu.opt1.apply {
+                text = listQuestions[2]
+                setOnClickListener {
+                    optu.opt1.invisible()
+                    listAnswer.add(listQuestions[2])
+                    binding.txtAnswer.text = listAnswer.joinToString(if (isKata) "" else " ")
+                }
+            }
+
+            if (isKata) {
+                if ((soalKata?.level ?: 0) < 8) {
+                    opte.root.gone()
+                } else {
+                    opte.root.visible()
+                    opte.opt1.text = listQuestions[3]
+                    opte.opt1.apply {
+                        text = listQuestions[3]
+                        setOnClickListener {
+                            optu.opt1.invisible()
+                            listAnswer.add(listQuestions[3])
+                            binding.txtAnswer.text =
+                                listAnswer.joinToString(if (isKata) "" else " ")
+                        }
+                    }
+                }
+            } else {
+                opte.root.gone()
+            }
+//            for (data in listQuestions) {
+//                val item = ItemQuizSusunBinding.inflate(layoutInflater)
+//                item.opt1.text = data
+//                item.opt1.setOnClickListener {
+//                    it.invisible()
+//                    listAnswer.add(data as String)
+//                    item.opt1.animate().alpha(1.0f)
+//                    .setDuration(800)
+//                    .setStartDelay((10).toLong())
+//                    .withEndAction {
+//                        binding.txtAnswer.text = listAnswer.joinToString(if (isKata) "" else " ")
+//                    }
+//                    .start()
+//                }
+//                placeholder.addView(item.root)
+//            }
 
             rvOption.apply {
                 adapter = adapterOption
-                layoutManager = CenterLinearLayoutManager(this@QuizKalimatActivity, LinearLayoutManager.HORIZONTAL, false)
+                layoutManager = CenterLinearLayoutManager(
+                    this@QuizKalimatActivity,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
                 clipToPadding = false
             }
             rvAnswer.apply {
@@ -133,13 +184,13 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
             }
             btnLogin.setOnClickListener {
                 Log.d("quizsusun", "$isKata- $reportKata- $reportKalimat- ${student?.uuid ?: "-"}")
-                if (txtAnswer.text == soalKata?.correctAnswer){
-                    if (reportKata!= null) {
-                        for(item in reportKata!!.quizSusunKata){
-                            if (item.level == soalKata!!.level){
+                if (txtAnswer.text == soalKata?.correctAnswer) {
+                    if (reportKata != null) {
+                        for (item in reportKata!!.quizSusunKata) {
+                            if (item.level == soalKata!!.level) {
                                 item.isCorrect = true
                                 val index = item.level - 1
-                                reportKata!!.quizSusunKata[index]= item
+                                reportKata!!.quizSusunKata[index] = item
                                 quizViewModel.updateReportKata(
                                     student?.uuid ?: "-", reportKata!!
                                 )
@@ -147,12 +198,12 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                         }
                     }
 
-                    if (reportKalimat!= null) {
-                        for(item in reportKalimat!!.quizSusunKata){
-                            if (item.level == soalKata!!.level){
+                    if (reportKalimat != null) {
+                        for (item in reportKalimat!!.quizSusunKata) {
+                            if (item.level == soalKata!!.level) {
                                 item.isCorrect = true
                                 val index = item.level - 1
-                                reportKalimat!!.quizSusunKata[index]= item
+                                reportKalimat!!.quizSusunKata[index] = item
                                 quizViewModel.updateReportKalimat(
                                     student?.uuid ?: "-", reportKalimat!!
                                 )
@@ -162,7 +213,7 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                     val dialog = AnswerStatusDialog(
                         this@QuizKalimatActivity,
                         icon = R.drawable.ic_checklist,
-                        status =  "Benar"
+                        status = "Benar"
                     )
                     dialog.show()
                     val layoutParams = WindowManager.LayoutParams()
@@ -170,13 +221,11 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                     layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
                     layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
                     dialog.getWindow()?.setAttributes(layoutParams)
-                }
-
-                else {
+                } else {
                     val dialog = AnswerStatusDialog(
                         this@QuizKalimatActivity,
                         icon = R.drawable.ic_wrong_answer,
-                        status =  "Salah"
+                        status = "Salah"
                     )
                     dialog.show()
                     val layoutParams = WindowManager.LayoutParams()
@@ -187,8 +236,8 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                 }
             }
         }
-
     }
+
 
     fun stringToList(str: String, separator: String): MutableList<String> {
         return str.split(separator).toMutableList()
@@ -271,6 +320,6 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
         }
     }
 
-    //bagaimana cara membuat center di recycler view horizontal
+//bagaimana cara membuat center di recycler view horizontal
 
 }
