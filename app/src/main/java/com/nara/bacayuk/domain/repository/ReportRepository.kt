@@ -4,11 +4,11 @@ import com.nara.bacayuk.data.model.*
 import kotlinx.coroutines.flow.Flow
 
 interface ReportRepository {
-    suspend fun createReportHurufDataSets(idUser: String,idStudent: String): Boolean
+    suspend fun createReportHurufDataSets(idUser: String,idStudent: String): String
     suspend fun updateReportHuruf(idUser: String,idStudent: String,reportHuruf: ReportHuruf): Boolean
     fun getAllReportFromFirestore(idUser: String, idStudent: String): Flow<Response<List<ReportHuruf>>>
 
-    suspend fun createReportKataDataSets(idUser: String,idStudent: String): Boolean
+    suspend fun createReportKataDataSets(idUser: String,idStudent: String): String
     suspend fun updateReportKata(idUser: String,idStudent: String,reportHuruf: ReportKata): Boolean
     fun getAllReportKataFromFirestore(idUser: String, idStudent: String): Flow<Response<ReportKata>>
     fun getAllBelajarVokal(idUser: String, idStudent: String): Flow<Response<List<BelajarSuku>>>

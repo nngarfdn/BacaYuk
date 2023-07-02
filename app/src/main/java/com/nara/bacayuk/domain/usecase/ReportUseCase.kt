@@ -5,7 +5,7 @@ import com.nara.bacayuk.domain.repository.ReportRepository
 import kotlinx.coroutines.flow.Flow
 
 class ReportUseCase(private val repository: ReportRepository) {
-    suspend fun createReportHurufDataSets(idUser: String, idStudent: String): Boolean =
+    suspend fun createReportHurufDataSets(idUser: String, idStudent: String): String =
         repository.createReportHurufDataSets(idUser, idStudent)
 
     suspend fun updateReportHuruf(
@@ -22,7 +22,7 @@ class ReportUseCase(private val repository: ReportRepository) {
     suspend fun createReportKataDataSets(
         idUser: String,
         idStudent: String
-    ): Boolean = repository.createReportKataDataSets(idUser, idStudent)
+    ): String = repository.createReportKataDataSets(idUser, idStudent)
 
     suspend fun updateReportKata(
         idUser: String,

@@ -3,6 +3,8 @@ package com.nara.bacayuk.data.report
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nara.bacayuk.data.model.*
+import com.nara.bacayuk.utils.MESSAGE_HURUF_SUCCESS
+import com.nara.bacayuk.utils.MESSAGE_KATA_SUCCESS
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -43,33 +45,6 @@ class ReportDataSourceImpl: ReportDataSource {
         }
     }
 
-    override suspend fun createReportKataDataSets(
-        idUser: String,
-        idStudent: String
-    ): Boolean {
-        return try {
-            val firestoreInstance = FirebaseFirestore.getInstance()
-            val listData = createDataSetKata()
-            listData.forEach{
-                val documentReference =
-                    firestoreInstance.collection("Users").document(idUser)
-                        .collection("Students").document(idStudent)
-                        .collection("ReportKata").document("ReportKata")
-                        .collection("BelajarVokal").document(it.abjadName)
-                documentReference.set(it).await()
-            }
-
-            val documentReference2 =
-                firestoreInstance.collection("Users").document(idUser)
-                    .collection("Students").document(idStudent)
-                    .collection("ReportKata").document("ReportKata")
-            documentReference2.set(ReportKata()).await()
-            true // kembalikan nilai boolean true jika operasi berhasil
-        } catch (e: Exception) {
-            Log.e("UserDataSourceImpl", "Error adding or updating user to Firestore.", e)
-            false // kembalikan nilai boolean false jika operasi gagal
-        }
-    }
 
     override suspend fun updateReportKata(
         idUser: String,
@@ -124,6 +99,23 @@ class ReportDataSourceImpl: ReportDataSource {
         }
     }
 
+    override fun getAllReportKalimatFromFirestore(
+        idUser: String,
+        idStudent: String
+    ): Flow<Response<ReportKalimat>> {
+        return flow {
+            val firestoreInstance = FirebaseFirestore.getInstance()
+            val snapshot = firestoreInstance.collection("Users")
+                .document(idUser).collection("Students").document(idStudent)
+                .collection("ReportKalimat").document("ReportKalimat").get().await()
+            val report = snapshot.toObject(ReportKalimat::class.java)
+            Log.d("getAllReport", report.toString())
+            emit(Response.Success(report ?: ReportKalimat()))
+        }.catch {
+            Log.e("getAllUserFromFirestore", "Failed to fetch user data from Firestore.", it)
+        }
+    }
+
     override fun getAllBelajarVokal(
         idUser: String,
         idStudent: String
@@ -152,6 +144,7 @@ class ReportDataSourceImpl: ReportDataSource {
         reportHuruf: ReportKalimat
     ): Boolean {
         return try {
+            var lastStatus = "Menyiapkan data kalimat.."
             val firestoreInstance = FirebaseFirestore.getInstance()
             val snapshot = firestoreInstance.collection("Users")
                 .document(idUser).collection("Students").document(idStudent)
@@ -163,40 +156,60 @@ class ReportDataSourceImpl: ReportDataSource {
         }
     }
 
-    override fun getAllReportKalimatFromFirestore(
-        idUser: String,
-        idStudent: String
-    ): Flow<Response<ReportKalimat>> {
-        return flow {
-            val firestoreInstance = FirebaseFirestore.getInstance()
-            val snapshot = firestoreInstance.collection("Users")
-                .document(idUser).collection("Students").document(idStudent)
-                .collection("ReportKalimat").document("ReportKalimat").get().await()
-            val report = snapshot.toObject(ReportKalimat::class.java)
-            Log.d("getAllReport", report.toString())
-            emit(Response.Success(report ?: ReportKalimat()))
-        }.catch {
-            Log.e("getAllUserFromFirestore", "Failed to fetch user data from Firestore.", it)
-        }
-    }
 
-    override suspend fun createReportHurufDataSets(idUser: String,idStudent: String): Boolean {
+
+    override suspend fun createReportHurufDataSets(idUser: String,idStudent: String): String {
+
         return try {
-            val datasets = createDataSet()
+            val datasetsHuruf = createDataSet()
+            var lastStatus = "Menyiapkan data huruf.."
             val firestoreInstance = FirebaseFirestore.getInstance()
-            for (item in datasets) {
+            for (item in datasetsHuruf) {
                 val documentReference =
                     firestoreInstance.collection("Users").document(idUser)
                         .collection("Students").document(idStudent)
                         .collection("ReportHuruf").document(item.abjadName)
 
                 documentReference.set(item).await()
+                if (item.abjadName == "Zz") lastStatus = MESSAGE_HURUF_SUCCESS
             }
 
-            true // kembalikan nilai boolean true jika operasi berhasil
+            lastStatus // kembalikan nilai boolean true jika operasi berhasil
         } catch (e: Exception) {
             Log.e("UserDataSourceImpl", "Error adding or updating user to Firestore.", e)
-            false // kembalikan nilai boolean false jika operasi gagal
+            "Gagal menyiapkan data belajar huruf" // kembalikan nilai boolean false jika operasi gagal
+        }
+    }
+
+    override suspend fun createReportKataDataSets(
+        idUser: String,
+        idStudent: String
+    ): String {
+        return try {
+            val firestoreInstance = FirebaseFirestore.getInstance()
+            val listData = createDataSetKata()
+            var lastStatus = "Menyiapkan data kata.."
+            listData.forEach{
+                lastStatus = "Menyiapkan data kata ${it.abjadName}"
+                val documentReference =
+                    firestoreInstance.collection("Users").document(idUser)
+                        .collection("Students").document(idStudent)
+                        .collection("ReportKata").document("ReportKata")
+                        .collection("BelajarVokal").document(it.abjadName)
+                documentReference.set(it).await()
+                if (it.abjadName== "Zz") lastStatus = MESSAGE_KATA_SUCCESS
+            }
+
+//            val documentReference2 =
+//                firestoreInstance.collection("Users").document(idUser)
+//                    .collection("Students").document(idStudent)
+//                    .collection("ReportKata").document("ReportKata")
+//            documentReference2.set(ReportKata()).await()
+            return lastStatus
+//            "Menyiapkan " // kembalikan nilai boolean true jika operasi berhasil
+        } catch (e: Exception) {
+            Log.e("UserDataSourceImpl", "Error adding or updating user to Firestore.", e)
+            "Gagal menyiapkan data belajar kata" // kembalikan nilai boolean false jika operasi gagal
         }
     }
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="@dimen/_16sdp"
+    android:gravity="center_horizontal"
+    android:padding="@dimen/_16sdp"
+    android:backgroundTint="@color/white"
+    android:background="@drawable/bg_rounded_8px_white"
+    android:layout_height="wrap_content">
+
+    <ProgressBar
+        android:id="@+id/progress_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/txt_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Benar"
+        android:layout_gravity="start"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginVertical="@dimen/_8sdp"
+        style="@style/TextViewH12Regular"
+        android:textColor="@color/neutral_700"/>
+    <Button
+        android:id="@+id/btn_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_rounded_purple_10px"
+        android:fontFamily="@font/pjs_medium"
+        android:paddingVertical="@dimen/_8sdp"
+        android:enabled="false"
+        android:text="Tutup"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/_16sdp" />
+</LinearLayout>

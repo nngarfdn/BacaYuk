@@ -5,7 +5,7 @@ import com.nara.bacayuk.domain.repository.ReportRepository
 import kotlinx.coroutines.flow.Flow
 
 class ReportRepositoryImpl(private val dataSource: ReportDataSource) :ReportRepository {
-    override suspend fun createReportHurufDataSets(idUser: String, idStudent: String): Boolean {
+    override suspend fun createReportHurufDataSets(idUser: String, idStudent: String): String {
         return dataSource.createReportHurufDataSets(idUser, idStudent)
     }
 
@@ -27,7 +27,7 @@ class ReportRepositoryImpl(private val dataSource: ReportDataSource) :ReportRepo
     override suspend fun createReportKataDataSets(
         idUser: String,
         idStudent: String
-    ): Boolean {
+    ): String {
         return dataSource.createReportKataDataSets(idUser, idStudent)
     }
 

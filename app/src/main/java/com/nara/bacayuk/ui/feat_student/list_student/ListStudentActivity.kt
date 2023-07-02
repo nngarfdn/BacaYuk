@@ -1,5 +1,6 @@
 package com.nara.bacayuk.ui.feat_student.list_student
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -7,6 +8,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -16,8 +18,11 @@ import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.data.model.User
 import com.nara.bacayuk.databinding.ActivityListStudentBinding
 import com.nara.bacayuk.ui.customview.ConfirmationDialogRedStyle
+import com.nara.bacayuk.ui.customview.OnDialogShow
+import com.nara.bacayuk.ui.customview.WaitingDialog
 import com.nara.bacayuk.ui.feat_auth.login.LoginActivity
 import com.nara.bacayuk.ui.feat_menu_utama.MainActivity
+import com.nara.bacayuk.ui.feat_menu_utama.MainViewModel
 import com.nara.bacayuk.ui.feat_student.add_edit_student.AddEditStudentActivity
 import com.nara.bacayuk.ui.listener.adapter.AdapterListener
 import com.nara.bacayuk.utils.*
@@ -37,15 +42,30 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
     private var balloon: Balloon? = null
     private val studentAdapter by lazy { StudentAdapter(this@ListStudentActivity) }
     private var selectedStudent: Student? = null
+    private val progressDialog by lazy { ProgressDialog(this) }
     private val listStudentViewModel: ListStudentViewModel by viewModel()
+    private val mainViewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         val user: User? = listStudentViewModel.getUserDataStore()
         if (user == null || user.email == "") {
             openActivity(this@ListStudentActivity, LoginActivity::class.java)
+        }
+        mainViewModel.statusCreateData.observe(this@ListStudentActivity) {
+            if (it.size > 1) {
+                progressDialog.setCancelable(false)
+                progressDialog.setMessage("${it[0]}\n${it[1]}\n${it[2]}")
+                progressDialog.show()
+                if (it[0] == MESSAGE_HURUF_SUCCESS && it[1] == MESSAGE_KATA_SUCCESS && it[2] == MESSAGE_KALIMAT_SUCCESS){
+                    progressDialog.dismiss()
+                    val intent = Intent(this@ListStudentActivity, MainActivity::class.java).apply {
+                        putExtra("student", selectedStudent)
+                    }
+                    startActivity(intent)
+                }
+            }
         }
 
         listStudentViewModel.students.observe(this@ListStudentActivity) { response ->
@@ -56,12 +76,17 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
                     } else {
                         handleEmptyState(false)
                         studentAdapter.submitData(response.data)
+                        response.data.forEach {
+                            Log.d("liststudent", "${it.fullName} - ${it.uuid}")
+                        }
                     }
                 }
                 is Response.Error -> {
                     Toast.makeText(this@ListStudentActivity, response.message, Toast.LENGTH_SHORT).show()
                 }
-                else -> {}
+                else -> {
+
+                }
             }
         }
 
@@ -88,10 +113,19 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
             binding.layoutStudent.btnSelect.isEnabled = selectedStudent!= null
 
             layoutStudent.btnSelect.setOnClickListener {
-                val intent = Intent(this@ListStudentActivity, MainActivity::class.java).apply {
-                    putExtra("student", selectedStudent)
+                if (selectedStudent?.isReadyHurufDataSet == false ) {
+                    mainViewModel.createReportHurufDataSets(
+                        true,
+                        user?.uuid?: "-", selectedStudent!!.uuid ?: "-",
+                        selectedStudent!!
+                    )
+                } else {
+                    val intent = Intent(this@ListStudentActivity, MainActivity::class.java).apply {
+                        putExtra("student", selectedStudent)
+                    }
+                    startActivity(intent)
                 }
-                startActivity(intent)
+
             }
 
             layoutEmpty.btnSelect.setOnClickListener {
@@ -105,6 +139,7 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         val uidUser = listStudentViewModel.getUID() ?: "-"
         Log.d("liststudent", "onResume: $uidUser")
         listStudentViewModel.getAllStudent(uidUser)
+        progressDialog.dismiss()
     }
 
     private fun showTip(isSelected: Boolean = false){

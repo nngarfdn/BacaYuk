@@ -2,12 +2,10 @@ package com.nara.bacayuk.ui.feat_menu_utama
 
 import android.app.ProgressDialog
 import android.content.Intent
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.os.*
 import android.util.Log
 import android.view.Gravity
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +16,8 @@ import com.nara.bacayuk.data.model.User
 import com.nara.bacayuk.databinding.ActivityMainBinding
 import com.nara.bacayuk.ui.customview.ConfirmationDialog
 import com.nara.bacayuk.ui.customview.ConfirmationDialogRedStyle
+import com.nara.bacayuk.ui.customview.OnDialogShow
+import com.nara.bacayuk.ui.customview.WaitingDialog
 import com.nara.bacayuk.ui.feat_auth.login.LoginActivity
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_kata.menu.MenuBacaKataActivity
@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity() {
     private var balloon: Balloon? = null
     private val progressMax = 150
     private var currentProgress = 0
+    private var isDataReady = 0
+    private var listData = arrayListOf<String>()
     private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +54,32 @@ class MainActivity : AppCompatActivity() {
             intent.getParcelableExtra("student") as Student?
         }
 
+        mainViewModel.statusCreateData.observe(this@MainActivity) {
+
+            Log.d("statusCreateData", "Called - $isDataReady")
+            listData.addAll(it)
+            if (it.size < 4) {
+                progressDialog = ProgressDialog(this)
+                progressDialog.setCancelable(false)
+                progressDialog.setMessage("${it[0]}\n${it[1]}\n${it[2]}")
+                val dialog = WaitingDialog(this@MainActivity, "${it[0]}\n${it[1]}\n${it[2]}",
+                object : OnDialogShow{
+                    override fun onDialogShow(button: Button) {
+                        if (it[0] == MESSAGE_HURUF_SUCCESS && it[1] == MESSAGE_KATA_SUCCESS && it[2] == MESSAGE_KALIMAT_SUCCESS){
+                            button.isEnabled = true
+                            isDataReady++
+                            Log.d("createsuccess", "onCreate: success $isDataReady")
+                        }
+                    }
+                })
+                if (it[0] == MESSAGE_HURUF_SUCCESS && it[1] == MESSAGE_KATA_SUCCESS && it[2] == MESSAGE_KALIMAT_SUCCESS){
+                    dialog.binding.txtStatus.text = "Data sudah siap"
+                    dialog.binding.progressDialog.gone()
+                    isDataReady++
+                }
+                dialog.show()
+            }
+        }
         binding.apply {
             toolbar.txtTitle.text = "Menu Utama"
             toolbar.imgActionRight.setOnClickListener {
@@ -111,30 +139,6 @@ class MainActivity : AppCompatActivity() {
                 is Response.Success -> {
                     Log.d("LoginActivity", "onCreate: ${student?.isReadyHurufDataSet}")
                     if (student?.isReadyHurufDataSet == false) {
-                        progressDialog = ProgressDialog(this)
-                        progressDialog.setCancelable(false)
-                        progressDialog.setMessage("Sedang mempersiapkan data..")
-                        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
-                        progressDialog.max = progressMax
-
-                        // Tampilkan ProgressDialog
-                        progressDialog.show()
-
-                        // Mulai update progress setiap detik
-                        val handler = Handler()
-                        handler.postDelayed(object : Runnable {
-                            override fun run() {
-                                if (currentProgress >= progressMax) {
-                                    // Jika progress mencapai batas maksimal, tutup ProgressDialog
-                                    progressDialog.dismiss()
-                                } else {
-                                    // Update progress dan lanjutkan perulangan setiap detik
-                                    currentProgress++
-                                    progressDialog.progress = currentProgress
-                                    handler.postDelayed(this, 1000)
-                                }
-                            }
-                        }, 1000)
                         response.data.uuid?.let {
                             mainViewModel.createReportHurufDataSets(
                                 true,

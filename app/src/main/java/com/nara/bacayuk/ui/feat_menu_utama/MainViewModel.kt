@@ -16,6 +16,7 @@ import com.nara.bacayuk.domain.usecase.StudentUseCase
 import com.nara.bacayuk.domain.usecase.UserUseCase
 import com.nara.bacayuk.utils.EMAIL
 import com.nara.bacayuk.utils.FULL_NAME_USER
+import com.nara.bacayuk.utils.MESSAGE_KALIMAT_SUCCESS
 import com.nara.bacayuk.utils.UID
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -28,6 +29,9 @@ class MainViewModel(
     private val studentUseCase: StudentUseCase
     ) : ViewModel() {
 
+    private val _statusCreateData = MutableLiveData<ArrayList<String>>()
+    val statusCreateData: LiveData<ArrayList<String>> = _statusCreateData
+
     fun createReportHurufDataSets(
         isFirstOpen: Boolean,
         idUser: String,
@@ -36,6 +40,11 @@ class MainViewModel(
     ) =
         viewModelScope.launch {
             val user = getUserDataStore()
+            val arrayList = arrayListOf("","","")
+            arrayList[0] = "Mempersiapkan data huruf.."
+            arrayList[1] = "Mempersiapkan data kata.."
+            arrayList[2] = "Mempersiapkan data kalimat.."
+            _statusCreateData.value = arrayList
             try {
                 if (isFirstOpen) {
                     student.isReadyHurufDataSet = true
@@ -45,12 +54,19 @@ class MainViewModel(
                         studentUseCase.addUpdateStudentToFirestore(it.uuid ?: "-", changedStudent) }
                     val status = reportUseCase.createReportHurufDataSets(idUser, idStudent)
                     val statusKata = reportUseCase.createReportKataDataSets(idUser, idStudent)
-                    val statusKalimat = reportUseCase.addUpdateReportKalimat(idUser, idStudent, ReportKalimat())
-                    if (status) Log.d("createReport", "Report Huruf data set created")
-                    else Log.d("createReport", "Report Huruf data set creation failed")
-                    if (statusKata) Log.d("createReport", "Report Kata data set created")
-                    else Log.d("createReport", "Report Kata data set creation failed")
-                    if (statusKalimat) Log.d("createReport", "Report Kata data set created")
+                    Log.d("statuscreate", "createReportHurufDataSets: $status")
+                    Log.d("statuscreate", "createReportHurufDataSets: $statusKata")
+                    val statusKalimat1 = reportUseCase.addUpdateReportKalimat(idUser, idStudent, ReportKalimat())
+//                    if (status) Log.d("createReport", "Report Huruf data set created")
+//                    else Log.d("createReport", "Report Huruf data set creation failed")
+//                    if (statusKata) Log.d("createReport", "Report Kata data set created")
+//                    else Log.d("createReport", "Report Kata data set creation failed")
+                    val arrayList1 = arrayListOf("","","")
+                    arrayList1[0] = status
+                    arrayList1[1] = statusKata
+                    arrayList1[2] = if (statusKalimat1) MESSAGE_KALIMAT_SUCCESS else "Gagal mempersiapkan data kalimat"
+                    _statusCreateData.value = arrayList1
+                    if (statusKalimat1) Log.d("createReport", "Report Kata data set created")
                     else Log.d("createReport", "Report Kata data set creation failed")
                 }
             } catch (e: Exception) {
