@@ -46,6 +46,7 @@ class QuizBacaHurufActivity : AppCompatActivity() {
                 txtTitle.text = getString(R.string.baca_huruf)
                 txtTitle.setTextColor(resources.getColor(R.color.teal_600))
                 imgActionRight.invisible()
+                imageView.invisible()
                 imageView.setOnClickListener {
                     finish()
                 }

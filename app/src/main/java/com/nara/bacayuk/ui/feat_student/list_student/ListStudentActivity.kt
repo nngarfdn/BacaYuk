@@ -64,6 +64,7 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
                         putExtra("student", selectedStudent)
                     }
                     startActivity(intent)
+                    finish()
                 }
             }
         }
@@ -124,6 +125,7 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
                         putExtra("student", selectedStudent)
                     }
                     startActivity(intent)
+                    finish()
                 }
 
             }

@@ -151,5 +151,6 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
                 putExtra("student", student)
             }
         startActivity(if (isBacaKata) intent2 else intent1)
+        finish()
     }
 }

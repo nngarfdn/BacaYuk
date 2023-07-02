@@ -130,8 +130,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 startActivity(intent)
             }
-
-
         }
 
         mainViewModel.user.observe(this@MainActivity) { response ->
@@ -203,6 +201,10 @@ class MainActivity : AppCompatActivity() {
             )
             dialog.show()
         }
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 
     private fun showBalloon() {

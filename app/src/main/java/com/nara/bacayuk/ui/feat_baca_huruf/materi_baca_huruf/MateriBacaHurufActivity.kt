@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.Abjad
 import com.nara.bacayuk.data.model.Student
@@ -44,12 +45,13 @@ class MateriBacaHurufActivity : AppCompatActivity() {
                 txtTitle.text = if (dataAbjad==null) "Baca Kata" else getString(R.string.baca_huruf)
                 txtTitle.setTextColor(resources.getColor(R.color.teal_600))
                 imgActionRight.invisible()
+                imageView.invisible()
                 imageView.setOnClickListener {
                     finish()
+                    Toast.makeText(this@MateriBacaHurufActivity, "back pressed", Toast.LENGTH_SHORT).show()
                 }
             }
             val isKata = dataAbjad==null
-
             val pagerAdapter = ViewPageAdapter(this@MateriBacaHurufActivity, isKata = isKata) { name = it.toString() }
             slideVP.adapter = pagerAdapter
             dotsIndicator.setViewPager2(slideVP)
@@ -67,6 +69,7 @@ class MateriBacaHurufActivity : AppCompatActivity() {
                                 putExtra("student", student)
                             }
                         startActivity(intent)
+                        finish()
                     } else {
                         finish()
                     }
