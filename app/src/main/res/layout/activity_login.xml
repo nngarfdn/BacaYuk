@@ -121,10 +121,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:gravity="center"
                 android:layout_marginBottom="@dimen/_48sdp"
-                android:layout_marginTop="@dimen/_16sdp">
+                android:layout_marginTop="@dimen/_64sdp">
                 <TextView
                     android:id="@+id/txt_capt_belum_punya_akun"
                     android:layout_width="wrap_content"
@@ -134,11 +134,17 @@
                     android:textColor="@color/neutral_700"/>
                 <TextView
                     android:id="@+id/txt_daftar"
-                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_width="match_parent"
+                    android:fontFamily="@font/pjs_medium"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/_14ssp"
                     android:text="@string/daftar"
-                    style="@style/TextViewH14Bold"
-                    android:textColor="@color/primary_500"/>
+                    android:textAlignment="center"
+                    android:background="@drawable/button_outline_rounded_focused_purple"
+                    android:textAllCaps="false"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:textColor="@color/primary_700"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

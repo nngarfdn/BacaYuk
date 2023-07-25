@@ -21,6 +21,7 @@ import com.nara.bacayuk.ui.customview.ConfirmationDialogRedStyle
 import com.nara.bacayuk.ui.customview.OnDialogShow
 import com.nara.bacayuk.ui.customview.WaitingDialog
 import com.nara.bacayuk.ui.feat_auth.login.LoginActivity
+import com.nara.bacayuk.ui.feat_auth.register.RegisterActivity
 import com.nara.bacayuk.ui.feat_menu_utama.MainActivity
 import com.nara.bacayuk.ui.feat_menu_utama.MainViewModel
 import com.nara.bacayuk.ui.feat_student.add_edit_student.AddEditStudentActivity
@@ -51,7 +52,7 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         setContentView(binding.root)
         val user: User? = listStudentViewModel.getUserDataStore()
         if (user == null || user.email == "") {
-            openActivity(this@ListStudentActivity, LoginActivity::class.java)
+            openActivity(this@ListStudentActivity, RegisterActivity::class.java)
         }
         mainViewModel.statusCreateData.observe(this@ListStudentActivity) {
             if (it.size > 1) {
