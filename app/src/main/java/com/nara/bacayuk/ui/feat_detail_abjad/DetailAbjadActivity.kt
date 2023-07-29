@@ -17,6 +17,5 @@ class DetailAbjadActivity : AppCompatActivity() {
                 playAudioFromRawAssets(this@DetailAbjadActivity, R.raw.rocket)
             }
         }
-
     }
 }

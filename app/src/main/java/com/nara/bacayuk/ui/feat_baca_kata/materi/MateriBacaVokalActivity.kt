@@ -127,10 +127,6 @@ class MateriBacaVokalActivity : AppCompatActivity(), AdapterListener,
             }, DSVOrientation.VERTICAL)
 
             bacaVocalAdapter.submitData(listOf("-","a", "i", "u", "e", "o"))
-            rvAbjadKapital.apply {
-                adapter = bacaVocalAdapter
-                layoutManager = layoutManagerA
-            }
 
             opta.opt1.text = "a"
             opti.opt1.text = "i"
