@@ -7,6 +7,18 @@
     android:padding="@dimen/_16sdp">
 
     <TextView
+        android:id="@+id/txt_guide"
+        style="@style/TextViewH16Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arahkan huruf dibawah berikut sesuai bentuknya"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/txt_abjad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/txt_abjad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,8 +43,7 @@
         android:textSize="100sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txt_opt1"

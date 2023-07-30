@@ -15,6 +15,7 @@ import com.nara.bacayuk.data.model.SoalKata
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityQuizPilganKalimatBinding
 import com.nara.bacayuk.ui.customview.AnswerStatusDialog
+import com.nara.bacayuk.ui.customview.OnDismissDialog
 import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizViewModel
 import com.nara.bacayuk.utils.invisible
 import com.nara.bacayuk.utils.loadImage
@@ -83,7 +84,7 @@ class QuizPilganKalimatActivity : AppCompatActivity() {
             opt1.setText(listQuestions[0])
             opt2.setText(listQuestions[1])
             opt3.setText(listQuestions[2])
-            opt4.setText(listQuestions[3])
+//            opt4.setText(listQuestions[3])
             imageView4.loadImage(this@QuizPilganKalimatActivity, soalKata?.imageUrl?:"")
             rbAnswer.setOnCheckedChangeListener { group, checkedId ->
                 val selectedRadioButton: RadioButton = findViewById(checkedId)
@@ -119,7 +120,12 @@ class QuizPilganKalimatActivity : AppCompatActivity() {
                         val dialog = AnswerStatusDialog(
                             this@QuizPilganKalimatActivity,
                             icon = R.drawable.ic_checklist,
-                            status =  "Benar"
+                            status =  "Benar",
+                            object : OnDismissDialog {
+                                override fun onDismissDialog() {
+                                    finish()
+                                }
+                            }
                         )
                         dialog.show()
                         val layoutParams = WindowManager.LayoutParams()
@@ -133,7 +139,12 @@ class QuizPilganKalimatActivity : AppCompatActivity() {
                         val dialog = AnswerStatusDialog(
                             this@QuizPilganKalimatActivity,
                             icon = R.drawable.ic_wrong_answer,
-                            status =  "Salah"
+                            status =  "Salah",
+                            object : OnDismissDialog {
+                                override fun onDismissDialog() {
+
+                                }
+                            }
                         )
                         dialog.show()
                         val layoutParams = WindowManager.LayoutParams()

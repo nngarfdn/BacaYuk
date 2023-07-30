@@ -9,10 +9,15 @@ import android.view.*
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import co.mobiwise.materialintro.shape.Focus
+import co.mobiwise.materialintro.shape.FocusGravity
+import co.mobiwise.materialintro.shape.ShapeType
+import co.mobiwise.materialintro.view.MaterialIntroView
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.databinding.FragmentQuizBinding
 import com.nara.bacayuk.ui.customview.AnswerStatusDialog
+import com.nara.bacayuk.ui.customview.OnDismissDialog
 import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -92,6 +97,21 @@ class QuizFragment : Fragment() {
                     reset(false)
                     txtAbjad.text = abjad?.abjadNonKapital
                     isKapital = false
+//
+
+                    MaterialIntroView.Builder(requireActivity())
+                        .enableDotAnimation(true)
+                        .enableIcon(false)
+                        .setFocusGravity(FocusGravity.CENTER)
+                        .setFocusType(Focus.ALL)
+                        .setDelayMillis(500)
+                        .enableFadeAnimation(true)
+                        .performClick(true)
+                        .setInfoText("Arahkah huruf abjad ini menuju huruf yang benar\\n Dengan cara menekan, tahan, lalu geser")
+                        .setShape(ShapeType.CIRCLE)
+                        .setTarget(binding.quiz.txtAbjad)
+                        .setUsageId("intro_abja") //THIS SHOULD BE UNIQUE ID
+                        .show()
                 }
                 "1" -> {
                     isKapital = true
@@ -241,7 +261,12 @@ class QuizFragment : Fragment() {
                         val dialog = AnswerStatusDialog(
                             v.context,
                             icon = R.drawable.ic_checklist,
-                             status =  "Benar"
+                             status =  "Benar",
+                            object: OnDismissDialog {
+                                override fun onDismissDialog() {
+
+                                }
+                            }
                         )
                         dialog.show()
                         val layoutParams = WindowManager.LayoutParams()
@@ -262,7 +287,12 @@ class QuizFragment : Fragment() {
                         val dialog = AnswerStatusDialog(
                             v.context,
                             icon = R.drawable.ic_wrong_answer,
-                            status =  "Salah"
+                            status =  "Salah",
+                            object : OnDismissDialog {
+                                override fun onDismissDialog() {
+
+                                }
+                            }
                         )
                         dialog.show()
                         val layoutParams = WindowManager.LayoutParams()

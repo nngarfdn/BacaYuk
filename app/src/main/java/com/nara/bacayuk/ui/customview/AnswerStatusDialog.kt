@@ -7,11 +7,13 @@ import androidx.core.content.ContextCompat
 import com.nara.bacayuk.R
 import com.nara.bacayuk.databinding.DialogConfirmationBinding
 import com.nara.bacayuk.databinding.LayoutStatusAnswerBinding
+import com.nara.bacayuk.utils.playAudioFromRawAssetsFileString
 
 class AnswerStatusDialog(
     context: Context,
     private val icon: Int = R.drawable.ic_checklist,
     private val status: String,
+    private val listener: OnDismissDialog
 
     ): Dialog(context) {
     private val binding by lazy { LayoutStatusAnswerBinding.inflate(layoutInflater) }
@@ -24,12 +26,20 @@ class AnswerStatusDialog(
             imgIcon.setImageResource(icon)
             txtStatus.text = status
             btnSelect.setOnClickListener {
+                listener.onDismissDialog()
                 dismiss()
+            }
+            when(status){
+                "Benar" -> playAudioFromRawAssetsFileString(context,"sound_correct")
+                "Salah" -> playAudioFromRawAssetsFileString(context,"sound_wrong")
             }
         }
     }
 }
 
+interface OnDismissDialog{
+    fun onDismissDialog()
+}
 interface OnDialogShow{
     fun onDialogShow(button: Button)
 }

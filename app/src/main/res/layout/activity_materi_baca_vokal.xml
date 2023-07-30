@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <include
         android:id="@+id/toolbar"
@@ -18,122 +17,56 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <LinearLayout
+            android:id="@+id/placeholder"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_32sdp"
+            android:layout_marginBottom="@dimen/_100sdp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
+            <include
+                android:id="@+id/opta"
+                layout="@layout/item_belajar_suku" />
 
-            <TextView
-                android:id="@+id/txt_abjad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/pjs_bold"
-                android:gravity="center_vertical"
-                android:text="b"
-                android:textColor="@color/teal_600"
-                android:textSize="128sp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintTop_toTopOf="parent" />
+            <include
+                android:id="@+id/opti"
+                layout="@layout/item_belajar_suku" />
 
+            <include
+                android:id="@+id/optu"
+                layout="@layout/item_belajar_suku" />
 
-            <Button
-                android:id="@+id/btn_select"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_16sdp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/button_rounded_green_10px"
-                android:fontFamily="@font/pjs_medium"
-                android:paddingVertical="@dimen/_8sdp"
-                android:text="Selesai"
-                android:textSize="@dimen/_12ssp"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@+id/img_sound"
-                 />
+            <include
+                android:id="@+id/opte"
+                layout="@layout/item_belajar_suku" />
 
-            <ImageView
-                android:id="@+id/img_sound"
-                android:layout_width="@dimen/_48sdp"
-                android:layout_height="@dimen/_48sdp"
-                android:layout_marginTop="24dp"
-                android:src="@drawable/ic_sound"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/placeholder" />
+            <include
+                android:id="@+id/opto"
+                layout="@layout/item_belajar_suku" />
 
-            <TextView
-                android:id="@+id/txt_answer"
-                android:fontFamily="@font/pjs_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_8sdp"
-                android:gravity="center_vertical"
-                android:text="-"
-                android:textSize="128sp"
-                android:textColor="@color/teal_600"
-                app:layout_constraintBottom_toBottomOf="@+id/txt_abjad"
-                app:layout_constraintStart_toEndOf="@+id/rv_abjad_kapital"
-                app:layout_constraintTop_toTopOf="@+id/txt_abjad" />
+        </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_4sdp"
-                android:background="@color/teal_600"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toTopOf="@+id/txt_abjad" />
-
-            <View
-                android:id="@+id/line"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_4sdp"
-                android:background="@color/teal_600"
-                android:layout_marginTop="@dimen/_5sdp"
-                app:layout_constraintTop_toBottomOf="@+id/txt_answer"
-                />
-
-            <LinearLayout
-                android:id="@+id/placeholder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/line" >
-
-                <include
-                    android:id="@+id/opta"
-                    layout="@layout/item_quiz_susun"/>
-
-                <include
-                    android:id="@+id/opti"
-                    layout="@layout/item_quiz_susun"/>
-
-                <include
-                    android:id="@+id/optu"
-                    layout="@layout/item_quiz_susun"/>
-
-                <include
-                    android:id="@+id/opte"
-                    layout="@layout/item_quiz_susun"/>
-                <include
-                    android:id="@+id/opto"
-                    layout="@layout/item_quiz_susun"/>
-
-            </LinearLayout>
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <Button
+        android:id="@+id/btn_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_rounded_green_10px"
+        android:fontFamily="@font/pjs_medium"
+        android:paddingVertical="@dimen/_8sdp"
+        android:text="Selesai"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="21dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

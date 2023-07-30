@@ -31,31 +31,52 @@
                 android:src="@color/teal_600"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                style="@style/TextViewH14Regular"
+                android:textColor="@color/black"
+                android:text="Pilihlah jawaban yang tepat"/>
+
             <RadioGroup
                 android:id="@+id/rb_answer"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/_32sdp"
+                android:layout_marginTop="@dimen/_16sdp"
                 android:layout_height="wrap_content">
 
                 <RadioButton
                     android:id="@+id/opt1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/TextViewH18Regular"
+                    android:paddingBottom="4dp"
+                    android:background="@drawable/button_outline_rounded_focused_purple"
                     android:text="option 1"/>
                 <RadioButton
                     android:id="@+id/opt2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/TextViewH18Regular"
+                    android:paddingBottom="4dp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:background="@drawable/button_outline_rounded_focused_purple"
                     android:text="option 2"/>
                 <RadioButton
                     android:id="@+id/opt3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/TextViewH18Regular"
+                    android:paddingBottom="4dp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:background="@drawable/button_outline_rounded_focused_purple"
                     android:text="option 3"/>
                 <RadioButton
                     android:id="@+id/opt4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:text="option 4"/>
 
             </RadioGroup>

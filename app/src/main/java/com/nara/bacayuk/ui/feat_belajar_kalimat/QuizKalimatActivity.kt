@@ -17,6 +17,7 @@ import com.nara.bacayuk.databinding.ActivityQuizKalimatBinding
 import com.nara.bacayuk.databinding.ItemQuizSusunBinding
 import com.nara.bacayuk.ui.customview.AnswerStatusDialog
 import com.nara.bacayuk.ui.customview.CenterLinearLayoutManager
+import com.nara.bacayuk.ui.customview.OnDismissDialog
 import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizSusunAdapter
 import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizViewModel
 import com.nara.bacayuk.ui.listener.adapter.AdapterQuizListener
@@ -102,6 +103,9 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                 imageView.setOnClickListener { onBackPressed() }
                 imgActionRight.invisible()
             }
+            if (isKata){
+                textView2.text = "Susunlah pilihan suku kata berikut menjadi kata yang benar!"
+            }
             imageView4.loadImage(this@QuizKalimatActivity, soalKata?.imageUrl ?: "")
             opta.opt1.apply {
                 text = listQuestions[0]
@@ -148,22 +152,7 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
             } else {
                 opte.root.gone()
             }
-//            for (data in listQuestions) {
-//                val item = ItemQuizSusunBinding.inflate(layoutInflater)
-//                item.opt1.text = data
-//                item.opt1.setOnClickListener {
-//                    it.invisible()
-//                    listAnswer.add(data as String)
-//                    item.opt1.animate().alpha(1.0f)
-//                    .setDuration(800)
-//                    .setStartDelay((10).toLong())
-//                    .withEndAction {
-//                        binding.txtAnswer.text = listAnswer.joinToString(if (isKata) "" else " ")
-//                    }
-//                    .start()
-//                }
-//                placeholder.addView(item.root)
-//            }
+
 
             rvOption.apply {
                 adapter = adapterOption
@@ -213,7 +202,12 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                     val dialog = AnswerStatusDialog(
                         this@QuizKalimatActivity,
                         icon = R.drawable.ic_checklist,
-                        status = "Benar"
+                        status = "Benar",
+                        object: OnDismissDialog {
+                            override fun onDismissDialog() {
+                                onBackPressed()
+                            }
+                        }
                     )
                     dialog.show()
                     val layoutParams = WindowManager.LayoutParams()
@@ -225,7 +219,12 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                     val dialog = AnswerStatusDialog(
                         this@QuizKalimatActivity,
                         icon = R.drawable.ic_wrong_answer,
-                        status = "Salah"
+                        status = "Salah",
+                        object : OnDismissDialog {
+                            override fun onDismissDialog() {
+                                resetView()
+                            }
+                        }
                     )
                     dialog.show()
                     val layoutParams = WindowManager.LayoutParams()
@@ -243,51 +242,22 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
         return str.split(separator).toMutableList()
     }
 
-    private fun moveView(viewToBeMoved: View, targetView: View) {
-        val targetX: Float =
-            targetView.x + targetView.width / 2 - viewToBeMoved.width / 2
-        val targetY: Float =
-            targetView.y + targetView.height / 2 - viewToBeMoved.height / 2
-
-        viewToBeMoved.animate()
-            .x(targetX)
-            .y(targetY)
-            .setDuration(1000)
-            .withEndAction {
-                targetView.visibility = View.VISIBLE
+    fun resetView() {
+        listAnswer.clear()
+        binding.txtAnswer.text = "----"
+        binding.apply {
+            opta.opt1.visible()
+            opti.opt1.visible()
+            optu.opt1.visible()
+            if ((soalKata?.level ?: 0) < 8) {
+                opte.root.gone()
+            } else {
+                opte.root.visible()
             }
-            .start()
+        }
+
     }
 
-//    override fun onClick(data: Any?, position: Int?, view: View?, type: String) {
-//        when(type) {
-//            "option" -> {
-////                moveView(binding.rvAnswer.layoutManager?.findViewByPosition(position?:0)!!, binding.rvAnswer.layoutManager?.findViewByPosition(0)!!)
-//                view?.invisible()
-//                listAnswer.add(data as String)
-//                adapterAnswer.submitData(listAnswer)
-//                adapterAnswer.notifyDataSetChanged()
-//                binding.rvAnswer.viewTreeObserver.addOnPreDrawListener(
-//                    object : ViewTreeObserver.OnPreDrawListener {
-//                        override fun onPreDraw(): Boolean {
-//                            binding.rvAnswer.getViewTreeObserver().removeOnPreDrawListener(this)
-//                            for (i in 0 until binding.rvAnswer.getChildCount()) {
-//                                val v: View = binding.rvAnswer.getChildAt(i)
-//                                v.alpha = 0.0f
-//                                v.animate().alpha(1.0f)
-//                                    .setDuration(800)
-//                                    .setStartDelay((i * 50).toLong())
-//                                    .start()
-//                            }
-//                            return true
-//                        }
-//                    })
-//            }
-//            "answer" -> {
-//
-//            }
-//        }
-//    }
 
     override fun getView(view: View?, type: String) {
         when (type) {
@@ -320,6 +290,5 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
         }
     }
 
-//bagaimana cara membuat center di recycler view horizontal
 
 }

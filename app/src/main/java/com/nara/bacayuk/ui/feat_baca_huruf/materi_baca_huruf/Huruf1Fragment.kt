@@ -207,7 +207,6 @@ class Huruf1Fragment : Fragment() {
             }
         }
 
-
     }
 
     companion object {
@@ -219,7 +218,6 @@ class Huruf1Fragment : Fragment() {
                     putString(ARG_PARAM1, param1)
                 }
             }
-
 
         @JvmStatic
         fun newInstanceKata(param1: String, listener: (CharSequence) -> Unit) =

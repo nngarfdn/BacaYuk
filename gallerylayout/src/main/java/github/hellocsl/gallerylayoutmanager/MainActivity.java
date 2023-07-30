@@ -2,7 +2,7 @@ package github.hellocsl.gallerylayoutmanager;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
 import github.hellocsl.gallerylayoutmanager.util.StatusBarCompat;

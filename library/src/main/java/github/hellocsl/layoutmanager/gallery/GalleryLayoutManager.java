@@ -3,17 +3,19 @@ package github.hellocsl.layoutmanager.gallery;
 import android.content.Context;
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.support.v7.widget.LinearSmoothScroller;
-import android.support.v7.widget.LinearSnapHelper;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.widget.LinearSmoothScroller;
+import androidx.appcompat.widget.LinearSnapHelper;
+import androidx.appcompat.widget.OrientationHelper;
+import androidx.appcompat.widget.RecyclerView;
+
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
-import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
+import static androidx.appcompat.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 /**
  * A custom LayoutManager to build a {@link android.widget.Gallery} or a {@link android.support.v4.view.ViewPager}like {@link RecyclerView} and
