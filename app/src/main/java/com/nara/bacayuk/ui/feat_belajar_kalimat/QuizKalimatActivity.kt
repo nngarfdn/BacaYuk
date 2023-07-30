@@ -249,10 +249,15 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
             opta.opt1.visible()
             opti.opt1.visible()
             optu.opt1.visible()
-            if ((soalKata?.level ?: 0) < 8) {
+            if ((soalKata?.level ?: 0) < 8 && isKata) {
                 opte.root.gone()
             } else {
-                opte.root.visible()
+                if (isKata){
+                    opte.root.visible()
+                } else {
+                    opte.root.gone()
+                }
+
             }
         }
 
