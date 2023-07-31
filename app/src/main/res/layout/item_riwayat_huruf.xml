@@ -33,86 +33,128 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <ImageView
+        android:id="@+id/img_materi_kapital"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/ic_finished"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_materi_kapital"
+        app:layout_constraintStart_toEndOf="@+id/txt_abjad"
+        app:layout_constraintTop_toTopOf="@+id/txt_materi_kapital" />
+
+    <ImageView
+        android:id="@+id/img_materi_non_kapital"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/ic_finished"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_materi_nonkapital"
+        app:layout_constraintStart_toEndOf="@+id/txt_abjad"
+        app:layout_constraintTop_toTopOf="@+id/txt_materi_nonkapital" />
+
+    <ImageView
+        android:id="@+id/img_materi_perbedaan"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/ic_finished"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_materi_perbedaan"
+        app:layout_constraintStart_toEndOf="@+id/txt_abjad"
+        app:layout_constraintTop_toTopOf="@+id/txt_materi_perbedaan" />
+
+    <ImageView
+        android:id="@+id/img_quiz_kapital"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/ic_finished"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_quiz_kapital"
+        app:layout_constraintStart_toEndOf="@+id/txt_abjad"
+        app:layout_constraintTop_toTopOf="@+id/txt_quiz_kapital" />
+
+    <ImageView
+        android:id="@+id/img_quiz_non_kapital"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/ic_finished"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_quiz_nonkapital"
+        app:layout_constraintStart_toEndOf="@+id/txt_abjad"
+        app:layout_constraintTop_toTopOf="@+id/txt_quiz_nonkapital" />
+
     <TextView
         android:id="@+id/txt_materi_kapital"
-        style="@style/TextViewH12Medium"
+        style="@style/TextViewH14Medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/ic_finished"
         android:drawablePadding="@dimen/_6sdp"
         android:text="Materi Huruf Kapital"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_abjad"
+        app:layout_constraintStart_toEndOf="@+id/img_materi_kapital"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txt_materi_nonkapital"
-        style="@style/TextViewH12Medium"
+        style="@style/TextViewH14Medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/ic_finished"
         android:drawablePadding="@dimen/_6sdp"
         android:text="Materi Huruf Non Kapital"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_abjad"
+        app:layout_constraintStart_toStartOf="@+id/txt_materi_kapital"
         app:layout_constraintTop_toBottomOf="@+id/txt_materi_kapital" />
 
     <TextView
         android:id="@+id/txt_materi_perbedaan"
-        style="@style/TextViewH12Medium"
+        style="@style/TextViewH14Medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/ic_finished"
         android:drawablePadding="@dimen/_6sdp"
         android:text="Membedakan Kapital dan Non Kapital"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_abjad"
+        app:layout_constraintStart_toStartOf="@+id/txt_materi_nonkapital"
         app:layout_constraintTop_toBottomOf="@+id/txt_materi_nonkapital" />
 
     <TextView
         android:id="@+id/txt_quiz_kapital"
-        style="@style/TextViewH12Medium"
+        style="@style/TextViewH14Medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/ic_finished"
         android:drawablePadding="@dimen/_6sdp"
-        android:text="Materi Huruf Kapital"
+        android:text="Quiz Huruf Kapital"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_abjad"
+        app:layout_constraintStart_toStartOf="@+id/txt_materi_perbedaan"
         app:layout_constraintTop_toBottomOf="@+id/txt_materi_perbedaan" />
 
     <TextView
         android:id="@+id/txt_quiz_nonkapital"
-        style="@style/TextViewH12Medium"
+        style="@style/TextViewH14Medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
-        android:drawableStart="@drawable/ic_finished"
         android:drawablePadding="@dimen/_6sdp"
-        android:text="Materi Huruf Non Kapital"
+        android:text="Quiz Huruf Non Kapital"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_abjad"
+        app:layout_constraintStart_toStartOf="@+id/txt_quiz_kapital"
         app:layout_constraintTop_toBottomOf="@+id/txt_quiz_kapital" />
 
     <androidx.constraintlayout.widget.Guideline

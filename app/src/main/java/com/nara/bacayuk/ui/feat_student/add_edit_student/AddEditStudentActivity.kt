@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.nara.bacayuk.data.model.Response
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityAddEditStudentBinding
+import com.nara.bacayuk.ui.customview.waitingDialog
 import com.nara.bacayuk.utils.DATA
 import com.nara.bacayuk.utils.invisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,6 +19,8 @@ class AddEditStudentActivity : AppCompatActivity() {
     private val addEditStudentViewModel: AddEditStudentViewModel by viewModel()
     private var isEditStudent = false
     private var dataStudent: Student? = null
+    //dialog
+    private val dialog by lazy { waitingDialog() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,12 +73,15 @@ class AddEditStudentActivity : AppCompatActivity() {
                         tahunMasukSekolah = thMasukSekolah,
                     )
                     val uidUser = addEditStudentViewModel.getUID() ?: "-"
-                    addEditStudentViewModel.addUserToFirestore(uidUser, student)
+                    addEditStudentViewModel.addUserToFirestore(uidUser, student).also {
+                        dialog.show()
+                    }
                 }
 
             }
 
             addEditStudentViewModel.isSuccess.observe(this@AddEditStudentActivity) { response ->
+                dialog.dismiss()
                 when (response) {
                     is Response.Success<*> -> {
                         Toast.makeText(this@AddEditStudentActivity, "Berhasil", Toast.LENGTH_SHORT).show()

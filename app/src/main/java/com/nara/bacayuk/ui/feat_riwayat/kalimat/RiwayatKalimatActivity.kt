@@ -13,6 +13,7 @@ import com.nara.bacayuk.data.model.SoalKata
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityRiwayatKalimatBinding
 import com.nara.bacayuk.databinding.ItemRiwayatBinding
+import com.nara.bacayuk.ui.customview.waitingDialog
 import com.nara.bacayuk.ui.feat_riwayat.huruf.RiwayatViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -23,11 +24,13 @@ class RiwayatKalimatActivity : AppCompatActivity() {
     private val riwayatViewModel: RiwayatViewModel by viewModel()
     var quizSusunKata: ArrayList<SoalKata> = arrayListOf()
     var quizPilganKata: ArrayList<SoalKata> = arrayListOf()
+    private val dialog by lazy { waitingDialog() }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        binding.toolbar.txtTitle.text = "Riwayat Baca Kalimat"
 
         student = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra("student", Student::class.java)
@@ -35,8 +38,12 @@ class RiwayatKalimatActivity : AppCompatActivity() {
             intent.getParcelableExtra("student") as Student?
         }
 
-        riwayatViewModel.getAllReportKalimatFromFirestore(student?.uuid ?: "-")
+        riwayatViewModel.getAllReportKalimatFromFirestore(student?.uuid ?: "-").also {
+            dialog.show()
+        }
+
         riwayatViewModel.reportKalimat.observe(this@RiwayatKalimatActivity) { response ->
+            dialog.dismiss()
             when (response) {
                 is Response.Success -> {
                     if (quizPilganKata.size < 1){
@@ -65,11 +72,11 @@ class RiwayatKalimatActivity : AppCompatActivity() {
         list.forEach {
             val view = ItemRiwayatBinding.inflate(layoutInflater)
             "Level ${it.level}".also { view.txtMateriKapital.text = it }
-            view.txtMateriKapital.setCompoundDrawablesWithIntrinsicBounds(
+            view.imgMateriKapital.setImageDrawable(
                 ContextCompat.getDrawable(
                     this@RiwayatKalimatActivity,
                     if (it.isCorrect) R.drawable.ic_finished else R.drawable.ic_unfinished
-                ), null, null, null
+                )
             )
             when(type){
                 1 -> binding.placeholderLatihanSuku.addView(view.root)

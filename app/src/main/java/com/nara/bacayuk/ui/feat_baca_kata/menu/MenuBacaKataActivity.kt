@@ -8,6 +8,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityMenuBacaKataBinding
+import com.nara.bacayuk.ui.customview.waitingDialog
 import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_kata.materi.MateriBacaVokalActivity

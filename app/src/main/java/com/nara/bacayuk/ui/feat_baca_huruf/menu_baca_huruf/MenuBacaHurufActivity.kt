@@ -11,6 +11,8 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.databinding.ActivityMenuBacaHurufBinding
+import com.nara.bacayuk.ui.customview.showDialog
+import com.nara.bacayuk.ui.customview.waitingDialog
 import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_kata.materi.MateriBacaVokalActivity
 import com.nara.bacayuk.ui.feat_menu_utama.MainActivity
@@ -27,6 +29,7 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
     private val binding by lazy { ActivityMenuBacaHurufBinding.inflate(layoutInflater) }
     private val adapterAbjadMenuAdapter by lazy { AbjadMenuAdapter(this@MenuBacaHurufActivity) }
     var student: Student? = null
+    private val dialog by lazy { waitingDialog() }
     private val menuBacaHurufViewModel: MenuBacaHurufViewModel by viewModel()
     private val listAbjadMenu = arrayListOf<Abjad>()
 
@@ -47,6 +50,7 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
         Log.d("menubaca", "${student?.uuid}")
 
         menuBacaHurufViewModel.vokals.observe(this@MenuBacaHurufActivity) { response ->
+            dialog.dismiss()
             when (response) {
                 is Response.Success -> {
                     response.data.forEach {
@@ -76,6 +80,7 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
         }
 
         menuBacaHurufViewModel.reports.observe(this@MenuBacaHurufActivity) { response ->
+            dialog.dismiss()
             when (response) {
                 is Response.Success -> {
 
@@ -134,8 +139,14 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
         super.onResume()
         if (isBacaKata) {
             menuBacaHurufViewModel.getAllBelajarVokal(student?.uuid ?: "-")
+            dialog.show()
         }
-        else menuBacaHurufViewModel.getAllReports(student?.uuid ?: "-")
+        else {
+            menuBacaHurufViewModel.getAllReports(student?.uuid ?: "-")
+            dialog.show()
+        }
+
+
     }
 
     override fun onClick(data: Any?, position: Int?, view: View?, type: String) {

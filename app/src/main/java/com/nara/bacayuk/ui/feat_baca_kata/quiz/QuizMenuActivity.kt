@@ -10,6 +10,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.databinding.ActivityQuizMenuBinding
+import com.nara.bacayuk.ui.customview.waitingDialog
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.AbjadMenuAdapter
 import com.nara.bacayuk.ui.feat_baca_kata.menu.MenuBacaKataActivity
 import com.nara.bacayuk.ui.feat_belajar_kalimat.QuizKalimatActivity
@@ -26,6 +27,7 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
     private val adapterQuizMenuAdapter1 by lazy { QuizMenuAdapter(this@QuizMenuActivity, "susun") }
     private val adapterQuizMenuAdapter2 by lazy { QuizMenuAdapter(this@QuizMenuActivity,"pilgan") }
     private val quizViewModel: QuizViewModel by viewModel()
+    private val dialog by lazy { waitingDialog() }
     var reportKata: ReportKata? = null
     var reportKalimat: ReportKalimat? = null
     var student: Student? = null
@@ -88,6 +90,7 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
         }
 
         quizViewModel.reportKatas.observe(this@QuizMenuActivity) { response ->
+            dialog.dismiss()
             when (response) {
                 is Response.Success -> {
                     reportKata = response.data
@@ -103,6 +106,7 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
         }
 
         quizViewModel.reportKalimat.observe(this@QuizMenuActivity) { response ->
+            dialog.dismiss()
             when (response) {
                 is Response.Success -> {
                     reportKalimat = response.data
@@ -119,8 +123,14 @@ class QuizMenuActivity : AppCompatActivity(), AdapterListener {
 
     override fun onResume() {
         super.onResume()
-        if (isKata) quizViewModel.getAllReportKataFromFirestore(student?.uuid ?: "-")
-        else quizViewModel.getAllReportKalimatFromFirestore(student?.uuid?: "-")
+        if (isKata) {
+            quizViewModel.getAllReportKataFromFirestore(student?.uuid ?: "-")
+            dialog.show()
+        }
+        else {
+            quizViewModel.getAllReportKalimatFromFirestore(student?.uuid?: "-")
+            dialog.show()
+        }
     }
 
     override fun onClick(data: Any?, position: Int?, view: View?, type: String) {

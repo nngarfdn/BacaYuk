@@ -10,10 +10,7 @@ import com.nara.bacayuk.databinding.LayoutWaitingDialogBinding
 
 class WaitingDialog(
     context: Context,
-    private val status: String,
-    private val listener: OnDialogShow
     ): Dialog(context) {
-    var status1 = status
     val binding by lazy { LayoutWaitingDialogBinding.inflate(layoutInflater) }
         init {
         setContentView(binding.root)
@@ -21,11 +18,20 @@ class WaitingDialog(
         setCanceledOnTouchOutside(false)
         window?.setBackgroundDrawable(ContextCompat.getDrawable(context, android.R.color.transparent))
         binding.apply {
-            txtStatus.text = status1
-            btnSelect.setOnClickListener {
-                dismiss()
-            }
-            listener.onDialogShow(btnSelect)
         }
+    }
+}
+
+//fun instance waiting dialog
+fun Context.waitingDialog() = WaitingDialog(this)
+
+fun WaitingDialog.showDialog() {
+    if (!isShowing) {
+        show()
+    }
+}
+fun WaitingDialog.hideDialog() {
+    if (isShowing) {
+        dismiss()
     }
 }

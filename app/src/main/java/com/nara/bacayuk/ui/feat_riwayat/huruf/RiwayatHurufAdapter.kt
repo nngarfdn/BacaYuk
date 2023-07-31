@@ -55,39 +55,39 @@ class RiwayatHurufAdapter :
             binding.txtAbjad.text = data?.abjadNonKapital
 //            binding.imgChecklist.invisible()
             binding.apply {
-                txtMateriKapital.setCompoundDrawablesWithIntrinsicBounds(
+                imgMateriKapital.setImageDrawable(
                      ContextCompat.getDrawable(
                         context,
                         if (report?.materiHurufKapital == true) R.drawable.ic_finished else R.drawable.ic_unfinished
-                    ),  null, null, null
+                    )
                 )
 
-                txtMateriNonkapital.setCompoundDrawablesWithIntrinsicBounds(
+                imgMateriNonKapital.setImageDrawable((
                      ContextCompat.getDrawable(
                         context,
                         if (report?.materiHurufNonKapital == true) R.drawable.ic_finished else R.drawable.ic_unfinished
-                    ), null, null, null
-                )
+                    )
+                        ))
 
-                txtMateriPerbedaan.setCompoundDrawablesWithIntrinsicBounds(
+                imgMateriPerbedaan.setImageDrawable(
                     ContextCompat.getDrawable(
                         context,
                         if (report?.materiPerbedaanHuruf == true) R.drawable.ic_finished else R.drawable.ic_unfinished
-                    ), null, null, null
+                    )
                 )
 
-                txtQuizKapital.setCompoundDrawablesWithIntrinsicBounds(
+                imgQuizKapital.setImageDrawable(
                      ContextCompat.getDrawable(
                         context,
                         if (report?.quizHurufKapital == true) R.drawable.ic_finished else R.drawable.ic_unfinished
-                    ), null, null, null
+                    )
                 )
 
-                txtQuizNonkapital.setCompoundDrawablesWithIntrinsicBounds(
+                imgQuizNonKapital.setImageDrawable(
                      ContextCompat.getDrawable(
                         context,
                         if (report?.quizHurufNonKapital == true) R.drawable.ic_finished else R.drawable.ic_unfinished
-                    ), null, null, null
+                    )
                 )
 
             }

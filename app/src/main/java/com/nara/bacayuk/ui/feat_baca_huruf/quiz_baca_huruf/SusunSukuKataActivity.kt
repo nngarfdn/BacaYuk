@@ -19,7 +19,6 @@ class SusunSukuKataActivity : AppCompatActivity() {
                 moveView(imageView2, imageView3)
             }
         }
-
     }
 
     private fun moveView(viewToBeMoved: View, targetView: View) {

@@ -8,7 +8,6 @@ import android.os.Looper
 import android.util.Log
 import android.view.Gravity
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,21 +17,26 @@ import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.data.model.User
 import com.nara.bacayuk.databinding.ActivityListStudentBinding
 import com.nara.bacayuk.ui.customview.ConfirmationDialogRedStyle
-import com.nara.bacayuk.ui.customview.OnDialogShow
-import com.nara.bacayuk.ui.customview.WaitingDialog
-import com.nara.bacayuk.ui.feat_auth.login.LoginActivity
+import com.nara.bacayuk.ui.customview.waitingDialog
 import com.nara.bacayuk.ui.feat_auth.register.RegisterActivity
 import com.nara.bacayuk.ui.feat_menu_utama.MainActivity
 import com.nara.bacayuk.ui.feat_menu_utama.MainViewModel
 import com.nara.bacayuk.ui.feat_student.add_edit_student.AddEditStudentActivity
 import com.nara.bacayuk.ui.listener.adapter.AdapterListener
-import com.nara.bacayuk.utils.*
+import com.nara.bacayuk.utils.DATA
+import com.nara.bacayuk.utils.EDIT
+import com.nara.bacayuk.utils.MESSAGE_HURUF_SUCCESS
+import com.nara.bacayuk.utils.MESSAGE_KALIMAT_SUCCESS
+import com.nara.bacayuk.utils.MESSAGE_KATA_SUCCESS
+import com.nara.bacayuk.utils.gone
+import com.nara.bacayuk.utils.invisible
+import com.nara.bacayuk.utils.openActivity
+import com.nara.bacayuk.utils.visible
 import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.createBalloon
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip
-import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltipUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -46,6 +50,7 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
     private val progressDialog by lazy { ProgressDialog(this) }
     private val listStudentViewModel: ListStudentViewModel by viewModel()
     private val mainViewModel: MainViewModel by viewModel()
+    private val dialog by lazy { waitingDialog() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +76,7 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         }
 
         listStudentViewModel.students.observe(this@ListStudentActivity) { response ->
+            dialog.dismiss()
             when (response) {
                 is Response.Success -> {
                     if (response.data.isEmpty()){
@@ -141,7 +147,9 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         super.onResume()
         val uidUser = listStudentViewModel.getUID() ?: "-"
         Log.d("liststudent", "onResume: $uidUser")
-        listStudentViewModel.getAllStudent(uidUser)
+        listStudentViewModel.getAllStudent(uidUser).also {
+            dialog.show()
+        }
         progressDialog.dismiss()
     }
 
@@ -180,7 +188,7 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         }
 
         deleteSiswaText.setOnClickListener {
-            val dialog = ConfirmationDialogRedStyle(
+            val dialogDelete = ConfirmationDialogRedStyle(
                 this@ListStudentActivity,
                 icon = com.nara.bacayuk.R.drawable.ic_baseline_delete_24,
                 title = "Apakah Anda yakin akan menghapus profil siswa ini?",
@@ -190,12 +198,14 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
                     selectedStudent?.uuid?.let { it1 ->
                         listStudentViewModel.deleteStudentFirestore(uidUser,
                             it1
-                        )
+                        ).also {
+                            dialog.show()
+                        }
                     }
                     onResume()
                 }
             )
-            dialog.show()
+            dialogDelete.show()
 
         }
 

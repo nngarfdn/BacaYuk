@@ -9,6 +9,7 @@ import com.nara.bacayuk.data.model.Abjad
 import com.nara.bacayuk.data.model.Response
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityRiwayatHurufBinding
+import com.nara.bacayuk.ui.customview.waitingDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RiwayatHurufActivity : AppCompatActivity() {
@@ -17,6 +18,7 @@ class RiwayatHurufActivity : AppCompatActivity() {
     private val riwayatViewModel: RiwayatViewModel by viewModel()
     private val riwayatHurufAdapter by lazy { RiwayatHurufAdapter() }
     var student: Student? = null
+    private val dialog by lazy { waitingDialog() }
     private val listAbjadMenu = arrayListOf<Abjad>()
 
 
@@ -30,8 +32,11 @@ class RiwayatHurufActivity : AppCompatActivity() {
             intent.getParcelableExtra("student") as Student?
         }
 
-        riwayatViewModel.getAllReports(student?.uuid ?: "-")
+        riwayatViewModel.getAllReports(student?.uuid ?: "-").also {
+            dialog.show()
+        }
         riwayatViewModel.reports.observe(this@RiwayatHurufActivity) { response ->
+            dialog.dismiss()
             when (response) {
                 is Response.Success -> {
                     response.data.forEach {

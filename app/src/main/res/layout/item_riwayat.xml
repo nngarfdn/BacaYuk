@@ -4,17 +4,27 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:id="@+id/img_materi_kapital"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_finished"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/txt_materi_kapital"
-        style="@style/TextViewH12Medium"
+        style="@style/TextViewH14Medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/ic_finished"
+        android:layout_marginStart="8dp"
         android:drawablePadding="@dimen/_6sdp"
         android:text="Materi Huruf Kapital"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/img_materi_kapital"
+        app:layout_constraintStart_toEndOf="@+id/img_materi_kapital"
+        app:layout_constraintTop_toTopOf="@+id/img_materi_kapital" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

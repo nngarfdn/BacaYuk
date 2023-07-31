@@ -17,7 +17,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Latihan Suku Kata"
+                android:text="Latihan Susun Kalimat"
                 android:textColor="@color/black"
                 style="@style/TextViewH16SemiBold"/>
             <LinearLayout
@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Latihan Baca Kata"
+                android:text="Latihan Baca Kalimat"
                 android:layout_marginTop="16dp"
                 android:textColor="@color/black"
                 style="@style/TextViewH16SemiBold"/>

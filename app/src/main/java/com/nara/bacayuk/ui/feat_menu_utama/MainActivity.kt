@@ -17,7 +17,6 @@ import com.nara.bacayuk.databinding.ActivityMainBinding
 import com.nara.bacayuk.ui.customview.ConfirmationDialog
 import com.nara.bacayuk.ui.customview.ConfirmationDialogRedStyle
 import com.nara.bacayuk.ui.customview.OnDialogShow
-import com.nara.bacayuk.ui.customview.WaitingDialog
 import com.nara.bacayuk.ui.feat_auth.login.LoginActivity
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_kata.menu.MenuBacaKataActivity
@@ -54,32 +53,32 @@ class MainActivity : AppCompatActivity() {
             intent.getParcelableExtra("student") as Student?
         }
 
-        mainViewModel.statusCreateData.observe(this@MainActivity) {
-
-            Log.d("statusCreateData", "Called - $isDataReady")
-            listData.addAll(it)
-            if (it.size < 4) {
-                progressDialog = ProgressDialog(this)
-                progressDialog.setCancelable(false)
-                progressDialog.setMessage("${it[0]}\n${it[1]}\n${it[2]}")
-                val dialog = WaitingDialog(this@MainActivity, "${it[0]}\n${it[1]}\n${it[2]}",
-                object : OnDialogShow{
-                    override fun onDialogShow(button: Button) {
-                        if (it[0] == MESSAGE_HURUF_SUCCESS && it[1] == MESSAGE_KATA_SUCCESS && it[2] == MESSAGE_KALIMAT_SUCCESS){
-                            button.isEnabled = true
-                            isDataReady++
-                            Log.d("createsuccess", "onCreate: success $isDataReady")
-                        }
-                    }
-                })
-                if (it[0] == MESSAGE_HURUF_SUCCESS && it[1] == MESSAGE_KATA_SUCCESS && it[2] == MESSAGE_KALIMAT_SUCCESS){
-                    dialog.binding.txtStatus.text = "Data sudah siap"
-                    dialog.binding.progressDialog.gone()
-                    isDataReady++
-                }
-                dialog.show()
-            }
-        }
+//        mainViewModel.statusCreateData.observe(this@MainActivity) {
+//
+//            Log.d("statusCreateData", "Called - $isDataReady")
+//            listData.addAll(it)
+//            if (it.size < 4) {
+//                progressDialog = ProgressDialog(this)
+//                progressDialog.setCancelable(false)
+//                progressDialog.setMessage("${it[0]}\n${it[1]}\n${it[2]}")
+//                val dialog = WaitingDialog(this@MainActivity, "${it[0]}\n${it[1]}\n${it[2]}",
+//                object : OnDialogShow{
+//                    override fun onDialogShow(button: Button) {
+//                        if (it[0] == MESSAGE_HURUF_SUCCESS && it[1] == MESSAGE_KATA_SUCCESS && it[2] == MESSAGE_KALIMAT_SUCCESS){
+//                            button.isEnabled = true
+//                            isDataReady++
+//                            Log.d("createsuccess", "onCreate: success $isDataReady")
+//                        }
+//                    }
+//                })
+//                if (it[0] == MESSAGE_HURUF_SUCCESS && it[1] == MESSAGE_KATA_SUCCESS && it[2] == MESSAGE_KALIMAT_SUCCESS){
+//                    dialog.binding.txtStatus.text = "Data sudah siap"
+//                    dialog.binding.progressDialog.gone()
+//                    isDataReady++
+//                }
+//                dialog.show()
+//            }
+//        }
         binding.apply {
             toolbar.txtTitle.text = "Menu Utama"
             toolbar.imgActionRight.setOnClickListener {
