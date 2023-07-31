@@ -83,7 +83,8 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
                         handleEmptyState(true)
                     } else {
                         handleEmptyState(false)
-                        studentAdapter.submitData(response.data)
+                        val listData = response.data.sortedBy { it.fullName }
+                        studentAdapter.submitData(listData)
                         response.data.forEach {
                             Log.d("liststudent", "${it.fullName} - ${it.uuid}")
                         }
