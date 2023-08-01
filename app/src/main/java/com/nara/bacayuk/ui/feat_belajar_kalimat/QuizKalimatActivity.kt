@@ -25,6 +25,7 @@ import com.nara.bacayuk.ui.listener.adapter.ViewPositionListener
 import com.nara.bacayuk.utils.gone
 import com.nara.bacayuk.utils.invisible
 import com.nara.bacayuk.utils.loadImage
+import com.nara.bacayuk.utils.playAudioFromRawAssetsFileString
 import com.nara.bacayuk.utils.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -104,7 +105,10 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                 imgActionRight.invisible()
             }
             if (isKata){
+                playAudioFromRawAssetsFileString(this@QuizKalimatActivity,"ins_susun_kata")
                 textView2.text = "Susunlah pilihan suku kata berikut menjadi kata yang benar!"
+            }else {
+                playAudioFromRawAssetsFileString(this@QuizKalimatActivity,"ins_susun_kalimat")
             }
             imageView4.loadImage(this@QuizKalimatActivity, soalKata?.imageUrl ?: "")
             opta.opt1.apply {

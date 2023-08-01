@@ -89,19 +89,19 @@ class MateriBacaVokalActivity : AppCompatActivity()
             "${abjad}e".also { opte.txtAbjad.text = it }
             "${abjad}o".also { opto.txtAbjad.text = it }
 
-            opta.imgSound.setOnClickListener {
+            opta.root.setOnClickListener {
                 playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity,"${abjad}_a")
             }
-            opti.imgSound.setOnClickListener {
+            opti.root.setOnClickListener {
                 playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity,"${abjad}_i")
             }
-            optu.imgSound.setOnClickListener {
+            optu.root.setOnClickListener {
                 playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity,"${abjad}_u")
             }
-            opte.imgSound.setOnClickListener {
+            opte.root.setOnClickListener {
                 playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity,"${abjad}_e")
             }
-            opto.imgSound.setOnClickListener {
+            opto.root.setOnClickListener {
                 playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity,"${abjad}_o")
             }
 

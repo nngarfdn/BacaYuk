@@ -6,12 +6,28 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.util.Log
 
+
+object AudioPlayerManager {
+    var mediaPlayer: MediaPlayer? = null
+
+    fun stopCurrentlyPlaying() {
+        mediaPlayer?.let {
+            if (it.isPlaying) {
+                it.stop()
+            }
+            it.release()
+            mediaPlayer = null
+        }
+    }
+}
+
 fun playAudioFromRawAssets(context: Context, fileName: Int) {
     val mediaPlayer = MediaPlayer.create(context, fileName)
     mediaPlayer.start()
 }
 
 fun playAudioFromRawAssetsFileString(context: Context, fileName: String){
+    AudioPlayerManager.stopCurrentlyPlaying()
     val resourceId = context.resources.getIdentifier(fileName, "raw", context.packageName)
     if (resourceId != 0) {
         val mediaPlayer = MediaPlayer.create(context, resourceId)

@@ -5,6 +5,7 @@ import android.content.ClipData
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.*
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -19,6 +20,7 @@ import com.nara.bacayuk.databinding.FragmentQuizBinding
 import com.nara.bacayuk.ui.customview.AnswerStatusDialog
 import com.nara.bacayuk.ui.customview.OnDismissDialog
 import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
+import com.nara.bacayuk.utils.playAudioFromRawAssetsFileString
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -94,11 +96,11 @@ class QuizFragment : Fragment() {
             txtOpt3.setOnDragListener(ChoiceDragListener())
             when (param1) {
                 "0" -> {
+                    playAudioFromRawAssetsFileString(requireContext(),"ins_arahkan_huruf")
                     reset(false)
                     txtAbjad.text = abjad?.abjadNonKapital
                     isKapital = false
 //
-
                     MaterialIntroView.Builder(requireActivity())
                         .enableDotAnimation(true)
                         .enableIcon(false)
@@ -107,13 +109,14 @@ class QuizFragment : Fragment() {
                         .setDelayMillis(500)
                         .enableFadeAnimation(true)
                         .performClick(true)
-                        .setInfoText("Arahkah huruf abjad ini menuju huruf yang benar\\n Dengan cara menekan, tahan, lalu geser")
+                        .setInfoText("Arahkah huruf abjad ini menuju huruf yang benar dengan cara menekan, tahan, lalu geser")
                         .setShape(ShapeType.CIRCLE)
                         .setTarget(binding.quiz.txtAbjad)
-                        .setUsageId("intro_abja") //THIS SHOULD BE UNIQUE ID
+                        .setUsageId("intro_abjad") //THIS SHOULD BE UNIQUE ID
                         .show()
                 }
                 "1" -> {
+                    playAudioFromRawAssetsFileString(requireContext(),"ins_arahkan_huruf")
                     isKapital = true
                     reset(true)
                     txtAbjad.text = abjad?.abjadKapital
@@ -202,62 +205,24 @@ class QuizFragment : Fragment() {
     inner class ChoiceDragListener : View.OnDragListener {
         override fun onDrag(v: View, event: DragEvent): Boolean {
             when (event.action) {
-                DragEvent.ACTION_DRAG_STARTED -> {
-                    //change the text color to teal200
-
-                }
-                DragEvent.ACTION_DRAG_ENTERED -> {
-
-                }
-                DragEvent.ACTION_DRAG_EXITED -> {
-
-                }
                 DragEvent.ACTION_DROP -> {
-
-
-                    //handle the dragged view being dropped over a drop view
                     val view = event.localState as View
-                    //view dragged item is being dropped on
                     val dropTarget = v as TextView
-                    //resize when being dragged
-                    //view being dragged and dropped
                     val dropped = view as TextView
-                    //checking whether first character of dropTarget equals first character of dropped
+
                     if (dropTarget.text.toString()[0] == dropped.text.toString()[0]) {
-                        //stop displaying the view where it was before it was dragged
                         view.setVisibility(View.INVISIBLE)
-                        //update the text in the target view to reflect the data being dropped
-                        //todo : change text color
                         dropTarget.text = dropped.text
                         dropTarget.setTextColor(resources.getColor(R.color.teal_600))
-                        //add animation
-//                        val animation = android.view.animation.AnimationUtils.loadAnimation(
-//                            applicationContext,
-//                            R.anim.scale
-//                        )
-//                        dropTarget.startAnimation(animation)
-
-//                        dropTarget.text = dropTarget.text.toString() + dropped.text.toString()
-                        //make it bold to highlight the fact that an item has been dropped
                         dropTarget.setTypeface(Typeface.DEFAULT_BOLD)
-                        //if an item has already been dropped here, there will be a tag
                         val tag = dropTarget.tag
-                        //if there is already an item here, set it back visible in its original place
                         if (tag != null) {
-                            //the tag is the view id already dropped here
                             val existingID = tag as Int
-                            //set the original view visible again
-
                             binding.root.findViewById<View>(existingID).setVisibility(View.VISIBLE)
-//                            findViewById<View>(existingID).setVisibility(View.VISIBLE)
                         }
-                        //set the tag in the target view being dropped on - to the ID of the view being dropped
                         dropTarget.tag = dropped.id
-                        //remove setOnDragListener by setting OnDragListener to null, so that no further drag & dropping on this TextView can be done
                         dropTarget.setOnDragListener(null)
-                        //show toast
                         val user: User? = quizBacaHurufViewModel.getUserDataStore()
-
                         val dialog = AnswerStatusDialog(
                             v.context,
                             icon = R.drawable.ic_checklist,
@@ -301,7 +266,6 @@ class QuizFragment : Fragment() {
                         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
                         dialog.getWindow()?.setAttributes(layoutParams)
                         reset(isKapital)
-                    //displays message if first character of dropTarget is not equal to first character of dropped
                     }
 
 

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.databinding.FragmentHuruf1Binding
+import com.nara.bacayuk.ui.customview.waitingDialog
 import com.nara.bacayuk.utils.playAudioFromRawAssets
 import com.nara.bacayuk.utils.playAudioFromRawAssetsFileString
 import com.nara.bacayuk.utils.playAudioFromUrl
@@ -26,6 +27,7 @@ class Huruf1Fragment : Fragment() {
     private lateinit var listener: (CharSequence) -> Unit
     private var abjad: Abjad? = null
     var reportKata: ReportKata? = null
+    private val dialog by lazy { context?.waitingDialog() }
 
     private val materiBacaHurufViewModel: MateriBacaHurufViewModel by viewModel()
 
@@ -64,6 +66,7 @@ class Huruf1Fragment : Fragment() {
         abjad = MateriBacaHurufActivity.dataAbjad
         when (param1) {
             "0" -> {
+                playAudioFromRawAssetsFileString(requireContext(),"ins_huruf_kecil")
                 binding.materi.apply {
                     txtAbjad.text = abjad?.abjadNonKapital
                     txtDesc.text = getString(R.string.ini_huruf_kecil)
@@ -83,6 +86,7 @@ class Huruf1Fragment : Fragment() {
             }
             "1" -> {
                 binding.materi.apply {
+                    playAudioFromRawAssetsFileString(requireContext(),"ins_huruf_kapital")
                     txtDesc.text = getString(R.string.ini_huruf_kapital)
                     txtAbjad.text = abjad?.abjadKapital
                     abjad?.reportHuruf?.materiHurufKapital = true
@@ -100,6 +104,7 @@ class Huruf1Fragment : Fragment() {
             }
             "2" -> {
                 binding.materi.apply {
+                    playAudioFromRawAssetsFileString(requireContext(),"ins_beda_besar_kecil")
                     txtDesc.text = getString(R.string.ini_perbedaan_huruf)
                     "${abjad?.abjadNonKapital} ${abjad?.abjadKapital}".also { txtAbjad.text = it }
                     abjad?.reportHuruf?.materiPerbedaanHuruf = true
@@ -118,15 +123,19 @@ class Huruf1Fragment : Fragment() {
         }
 
 
-        materiBacaHurufViewModel.getAllReportKataFromFirestore(MateriBacaHurufActivity.student?.uuid ?: "-")
+        materiBacaHurufViewModel.getAllReportKataFromFirestore(MateriBacaHurufActivity.student?.uuid ?: "-").apply {
+            dialog?.show()
+        }
         materiBacaHurufViewModel.reportKatas.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Response.Success -> {
                     reportKata = response.data
+                    dialog?.dismiss()
                     Log.d("reportabjadparam2", response.data.belajarVokal.toString())
                     when (param2) {
                         "0" -> {
                             binding.materi.apply {
+                                playAudioFromRawAssetsFileString(requireContext(),"ins_vokal")
                                 txtAbjad.text = "A a"
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
                                 reportKata?.belajarVokal?.isADone = true
@@ -144,6 +153,7 @@ class Huruf1Fragment : Fragment() {
                         }
                         "1" -> {
                             binding.materi.apply {
+                                playAudioFromRawAssetsFileString(requireContext(),"ins_vokal")
                                 txtAbjad.text = "I i"
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
                                 imgSound.setOnClickListener {
@@ -158,7 +168,9 @@ class Huruf1Fragment : Fragment() {
                             )
                         }
                         "2" -> {
+
                             binding.materi.apply {
+                                playAudioFromRawAssetsFileString(requireContext(),"ins_vokal")
                                 txtAbjad.text = "U u"
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
                                 imgSound.setOnClickListener {
@@ -173,6 +185,7 @@ class Huruf1Fragment : Fragment() {
                         }
                         "3" -> {
                             binding.materi.apply {
+                                playAudioFromRawAssetsFileString(requireContext(),"ins_vokal")
                                 txtAbjad.text = "E e"
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
                                 imgSound.setOnClickListener {
@@ -187,6 +200,7 @@ class Huruf1Fragment : Fragment() {
                         }
                         "4" -> {
                             binding.materi.apply {
+                                playAudioFromRawAssetsFileString(requireContext(),"ins_vokal")
                                 txtAbjad.text = "O o"
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
                                 imgSound.setOnClickListener {

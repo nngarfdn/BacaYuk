@@ -68,7 +68,7 @@
                 android:textSize="@dimen/_12ssp"
                 android:paddingVertical="@dimen/_8sdp"
                 android:fontFamily="@font/pjs_medium"
-                android:text="Latihan Suku Kata"
+                android:text="Latihan Baca Kata"
                 android:textAllCaps="false"
                 android:backgroundTint="@color/white"
                 android:textColor="@color/blue_500"

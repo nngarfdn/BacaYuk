@@ -19,6 +19,7 @@ import com.nara.bacayuk.ui.customview.OnDismissDialog
 import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizViewModel
 import com.nara.bacayuk.utils.invisible
 import com.nara.bacayuk.utils.loadImage
+import com.nara.bacayuk.utils.playAudioFromRawAssetsFileString
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class QuizPilganKalimatActivity : AppCompatActivity() {
@@ -27,7 +28,6 @@ class QuizPilganKalimatActivity : AppCompatActivity() {
     var student: Student? = null
     var soalKata: SoalKata? = null
     var listQuestions: MutableList<String> = mutableListOf()
-    var listAnswer: MutableList<String> = mutableListOf()
     private val quizViewModel: QuizViewModel by viewModel()
     var sizeQuestion = 0
     var isKata: Boolean = false
@@ -81,6 +81,7 @@ class QuizPilganKalimatActivity : AppCompatActivity() {
                 imageView.setOnClickListener { onBackPressed() }
                 imgActionRight.invisible()
             }
+            playAudioFromRawAssetsFileString(this@QuizPilganKalimatActivity,"ins_pilih")
             opt1.setText(listQuestions[0])
             opt2.setText(listQuestions[1])
             opt3.setText(listQuestions[2])

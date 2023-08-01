@@ -1,21 +1,57 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Jika Anda menggunakan Kotlin, tambahkan aturan ini agar kode Kotlin berfungsi dengan baik
+-dontwarn kotlin.**
+-keep class kotlin.** { *; }
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Jika Anda menggunakan AndroidX, tambahkan aturan ini agar library AndroidX berfungsi dengan baik
+-dontwarn androidx.**
+-keep class androidx.** { *; }
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Jika Anda menggunakan AndroidX, tambahkan aturan ini agar library AndroidX berfungsi dengan baik
+-dontwarn androidx.**
+-keep class androidx.** { *; }
+
+
+# Jika Anda menggunakan AndroidX, tambahkan aturan ini agar library AndroidX berfungsi dengan baik
+-dontwarn androidx.**
+-keep class androidx.** { *; }
+
+# Rules for Glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+    **[] $VALUES;
+    public *;
+}
+
+# Rules for Firebase
+-keepnames class com.google.firebase.** { *; }
+-keepnames class org.apache.http.** { *; }
+-keepnames class com.firebase.** { *; }
+
+# Rules for Koin
+-keep class org.koin.** { *; }
+
+# Rules for Mockito
+-dontwarn org.mockito.**
+-keep class org.mockito.** { *; }
+
+# Rules for Balloon
+-keep class com.skydoves.** { *; }
+
+# Rules for WheelPicker
+-keep class sh.tyy.** { *; }
+
+# Rules for SimpleTooltip
+-keep class com.github.douglasjunior.** { *; }
+
+# Rules for Android Simple Tooltip
+-keep class com.github.iammert.** { *; }
+
+# Rules for DiscreteScrollView
+-keep class com.yarolegovich.** { *; }
+
+# Rules for ViewPager2
+-keep class androidx.viewpager2.** { *; }
+
+# Rules for Material Intro View
+-keep class com.github.iammert.** { *; }
