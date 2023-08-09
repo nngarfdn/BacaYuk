@@ -24,9 +24,11 @@ import com.nara.bacayuk.databinding.ItemQuizSusunBinding
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufViewModel
 import com.nara.bacayuk.ui.listener.adapter.AdapterListener
 import com.nara.bacayuk.utils.DATA
+import com.nara.bacayuk.utils.ToastType
 import com.nara.bacayuk.utils.invisible
 import com.nara.bacayuk.utils.playAudioFromRawAssetsFileString
 import com.nara.bacayuk.utils.playAudioFromUrl
+import com.nara.bacayuk.utils.showQuizToast
 import com.yarolegovich.discretescrollview.DSVOrientation
 import com.yarolegovich.discretescrollview.DiscreteScrollLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,6 +42,7 @@ class MateriBacaVokalActivity : AppCompatActivity()
     var dataAbjad: Abjad? = null
     private val menuBacaHurufViewModel: MenuBacaHurufViewModel by viewModel()
     private var listBelajarSuku = mutableListOf<BelajarSuku>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +80,7 @@ class MateriBacaVokalActivity : AppCompatActivity()
 
 
         binding.apply {
-            toolbar.apply { 
+            toolbar.apply {
                 txtTitle.text = "Belajar Suku Kata"
                 imageView.setOnClickListener { onBackPressed() }
                 imgActionRight.invisible()
@@ -89,20 +92,46 @@ class MateriBacaVokalActivity : AppCompatActivity()
             "${abjad}e".also { opte.txtAbjad.text = it }
             "${abjad}o".also { opto.txtAbjad.text = it }
 
+            val selectedDrawable = ContextCompat.getDrawable(this@MateriBacaVokalActivity, com.nara.bacayuk.R.drawable.button_outline_rounded_focused_purple_selected)
+            val unselectedDrawable = ContextCompat.getDrawable(this@MateriBacaVokalActivity, com.nara.bacayuk.R.drawable.button_outline_rounded_focused_purple)
+            txtAbjad.text = "--"
+            fun deselectAllButtons() {
+                opta.root.background = unselectedDrawable
+                opti.root.background = unselectedDrawable
+                optu.root.background = unselectedDrawable
+                opte.root.background = unselectedDrawable
+                opto.root.background = unselectedDrawable
+            }
+
             opta.root.setOnClickListener {
-                playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity,"${abjad}_a")
+                deselectAllButtons()
+                txtAbjad.text = "${abjad}a"
+                it.background = selectedDrawable
+                playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity, "${abjad}_a")
             }
             opti.root.setOnClickListener {
-                playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity,"${abjad}_i")
+                deselectAllButtons()
+                txtAbjad.text = "${abjad}i"
+                it.background = selectedDrawable
+                playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity, "${abjad}_i")
             }
             optu.root.setOnClickListener {
-                playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity,"${abjad}_u")
+                deselectAllButtons()
+                txtAbjad.text = "${abjad}u"
+                it.background = selectedDrawable
+                playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity, "${abjad}_u")
             }
             opte.root.setOnClickListener {
-                playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity,"${abjad}_e")
+                deselectAllButtons()
+                txtAbjad.text = "${abjad}e"
+                it.background = selectedDrawable
+                playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity, "${abjad}_e")
             }
             opto.root.setOnClickListener {
-                playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity,"${abjad}_o")
+                deselectAllButtons()
+                txtAbjad.text = "${abjad}o"
+                it.background = selectedDrawable
+                playAudioFromRawAssetsFileString(this@MateriBacaVokalActivity, "${abjad}_o")
             }
 
 
@@ -118,13 +147,15 @@ class MateriBacaVokalActivity : AppCompatActivity()
                         item.belajarVokal.isEDone = true
                         item.belajarVokal.isODone = true
                         menuBacaHurufViewModel.updateBelajarSuku(student?.uuid?: "-", item)
-                        onBackPressed()
+                        showQuizToast(this@MateriBacaVokalActivity, ToastType.SUKU_KATA)
+//                        onBackPressed()
                         finish()
                     }
                 }
             }
         }
     }
+
 
 
 

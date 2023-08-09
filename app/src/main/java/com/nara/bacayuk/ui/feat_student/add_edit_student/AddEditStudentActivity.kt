@@ -10,6 +10,7 @@ import com.nara.bacayuk.databinding.ActivityAddEditStudentBinding
 import com.nara.bacayuk.ui.customview.waitingDialog
 import com.nara.bacayuk.utils.DATA
 import com.nara.bacayuk.utils.invisible
+import com.nara.bacayuk.utils.showAddSuccessToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -84,8 +85,9 @@ class AddEditStudentActivity : AppCompatActivity() {
                 dialog.dismiss()
                 when (response) {
                     is Response.Success<*> -> {
-                        Toast.makeText(this@AddEditStudentActivity, "Berhasil", Toast.LENGTH_SHORT).show()
+                        showAddSuccessToast(this@AddEditStudentActivity)
                         finish()
+
                     }
                     is Response.Error -> {
                         Toast.makeText(this@AddEditStudentActivity, response.message, Toast.LENGTH_SHORT).show()

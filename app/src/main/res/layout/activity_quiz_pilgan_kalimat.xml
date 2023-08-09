@@ -41,18 +41,46 @@
                 android:textColor="@color/black"
                 android:text="Pilihlah jawaban yang tepat"/>
 
+            <include
+                android:id="@+id/opta"
+                layout="@layout/item_option_quiz" />
+
+            <include
+                android:id="@+id/opti"
+                layout="@layout/item_option_quiz" />
+
+            <include
+                android:id="@+id/optu"
+                layout="@layout/item_option_quiz" />
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_rounded_purple_10px"
+                android:fontFamily="@font/pjs_medium"
+                android:textSize="@dimen/_14sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginBottom="@dimen/_50sdp"
+                android:paddingVertical="@dimen/_16sdp"
+                android:text="@string/pilih"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
             <RadioGroup
                 android:id="@+id/rb_answer"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/_16sdp"
                 android:layout_height="wrap_content">
 
                 <RadioButton
                     android:id="@+id/opt1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     style="@style/TextViewH18Regular"
                     android:paddingBottom="4dp"
+                    android:button="@drawable/custom_radio_button"
                     android:background="@drawable/button_outline_rounded_focused_purple"
                     android:text="option 1"/>
                 <RadioButton
@@ -61,6 +89,7 @@
                     android:layout_height="wrap_content"
                     style="@style/TextViewH18Regular"
                     android:paddingBottom="4dp"
+                    android:button="@drawable/custom_radio_button"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:background="@drawable/button_outline_rounded_focused_purple"
                     android:text="option 2"/>
@@ -70,6 +99,7 @@
                     android:layout_height="wrap_content"
                     style="@style/TextViewH18Regular"
                     android:paddingBottom="4dp"
+                    android:button="@drawable/custom_radio_button"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:background="@drawable/button_outline_rounded_focused_purple"
                     android:text="option 3"/>
@@ -77,6 +107,7 @@
                     android:id="@+id/opt4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:button="@drawable/custom_radio_button"
                     android:visibility="gone"
                     android:text="option 4"/>
 
@@ -85,16 +116,6 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_rounded_purple_10px"
-        android:fontFamily="@font/pjs_medium"
-        android:layout_margin="@dimen/_16sdp"
-        android:paddingVertical="@dimen/_8sdp"
-        android:text="@string/pilih"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

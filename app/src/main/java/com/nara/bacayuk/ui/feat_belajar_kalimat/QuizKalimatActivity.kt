@@ -116,6 +116,7 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                 setOnClickListener {
                     opta.opt1.invisible()
                     listAnswer.add(listQuestions[0])
+                    binding.btnLogin.isEnabled = true
                     binding.txtAnswer.text = listAnswer.joinToString(if (isKata) "" else " ")
                 }
             }
@@ -124,6 +125,7 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                 setOnClickListener {
                     opti.opt1.invisible()
                     listAnswer.add(listQuestions[1])
+                    binding.btnLogin.isEnabled = true
                     binding.txtAnswer.text = listAnswer.joinToString(if (isKata) "" else " ")
                 }
             }
@@ -133,6 +135,7 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
                 setOnClickListener {
                     optu.opt1.invisible()
                     listAnswer.add(listQuestions[2])
+                    binding.btnLogin.isEnabled = true
                     binding.txtAnswer.text = listAnswer.joinToString(if (isKata) "" else " ")
                 }
             }
@@ -249,6 +252,7 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
     fun resetView() {
         listAnswer.clear()
         binding.txtAnswer.text = "----"
+        binding.btnLogin.isEnabled = false
         binding.apply {
             opta.opt1.visible()
             opti.opt1.visible()

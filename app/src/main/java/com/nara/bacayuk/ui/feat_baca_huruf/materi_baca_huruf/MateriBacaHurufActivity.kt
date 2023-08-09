@@ -12,7 +12,9 @@ import com.nara.bacayuk.databinding.ActivityMateriBacaHurufBinding
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufViewModel
 import com.nara.bacayuk.ui.feat_baca_huruf.quiz_baca_huruf.QuizBacaHurufActivity
 import com.nara.bacayuk.utils.DATA
+import com.nara.bacayuk.utils.ToastType
 import com.nara.bacayuk.utils.invisible
+import com.nara.bacayuk.utils.showQuizToast
 import com.nara.bacayuk.utils.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -71,6 +73,7 @@ class MateriBacaHurufActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     } else {
+                        showQuizToast(this@MateriBacaHurufActivity, ToastType.VOKAL)
                         finish()
                     }
                 }

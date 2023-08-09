@@ -174,7 +174,7 @@ class MainActivity : AppCompatActivity() {
 
         val editSiswaText: TextView = tooltip?.findViewById(R.id.txt_edit_menu)!!
 
-        editSiswaText.setText("Lihat Data Siswa")
+        editSiswaText.setText("Ganti Siswa")
         val deleteSiswaText: TextView =
             tooltip?.findViewById(R.id.txt_delete_menu)!!
         deleteSiswaText.setText("Keluar")

@@ -8,6 +8,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.RadioGroup.OnCheckedChangeListener
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.ReportKalimat
 import com.nara.bacayuk.data.model.ReportKata
@@ -33,6 +34,7 @@ class QuizPilganKalimatActivity : AppCompatActivity() {
     var isKata: Boolean = false
     var reportKata: ReportKata? = null
     var reportKalimat: ReportKalimat? = null
+    var selectedAnswer: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,75 +87,112 @@ class QuizPilganKalimatActivity : AppCompatActivity() {
             opt1.setText(listQuestions[0])
             opt2.setText(listQuestions[1])
             opt3.setText(listQuestions[2])
+            opta.txtAbjad.setText("a. ${listQuestions[0]}" )
+            opti.txtAbjad.setText("b. ${listQuestions[1]}" )
+            optu.txtAbjad.setText("c. ${listQuestions[2]}" )
 //            opt4.setText(listQuestions[3])
             imageView4.loadImage(this@QuizPilganKalimatActivity, soalKata?.imageUrl?:"")
             rbAnswer.setOnCheckedChangeListener { group, checkedId ->
                 val selectedRadioButton: RadioButton = findViewById(checkedId)
                 val selectedText = selectedRadioButton.text.toString()
-                btnLogin.setOnClickListener {
-                    if (selectedText == soalKata?.correctAnswer) {
-                        if (reportKata!= null) {
-                            for(item in reportKata!!.quizPilganKata){
-                                if (item.level == soalKata!!.level){
-                                    item.isCorrect = true
-                                    val index = item.level - 1
-                                    reportKata!!.quizPilganKata[index]= item
-                                    quizViewModel.updateReportKata(
-                                        student?.uuid ?: "-", reportKata!!
-                                    )
-                                }
+
+            }
+
+
+            val selectedDrawable = ContextCompat.getDrawable(this@QuizPilganKalimatActivity, com.nara.bacayuk.R.drawable.button_outline_rounded_focused_purple_selected)
+            val unselectedDrawable = ContextCompat.getDrawable(this@QuizPilganKalimatActivity, com.nara.bacayuk.R.drawable.button_outline_rounded_focused_purple)
+            fun deselectAllButtons() {
+                opta.root.background = unselectedDrawable
+                opti.root.background = unselectedDrawable
+                optu.root.background = unselectedDrawable
+            }
+
+            btnLogin.isEnabled = selectedAnswer != ""
+
+            opta.root.setOnClickListener {
+                selectedAnswer = listQuestions[0]
+                deselectAllButtons()
+                btnLogin.isEnabled = true
+                it.background = selectedDrawable
+            }
+            opti.root.setOnClickListener {
+                selectedAnswer = listQuestions[1]
+                deselectAllButtons()
+                btnLogin.isEnabled = true
+                it.background = selectedDrawable
+            }
+            optu.root.setOnClickListener {
+                selectedAnswer = listQuestions[2]
+                deselectAllButtons()
+                btnLogin.isEnabled = true
+                it.background = selectedDrawable
+            }
+
+            btnLogin.setOnClickListener {
+                if (selectedAnswer == soalKata?.correctAnswer) {
+                    if (reportKata!= null) {
+                        for(item in reportKata!!.quizPilganKata){
+                            if (item.level == soalKata!!.level){
+                                item.isCorrect = true
+                                val index = item.level - 1
+                                reportKata!!.quizPilganKata[index]= item
+                                quizViewModel.updateReportKata(
+                                    student?.uuid ?: "-", reportKata!!
+                                )
                             }
                         }
+                    }
 
-                        if (reportKalimat!= null) {
-                            for(item in reportKalimat!!.quizPilganKata){
-                                if (item.level == soalKata!!.level){
-                                    item.isCorrect = true
-                                    val index = item.level - 1
-                                    reportKalimat!!.quizPilganKata[index]= item
-                                    quizViewModel.updateReportKalimat(
-                                        student?.uuid ?: "-", reportKalimat!!
-                                    )
-                                }
+                    if (reportKalimat!= null) {
+                        for(item in reportKalimat!!.quizPilganKata){
+                            if (item.level == soalKata!!.level){
+                                item.isCorrect = true
+                                val index = item.level - 1
+                                reportKalimat!!.quizPilganKata[index]= item
+                                quizViewModel.updateReportKalimat(
+                                    student?.uuid ?: "-", reportKalimat!!
+                                )
                             }
                         }
-
-                        val dialog = AnswerStatusDialog(
-                            this@QuizPilganKalimatActivity,
-                            icon = R.drawable.ic_checklist,
-                            status =  "Benar",
-                            object : OnDismissDialog {
-                                override fun onDismissDialog() {
-                                    finish()
-                                }
-                            }
-                        )
-                        dialog.show()
-                        val layoutParams = WindowManager.LayoutParams()
-                        layoutParams.copyFrom(dialog.getWindow()?.getAttributes())
-                        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
-                        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
-                        dialog.getWindow()?.setAttributes(layoutParams)
                     }
 
-                    else {
-                        val dialog = AnswerStatusDialog(
-                            this@QuizPilganKalimatActivity,
-                            icon = R.drawable.ic_wrong_answer,
-                            status =  "Salah",
-                            object : OnDismissDialog {
-                                override fun onDismissDialog() {
-
-                                }
+                    val dialog = AnswerStatusDialog(
+                        this@QuizPilganKalimatActivity,
+                        icon = R.drawable.ic_checklist,
+                        status =  "Benar",
+                        object : OnDismissDialog {
+                            override fun onDismissDialog() {
+                                finish()
                             }
-                        )
-                        dialog.show()
-                        val layoutParams = WindowManager.LayoutParams()
-                        layoutParams.copyFrom(dialog.getWindow()?.getAttributes())
-                        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
-                        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
-                        dialog.getWindow()?.setAttributes(layoutParams)
-                    }
+                        }
+                    )
+                    dialog.show()
+                    val layoutParams = WindowManager.LayoutParams()
+                    layoutParams.copyFrom(dialog.getWindow()?.getAttributes())
+                    layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
+                    layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
+                    dialog.getWindow()?.setAttributes(layoutParams)
+                }
+
+                else {
+                    val dialog = AnswerStatusDialog(
+                        this@QuizPilganKalimatActivity,
+                        icon = R.drawable.ic_wrong_answer,
+                        status =  "Salah",
+                        object : OnDismissDialog {
+                            override fun onDismissDialog() {
+                                deselectAllButtons()
+                                selectedAnswer = ""
+                                btnLogin.isEnabled = false
+                            }
+                        }
+                    )
+                    dialog.show()
+                    val layoutParams = WindowManager.LayoutParams()
+                    layoutParams.copyFrom(dialog.getWindow()?.getAttributes())
+                    layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
+                    layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
+                    dialog.getWindow()?.setAttributes(layoutParams)
                 }
             }
         }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.*
@@ -74,6 +75,11 @@ class Huruf1Fragment : Fragment() {
                     val reportHuruf = abjad?.reportHuruf
                     imgSound.setOnClickListener {
 //                        playAudioFromUrl(abjad?.reportHuruf?.abjadName ?: "")
+                        val selectedSoundDrawable = ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_selected_sound
+                        )
+                        imgSound.setImageDrawable(selectedSoundDrawable)
                         val huruf = "huruf_${abjad?.abjadNonKapital?.toLowerCase()}"
                         playAudioFromRawAssetsFileString(requireContext(),huruf)
                     }
@@ -92,6 +98,11 @@ class Huruf1Fragment : Fragment() {
                     abjad?.reportHuruf?.materiHurufKapital = true
                     val reportHuruf = abjad?.reportHuruf
                     imgSound.setOnClickListener {
+                        val selectedSoundDrawable = ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_selected_sound
+                        )
+                        imgSound.setImageDrawable(selectedSoundDrawable)
                         val huruf = "huruf_${abjad?.abjadNonKapital?.toLowerCase()}"
                         playAudioFromRawAssetsFileString(requireContext(),huruf)
                     }
@@ -109,6 +120,11 @@ class Huruf1Fragment : Fragment() {
                     "${abjad?.abjadNonKapital} ${abjad?.abjadKapital}".also { txtAbjad.text = it }
                     abjad?.reportHuruf?.materiPerbedaanHuruf = true
                     imgSound.setOnClickListener {
+                        val selectedSoundDrawable = ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_selected_sound
+                        )
+                        imgSound.setImageDrawable(selectedSoundDrawable)
                         val huruf = "huruf_${abjad?.abjadNonKapital?.toLowerCase()}"
                         playAudioFromRawAssetsFileString(requireContext(),huruf)
                     }
@@ -140,6 +156,11 @@ class Huruf1Fragment : Fragment() {
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
                                 reportKata?.belajarVokal?.isADone = true
                                 imgSound.setOnClickListener {
+                                    val selectedSoundDrawable = ContextCompat.getDrawable(
+                                        requireContext(),
+                                        R.drawable.ic_selected_sound
+                                    )
+                                    imgSound.setImageDrawable(selectedSoundDrawable)
                                     playAudioFromRawAssetsFileString(requireContext(),"huruf_a")
                                 }
                                 Log.d("abjadparam2", "${MateriBacaHurufActivity.student?.uuid} - ${reportKata?.belajarVokal?.isADone}")
@@ -157,6 +178,11 @@ class Huruf1Fragment : Fragment() {
                                 txtAbjad.text = "I i"
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
                                 imgSound.setOnClickListener {
+                                    val selectedSoundDrawable = ContextCompat.getDrawable(
+                                        requireContext(),
+                                        R.drawable.ic_selected_sound
+                                    )
+                                    imgSound.setImageDrawable(selectedSoundDrawable)
                                     playAudioFromRawAssetsFileString(requireContext(),"huruf_i")
                                 }
                             }
@@ -170,10 +196,16 @@ class Huruf1Fragment : Fragment() {
                         "2" -> {
 
                             binding.materi.apply {
+
                                 playAudioFromRawAssetsFileString(requireContext(),"ins_vokal")
                                 txtAbjad.text = "U u"
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
                                 imgSound.setOnClickListener {
+                                    val selectedSoundDrawable = ContextCompat.getDrawable(
+                                        requireContext(),
+                                        R.drawable.ic_selected_sound
+                                    )
+                                    imgSound.setImageDrawable(selectedSoundDrawable)
                                     playAudioFromRawAssetsFileString(requireContext(),"huruf_u")
                                 }
                             }
@@ -189,6 +221,11 @@ class Huruf1Fragment : Fragment() {
                                 txtAbjad.text = "E e"
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
                                 imgSound.setOnClickListener {
+                                    val selectedSoundDrawable = ContextCompat.getDrawable(
+                                        requireContext(),
+                                        R.drawable.ic_selected_sound
+                                    )
+                                    imgSound.setImageDrawable(selectedSoundDrawable)
                                     playAudioFromRawAssetsFileString(requireContext(),"huruf_e")
                                 }
                             }
@@ -204,6 +241,11 @@ class Huruf1Fragment : Fragment() {
                                 txtAbjad.text = "O o"
                                 txtDesc.text = getString(R.string.ini_huruf_vokal)
                                 imgSound.setOnClickListener {
+                                    val selectedSoundDrawable = ContextCompat.getDrawable(
+                                        requireContext(),
+                                        R.drawable.ic_selected_sound
+                                    )
+                                    imgSound.setImageDrawable(selectedSoundDrawable)
                                     playAudioFromRawAssetsFileString(requireContext(),"huruf_o")
                                 }
                             }
