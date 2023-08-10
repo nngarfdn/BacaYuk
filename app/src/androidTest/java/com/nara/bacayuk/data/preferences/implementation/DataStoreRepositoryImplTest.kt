@@ -6,9 +6,9 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.bacayuk.data.preferences.DataStoreRepository
-import com.android.bacayuk.data.preferences.DataStoreRepositoryImpl
-import com.android.bacayuk.data.preferences.dataStore
+import com.nara.bacayuk.data.preferences.DataStoreRepository
+import com.nara.bacayuk.data.preferences.DataStoreRepositoryImpl
+import com.nara.bacayuk.data.preferences.dataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*

@@ -16,6 +16,36 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="-1644432256">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="RR8RB0BNEZK" value="120" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-M225FV" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="-1368287037">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="R9RW500J9SX" value="120" />
+                  <entry key="RR8RB0BNEZK" value="120" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-M225FV" value="120" />
+                  <entry key="samsung&#10; SM-X200" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-1275583511">
           <value>
             <AndroidTestResultsTableState>
@@ -50,6 +80,22 @@
                   <entry key="Duration" value="90" />
                   <entry key="Tests" value="360" />
                   <entry key="samsung&#10; SM-M225FV" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="392370123">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="R9RW500J9SX" value="120" />
+                  <entry key="RR8RB0BNEZK" value="120" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-M225FV" value="120" />
+                  <entry key="samsung&#10; SM-X200" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>

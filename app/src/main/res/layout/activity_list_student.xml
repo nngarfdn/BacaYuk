@@ -27,6 +27,7 @@
             <include
                 android:id="@+id/layout_student"
                 layout="@layout/layout_list_student"/>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -24,8 +24,8 @@ android {
         applicationId "com.nara.bacayuk"
         minSdk 21
         targetSdk 33
-        versionCode 4
-        versionName "2.2"
+        versionCode 5
+        versionName "2.3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -52,6 +52,7 @@ dependencies {
     implementation 'androidx.test.ext:junit-ktx:1.1.5'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.test.uiautomator:uiautomator:2.2.0'
     def lifecycle_version = "2.4.1"
     def coroutines_version = "1.4.2"
 

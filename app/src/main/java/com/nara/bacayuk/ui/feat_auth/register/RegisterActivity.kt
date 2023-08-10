@@ -30,7 +30,7 @@ class RegisterActivity : AppCompatActivity() {
             txtMasuk.setOnClickListener {
                 openActivity(this@RegisterActivity, LoginActivity::class.java)
             }
-            btnDaftar.isEnabled = edtName.text.toString().isNotEmpty() && edtEmail.text.toString()
+            btnRegister.isEnabled = edtName.text.toString().isNotEmpty() && edtEmail.text.toString()
                 .isNotEmpty() && edtPassword.text.toString()
                 .isNotEmpty() && edtPasswordConfirmation.text.toString().isNotEmpty()
         }
@@ -83,10 +83,10 @@ class RegisterActivity : AppCompatActivity() {
                         )
 
                     }
-                    btnDaftar.isEnabled = s.toString().isNotEmpty() && edtEmail.text.toString()
+                    btnRegister.isEnabled = s.toString().isNotEmpty() && edtEmail.text.toString()
                         .isNotEmpty() && edtPassword.text.toString()
                         .isNotEmpty() && edtPasswordConfirmation.text.toString().isNotEmpty()
-                    btnDaftar.setOnClickListener {
+                    btnRegister.setOnClickListener {
                         registerViewModel.register(
                             edtEmail.text.toString(),
                             edtPassword.text.toString()
@@ -145,11 +145,11 @@ class RegisterActivity : AppCompatActivity() {
                             )
                         }
                     }
-                    btnDaftar.isEnabled =
+                    btnRegister.isEnabled =
                         s.toString().isNotEmpty() && edtEmail.text.toString()
                             .isNotEmpty() && edtPassword.text.toString()
                             .isNotEmpty() && edtPasswordConfirmation.text.toString().isNotEmpty()
-                    btnDaftar.setOnClickListener {
+                    btnRegister.setOnClickListener {
                         registerViewModel.register(
                             edtEmail.text.toString(),
                             edtPassword.text.toString()
@@ -188,11 +188,11 @@ class RegisterActivity : AppCompatActivity() {
                             )
                         }
                     }
-                    btnDaftar.isEnabled =
+                    btnRegister.isEnabled =
                         s.toString().isNotEmpty() && edtEmail.text.toString()
                             .isNotEmpty() && edtPassword.text.toString()
                             .isNotEmpty() && edtPasswordConfirmation.text.toString().isNotEmpty()
-                    btnDaftar.setOnClickListener {
+                    btnRegister.setOnClickListener {
                         registerViewModel.register(
                             edtEmail.text.toString(),
                             edtPassword.text.toString()
@@ -248,11 +248,11 @@ class RegisterActivity : AppCompatActivity() {
                             )
                         }
                     }
-                    btnDaftar.isEnabled =
+                    btnRegister.isEnabled =
                         s.toString().isNotEmpty() && edtEmail.text.toString()
                             .isNotEmpty() && edtPassword.text.toString()
                             .isNotEmpty() && edtPasswordConfirmation.text.toString().isNotEmpty()
-                    btnDaftar.setOnClickListener {
+                    btnRegister.setOnClickListener {
                         registerViewModel.register(
                             edtEmail.text.toString(),
                             edtPassword.text.toString()

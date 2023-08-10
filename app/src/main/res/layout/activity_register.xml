@@ -166,7 +166,7 @@
                 android:textColor="@color/red_error"/>
 
             <Button
-                android:id="@+id/btn_daftar"
+                android:id="@+id/btn_register"
                 android:layout_marginTop="@dimen/_16sdp"
                 android:layout_width="match_parent"
                 android:background="@drawable/button_rounded_purple_10px"
