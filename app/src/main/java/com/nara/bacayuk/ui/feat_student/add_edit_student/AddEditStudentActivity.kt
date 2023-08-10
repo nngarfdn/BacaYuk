@@ -52,7 +52,7 @@ class AddEditStudentActivity : AppCompatActivity() {
             }
 
 
-            btnSave.setOnClickListener {
+            btnSaveStudent.setOnClickListener {
                 val name = edtName.text.toString()
                 val kelas = edtKelas.text.toString()
                 val noAbsen = edtNoabsen.text.toString()

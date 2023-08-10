@@ -16,7 +16,7 @@ class AbjadKapitalActivity : AppCompatActivity(), AdapterListener {
         setContentView(binding.root)
 //        abjadAdapter.submitData(getAbjadKapital())
         binding.apply {
-            rvAbjadKapital.apply {
+            rvListStudent.apply {
                 adapter = abjadAdapter
                 //flexible grid layout
                 layoutManager = androidx.recyclerview.widget.GridLayoutManager(this@AbjadKapitalActivity, 4)

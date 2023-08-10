@@ -113,15 +113,15 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
                 }
             }
 
-            layoutStudent.rvAbjadKapital.apply {
+            layoutStudent.rvListStudent.apply {
                 adapter = this@ListStudentActivity.studentAdapter
                 layoutManager =
                     androidx.recyclerview.widget.GridLayoutManager(this@ListStudentActivity, 4)
             }
 
-            binding.layoutStudent.btnSelect.isEnabled = selectedStudent!= null
+            binding.layoutStudent.btnSelectStudent.isEnabled = selectedStudent!= null
 
-            layoutStudent.btnSelect.setOnClickListener {
+            layoutStudent.btnSelectStudent.setOnClickListener {
                 if (selectedStudent?.isReadyHurufDataSet == false ) {
                     mainViewModel.createReportHurufDataSets(
                         true,
@@ -264,6 +264,6 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
 
     override fun onClick(data: Any?, position: Int?, view: View?, type: String) {
         selectedStudent = data as Student?
-        binding.layoutStudent.btnSelect.isEnabled = selectedStudent!= null
+        binding.layoutStudent.btnSelectStudent.isEnabled = selectedStudent!= null
     }
 }

@@ -6,11 +6,8 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.UiDevice
 import com.nara.bacayuk.R
 import org.junit.Assert.*
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,7 +18,6 @@ class RegisterActivityTest{
     @get:Rule
     var activityRule: ActivityScenarioRule<RegisterActivity> = ActivityScenarioRule(
         RegisterActivity::class.java)
-
 
     @Test
     fun testRegister() {
@@ -41,6 +37,5 @@ class RegisterActivityTest{
         Thread.sleep(4000)
         Espresso.onView(ViewMatchers.withId(R.id.txt_forgot_password)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
-
 
 }
