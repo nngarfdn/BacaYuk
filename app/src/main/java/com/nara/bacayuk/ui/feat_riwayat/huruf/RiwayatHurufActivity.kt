@@ -21,7 +21,6 @@ class RiwayatHurufActivity : AppCompatActivity() {
     private val dialog by lazy { waitingDialog() }
     private val listAbjadMenu = arrayListOf<Abjad>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
