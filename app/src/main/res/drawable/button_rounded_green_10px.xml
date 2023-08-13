@@ -9,4 +9,6 @@
     <item android:state_enabled="false"
         android:drawable="@drawable/button_rounded_disabled_green" />
 
+    <item android:state_active="false"
+        android:drawable="@drawable/button_rounded_disabled_green" />
 </selector>

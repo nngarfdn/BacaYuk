@@ -1,6 +1,8 @@
 package com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf
 
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.provider.MediaStore.Audio.Media
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.databinding.FragmentHuruf1Binding
 import com.nara.bacayuk.ui.customview.waitingDialog
+import com.nara.bacayuk.utils.AudioPlayerManager
 import com.nara.bacayuk.utils.playAudioFromRawAssets
 import com.nara.bacayuk.utils.playAudioFromRawAssetsFileString
 import com.nara.bacayuk.utils.playAudioFromUrl
@@ -28,6 +31,7 @@ class Huruf1Fragment : Fragment() {
     private lateinit var listener: (CharSequence) -> Unit
     private var abjad: Abjad? = null
     var reportKata: ReportKata? = null
+    var mediaPlayer: MediaPlayer? = MediaPlayer()
     private val dialog by lazy { context?.waitingDialog() }
 
     private val materiBacaHurufViewModel: MateriBacaHurufViewModel by viewModel()
@@ -67,7 +71,16 @@ class Huruf1Fragment : Fragment() {
         abjad = MateriBacaHurufActivity.dataAbjad
         when (param1) {
             "0" -> {
-                playAudioFromRawAssetsFileString(requireContext(),"ins_huruf_kecil")
+                mediaPlayer = null
+                if (mediaPlayer?.isPlaying == true) {
+                    mediaPlayer?.stop()
+                    AudioPlayerManager.stopCurrentlyPlaying()
+                } else {
+                    mediaPlayer?.stop()
+                    mediaPlayer = MediaPlayer.create(requireContext(), R.raw.ins_huruf_kecil)
+                    mediaPlayer?.start()
+                }
+//                playAudioFromRawAssetsFileString(requireContext(),"ins_huruf_kecil")
                 binding.materi.apply {
                     txtAbjad.text = abjad?.abjadNonKapital
                     txtDesc.text = getString(R.string.ini_huruf_kecil)
@@ -91,8 +104,17 @@ class Huruf1Fragment : Fragment() {
                 }
             }
             "1" -> {
+                mediaPlayer = null
+                if (mediaPlayer?.isPlaying == true) {
+                    mediaPlayer?.stop()
+                    AudioPlayerManager.stopCurrentlyPlaying()
+                } else {
+                    mediaPlayer?.stop()
+                    mediaPlayer = MediaPlayer.create(requireContext(), R.raw.ins_huruf_kapital)
+                    mediaPlayer?.start()
+                }
                 binding.materi.apply {
-                    playAudioFromRawAssetsFileString(requireContext(),"ins_huruf_kapital")
+//                    playAudioFromRawAssetsFileString(requireContext(),"ins_huruf_kapital")
                     txtDesc.text = getString(R.string.ini_huruf_kapital)
                     txtAbjad.text = abjad?.abjadKapital
                     abjad?.reportHuruf?.materiHurufKapital = true
@@ -114,8 +136,17 @@ class Huruf1Fragment : Fragment() {
                 }
             }
             "2" -> {
+                mediaPlayer = null
+                if (mediaPlayer?.isPlaying == true) {
+                    mediaPlayer?.stop()
+                    AudioPlayerManager.stopCurrentlyPlaying()
+                } else {
+                    mediaPlayer?.stop()
+                    mediaPlayer = MediaPlayer.create(requireContext(), R.raw.ins_beda_besar_kecil)
+                    mediaPlayer?.start()
+                }
                 binding.materi.apply {
-                    playAudioFromRawAssetsFileString(requireContext(),"ins_beda_besar_kecil")
+//                    playAudioFromRawAssetsFileString(requireContext(),"ins_beda_besar_kecil")
                     txtDesc.text = getString(R.string.ini_perbedaan_huruf)
                     "${abjad?.abjadNonKapital} ${abjad?.abjadKapital}".also { txtAbjad.text = it }
                     abjad?.reportHuruf?.materiPerbedaanHuruf = true

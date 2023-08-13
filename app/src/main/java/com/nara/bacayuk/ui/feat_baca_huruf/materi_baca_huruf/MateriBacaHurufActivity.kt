@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.widget.Toast
 import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.Abjad
@@ -11,6 +12,7 @@ import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityMateriBacaHurufBinding
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufViewModel
 import com.nara.bacayuk.ui.feat_baca_huruf.quiz_baca_huruf.QuizBacaHurufActivity
+import com.nara.bacayuk.ui.feat_student.list_student.ListStudentActivity
 import com.nara.bacayuk.utils.DATA
 import com.nara.bacayuk.utils.ToastType
 import com.nara.bacayuk.utils.invisible
@@ -57,7 +59,6 @@ class MateriBacaHurufActivity : AppCompatActivity() {
             val pagerAdapter = ViewPageAdapter(this@MateriBacaHurufActivity, isKata = isKata) { name = it.toString() }
             slideVP.adapter = pagerAdapter
             dotsIndicator.setViewPager2(slideVP)
-
 
             buttonNext.setOnClickListener {
                 val n = if (isKata) 4 else 2

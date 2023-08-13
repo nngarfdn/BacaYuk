@@ -89,7 +89,7 @@ class QuizFragment : Fragment() {
 
 
 
-            txtAbjad.setOnTouchListener(ChoiceTouchListener())
+            txtAbjadQuiz.setOnTouchListener(ChoiceTouchListener())
 
             txtOpt1.setOnDragListener(ChoiceDragListener())
             txtOpt2.setOnDragListener(ChoiceDragListener())
@@ -98,7 +98,7 @@ class QuizFragment : Fragment() {
                 "0" -> {
                     playAudioFromRawAssetsFileString(requireContext(),"ins_arahkan_huruf")
                     reset(false)
-                    txtAbjad.text = abjad?.abjadNonKapital
+                    txtAbjadQuiz.text = abjad?.abjadNonKapital
                     isKapital = false
 //
                     MaterialIntroView.Builder(requireActivity())
@@ -111,7 +111,7 @@ class QuizFragment : Fragment() {
                         .performClick(true)
                         .setInfoText("Arahkah huruf abjad ini menuju huruf yang benar dengan cara menekan, tahan, lalu geser")
                         .setShape(ShapeType.CIRCLE)
-                        .setTarget(binding.quiz.txtAbjad)
+                        .setTarget(binding.quiz.txtAbjadQuiz)
                         .setUsageId("intro_abjad") //THIS SHOULD BE UNIQUE ID
                         .show()
                 }
@@ -119,7 +119,7 @@ class QuizFragment : Fragment() {
                     playAudioFromRawAssetsFileString(requireContext(),"ins_arahkan_huruf")
                     isKapital = true
                     reset(true)
-                    txtAbjad.text = abjad?.abjadKapital
+                    txtAbjadQuiz.text = abjad?.abjadKapital
 
                 }
             }
@@ -166,7 +166,7 @@ class QuizFragment : Fragment() {
         binding.quiz.apply {
 
             Log.d("cekdata", "correctAnswerKapital: ${wrongAndCorrectAnswerKapital[2]}")
-            txtAbjad.visibility = View.VISIBLE
+            txtAbjadQuiz.visibility = View.VISIBLE
 
             txtOpt1.text = if (isKapital) wrongAndCorrectAnswerKapital[0] else wrongAndCorrectAnswerNonKapital[0]
             txtOpt2.text = if (isKapital) wrongAndCorrectAnswerKapital[1] else wrongAndCorrectAnswerNonKapital[1]
