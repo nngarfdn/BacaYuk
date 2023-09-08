@@ -1,6 +1,8 @@
 package com.nara.bacayuk.ui.feat_auth.login
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -10,17 +12,20 @@ import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.Response
 import com.nara.bacayuk.data.model.User
 import com.nara.bacayuk.databinding.ActivityLoginBinding
+import com.nara.bacayuk.ui.customview.waitingDialog
 import com.nara.bacayuk.ui.feat_auth.forgot_password.ForgotPasswordActivity
 import com.nara.bacayuk.ui.feat_auth.register.RegisterActivity
 import com.nara.bacayuk.ui.feat_student.list_student.ListStudentActivity
 import com.nara.bacayuk.utils.changeErrorStateEditText
 import com.nara.bacayuk.utils.isValidEmail
 import com.nara.bacayuk.utils.openActivity
+import com.nara.bacayuk.utils.showToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
+    private val dialog by lazy { this@LoginActivity.waitingDialog() }
     private val loginViewModel: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +64,26 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel.errorMessage.observe(this@LoginActivity) {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loginViewModel.user.observe(this@LoginActivity) { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("LoginActivity", "onCreate: ${response.data.email}")
+                    loginViewModel.saveUserToDataStore(response.data)
+                    getUserDataStore()
+                }
+                is Response.Error -> {
+                    Toast.makeText(this, "${response.e?.message}", Toast.LENGTH_SHORT).show()
+                    Log.d("LoginActivity", "onCreate: ${response.message}")
+                }
+                else -> {
+
+                }
+            }
         }
     }
 
@@ -104,7 +129,12 @@ class LoginActivity : AppCompatActivity() {
                         .isNotEmpty()
                 btnLogin.setOnClickListener {
                     loginViewModel.login(edtEmail.text.toString(), edtPassword.text.toString())
-                    loginViewModel.login(edtEmail.text.toString(), edtPassword.text.toString())
+                    //handler delay 2 s
+                    dialog.show()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        getUserDataStore()
+                        dialog.dismiss()
+                    }, 2000)
                 }
             }
 
@@ -153,7 +183,14 @@ class LoginActivity : AppCompatActivity() {
                         .isNotEmpty()
                 btnLogin.setOnClickListener {
                     loginViewModel.login(edtEmail.text.toString(), edtPassword.text.toString())
-                    loginViewModel.login(edtEmail.text.toString(), edtPassword.text.toString())
+                    //handler delay 2 s
+                    dialog.show()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        getUserDataStore()
+                        dialog.dismiss()
+                    }, 2000)
+
+
                 }
             }
 

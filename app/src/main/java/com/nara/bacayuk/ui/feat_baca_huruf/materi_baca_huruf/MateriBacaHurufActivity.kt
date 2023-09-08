@@ -10,6 +10,7 @@ import com.nara.bacayuk.R
 import com.nara.bacayuk.data.model.Abjad
 import com.nara.bacayuk.data.model.Student
 import com.nara.bacayuk.databinding.ActivityMateriBacaHurufBinding
+import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufViewModel
 import com.nara.bacayuk.ui.feat_baca_huruf.quiz_baca_huruf.QuizBacaHurufActivity
 import com.nara.bacayuk.ui.feat_student.list_student.ListStudentActivity
@@ -17,6 +18,7 @@ import com.nara.bacayuk.utils.DATA
 import com.nara.bacayuk.utils.ToastType
 import com.nara.bacayuk.utils.invisible
 import com.nara.bacayuk.utils.showQuizToast
+import com.nara.bacayuk.utils.showToast
 import com.nara.bacayuk.utils.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -80,6 +82,21 @@ class MateriBacaHurufActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        if (dataAbjad==null) {
+            finish()
+        } else {
+            val intent = Intent(this@MateriBacaHurufActivity, MenuBacaHurufActivity::class.java)
+                .apply {
+                    putExtra("student", student)
+                    putExtra("isKata", false)
+                }
+            startActivity(intent)
+            finish()
+        }
+
     }
 
 }

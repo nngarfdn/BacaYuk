@@ -1,6 +1,7 @@
 package com.nara.bacayuk.ui.feat_baca_kata.materi
 
 import android.R
+import android.content.Intent
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.media.MediaPlayer
 import android.net.Uri
@@ -21,6 +22,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nara.bacayuk.data.model.*
 import com.nara.bacayuk.databinding.ActivityMateriBacaVokalBinding
 import com.nara.bacayuk.databinding.ItemQuizSusunBinding
+import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
+import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufViewModel
 import com.nara.bacayuk.ui.listener.adapter.AdapterListener
 import com.nara.bacayuk.utils.DATA
@@ -73,11 +76,9 @@ class MateriBacaVokalActivity : AppCompatActivity()
                         Log.d("menubaca", it)
                     }
                 }
-
                 else -> {}
             }
         }
-
 
         binding.apply {
             toolbar.apply {
@@ -85,6 +86,7 @@ class MateriBacaVokalActivity : AppCompatActivity()
                 imageView.setOnClickListener { onBackPressed() }
                 imgActionRight.invisible()
             }
+
             val abjad = dataAbjad?.abjadNonKapital
             "${abjad}a".also { opta.txtAbjad.text = it }
             "${abjad}i".also { opti.txtAbjad.text = it }
@@ -148,7 +150,12 @@ class MateriBacaVokalActivity : AppCompatActivity()
                         item.belajarVokal.isODone = true
                         menuBacaHurufViewModel.updateBelajarSuku(student?.uuid?: "-", item)
                         showQuizToast(this@MateriBacaVokalActivity, ToastType.SUKU_KATA)
-//                        onBackPressed()
+                        val intent = Intent(this@MateriBacaVokalActivity,
+                            MenuBacaHurufActivity::class.java).apply {
+                            putExtra("student", student)
+                            putExtra("isKata", true)
+                        }
+                        startActivity(intent)
                         finish()
                     }
                 }

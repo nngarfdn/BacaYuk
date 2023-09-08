@@ -69,4 +69,10 @@ class QuizBacaHurufActivity : AppCompatActivity() {
             }
         }
     }
+    override fun onBackPressed() {
+        val intent = Intent(this@QuizBacaHurufActivity, MenuBacaHurufActivity::class.java)
+            .apply { putExtra("student", MateriBacaHurufActivity.student) }
+        startActivity(intent)
+        finish()
+    }
 }

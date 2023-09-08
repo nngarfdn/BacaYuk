@@ -51,6 +51,8 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
     private val listStudentViewModel: ListStudentViewModel by viewModel()
     private val mainViewModel: MainViewModel by viewModel()
     private val dialog by lazy { waitingDialog() }
+    private var backPressedTime: Long = 0
+    private lateinit var backToast: Toast
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -261,6 +263,17 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
         }
     }
 
+    override fun onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            backToast.cancel()
+            finishAffinity()  // Menutup semua aktivitas dan keluar dari aplikasi
+            return
+        } else {
+            backToast = Toast.makeText(this, "Tekan sekali lagi untuk keluar", Toast.LENGTH_SHORT)
+            backToast.show()
+        }
+        backPressedTime = System.currentTimeMillis()
+    }
 
     override fun onClick(data: Any?, position: Int?, view: View?, type: String) {
         selectedStudent = data as Student?

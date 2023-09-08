@@ -24,14 +24,18 @@ class AnswerStatusDialog(
         window?.setBackgroundDrawable(ContextCompat.getDrawable(context, android.R.color.transparent))
         binding.apply {
             imgIcon.setImageResource(icon)
-            txtStatus.text = status
+            txtStatus.text = "Jawaban $status"
             btnSelect.setOnClickListener {
                 listener.onDismissDialog()
                 dismiss()
             }
             when(status){
-                "Benar" -> playAudioFromRawAssetsFileString(context,"sound_correct")
-                "Salah" -> playAudioFromRawAssetsFileString(context,"sound_wrong")
+                "Benar" -> {
+                    playAudioFromRawAssetsFileString(context,"sound_correct")
+                }
+                "Salah" -> {
+                    playAudioFromRawAssetsFileString(context,"sound_wrong")
+                }
             }
         }
     }

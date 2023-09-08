@@ -110,6 +110,26 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
             }else {
                 playAudioFromRawAssetsFileString(this@QuizKalimatActivity,"ins_susun_kalimat")
             }
+
+            binding.txtAnswer.setOnClickListener {
+                if (listAnswer.isNotEmpty()) {
+                    val lastItem = listAnswer.removeAt(listAnswer.size - 1) // Hapus item terakhir dari listAnswer
+                    when (lastItem) {
+                        listQuestions[0] -> binding.opta.opt1.visible()
+                        listQuestions[1] -> binding.opti.opt1.visible()
+                        listQuestions[2] -> binding.optu.opt1.visible()
+                        // ... tambahkan kasus lain jika ada lebih banyak opsi
+                    }
+
+                    // Update tampilan txtAnswer dengan item yang tersisa di listAnswer
+                    if (listAnswer.isEmpty()) {
+                        binding.txtAnswer.text = "----"
+                    } else {
+                        binding.txtAnswer.text = listAnswer.joinToString(if (isKata) "" else " ")
+                    }
+                }
+            }
+
             imageView4.loadImage(this@QuizKalimatActivity, soalKata?.imageUrl ?: "")
             opta.opt1.apply {
                 text = listQuestions[0]
@@ -302,6 +322,4 @@ class QuizKalimatActivity : AppCompatActivity(), AdapterQuizListener, ViewPositi
             }
         }
     }
-
-
 }

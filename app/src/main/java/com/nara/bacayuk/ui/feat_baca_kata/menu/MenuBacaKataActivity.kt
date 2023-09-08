@@ -13,6 +13,7 @@ import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActi
 import com.nara.bacayuk.ui.feat_baca_huruf.menu_baca_huruf.MenuBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_kata.materi.MateriBacaVokalActivity
 import com.nara.bacayuk.ui.feat_baca_kata.quiz.QuizMenuActivity
+import com.nara.bacayuk.ui.feat_menu_utama.MainActivity
 import com.nara.bacayuk.ui.feat_riwayat.huruf.RiwayatHurufActivity
 import com.nara.bacayuk.utils.invisible
 import com.nara.bacayuk.utils.openActivity
@@ -20,6 +21,7 @@ import com.nara.bacayuk.utils.openActivity
 class MenuBacaKataActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMenuBacaKataBinding.inflate(layoutInflater) }
     var student: Student? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -41,7 +43,7 @@ class MenuBacaKataActivity : AppCompatActivity() {
 
                 txtTitle.text = "Baca Kata"
                 imageView.setOnClickListener {
-                    finish()
+                    onBackPressed()
                 }
             }
 
@@ -77,5 +79,13 @@ class MenuBacaKataActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this@MenuBacaKataActivity, MainActivity::class.java).apply {
+            putExtra("student", student)
+        }
+        startActivity(intent)
+        finish()
     }
 }

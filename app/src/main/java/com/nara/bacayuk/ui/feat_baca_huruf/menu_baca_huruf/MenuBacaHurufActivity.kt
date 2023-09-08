@@ -15,6 +15,7 @@ import com.nara.bacayuk.ui.customview.showDialog
 import com.nara.bacayuk.ui.customview.waitingDialog
 import com.nara.bacayuk.ui.feat_baca_huruf.materi_baca_huruf.MateriBacaHurufActivity
 import com.nara.bacayuk.ui.feat_baca_kata.materi.MateriBacaVokalActivity
+import com.nara.bacayuk.ui.feat_baca_kata.menu.MenuBacaKataActivity
 import com.nara.bacayuk.ui.feat_menu_utama.MainActivity
 import com.nara.bacayuk.ui.feat_student.list_student.ListStudentActivity
 import com.nara.bacayuk.ui.listener.adapter.AdapterListener
@@ -124,7 +125,7 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
 
                 txtTitle.text = if (isBacaKata) "Baca Kata" else getString(R.string.baca_huruf)
                 imageView.setOnClickListener {
-                    finish()
+                    onBackPressed()
                 }
             }
 
@@ -145,8 +146,6 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
             menuBacaHurufViewModel.getAllReports(student?.uuid ?: "-")
             dialog.show()
         }
-
-
     }
 
     override fun onClick(data: Any?, position: Int?, view: View?, type: String) {
@@ -166,6 +165,19 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
             startActivity(intent2)
         }else {
             startActivity(intent1)
+            finish()
+        }
+    }
+
+    override fun onBackPressed() {
+        if (isBacaKata) {
+            val intent = Intent(this@MenuBacaHurufActivity, MenuBacaKataActivity::class.java)
+                .apply {
+                    putExtra("student", student)
+                }
+            startActivity(intent)
+            finish()
+        } else{
             finish()
         }
     }

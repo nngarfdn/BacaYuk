@@ -7,6 +7,10 @@ import android.widget.Toast
 import com.nara.bacayuk.databinding.CustomToastBinding
 
 
+//show normal toast extention fun Context
+fun Context.showToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
 fun showAddSuccessToast(context: Context) {
     // Inflate custom toast layout menggunakan view binding
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
