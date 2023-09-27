@@ -25,8 +25,6 @@ class AddEditStudentViewModel(
     private val _isSuccess = MutableLiveData<Response<Boolean>>()
     val isSuccess : MutableLiveData<Response<Boolean>> = _isSuccess
 
-
-
     fun addUserToFirestore(idUser: String,student: Student) = viewModelScope.launch {
         val result = studentUseCase.addUpdateStudentToFirestore(idUser,student)
         if (result){
@@ -34,7 +32,6 @@ class AddEditStudentViewModel(
         } else {
             _isSuccess.postValue(Response.Error(null, "Galgal Menambahkan"))
         }
-
     }
 
     fun getUID(): String? = runBlocking {

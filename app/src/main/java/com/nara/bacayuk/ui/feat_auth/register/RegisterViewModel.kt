@@ -31,7 +31,6 @@ class RegisterViewModel(
             authUseCase.register(email, password).collect {
                 Log.d("MainViewModel", "login: success")
                 _user.value = it
-
             }
         } catch (e: Exception) {
             Log.d("MainViewModel", "login: fail")

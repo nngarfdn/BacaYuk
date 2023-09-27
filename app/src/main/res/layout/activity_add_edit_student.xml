@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-
     <include
         android:id="@+id/toolbar"
         layout="@layout/layout_toolbar_action"/>
@@ -156,7 +155,6 @@
                     android:background="@drawable/normal_state_edittext_outline"
                     android:paddingVertical="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
-
             <Button
                 android:id="@+id/btn_save_student"
                 android:layout_marginTop="@dimen/_16sdp"

@@ -87,10 +87,7 @@ class RegisterActivity : AppCompatActivity() {
                         .isNotEmpty() && edtPassword.text.toString()
                         .isNotEmpty() && edtPasswordConfirmation.text.toString().isNotEmpty()
                     btnRegister.setOnClickListener {
-                        registerViewModel.register(
-                            edtEmail.text.toString(),
-                            edtPassword.text.toString()
-                        )
+                        registerViewModel.register(edtEmail.text.toString(), edtPassword.text.toString())
                     }
                 }
 

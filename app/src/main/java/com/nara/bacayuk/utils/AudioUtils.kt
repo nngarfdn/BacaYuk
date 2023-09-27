@@ -9,7 +9,6 @@ import android.util.Log
 
 object AudioPlayerManager {
     var mediaPlayer: MediaPlayer? = null
-
     fun stopCurrentlyPlaying() {
         mediaPlayer?.let {
             if (it.isPlaying) {
@@ -20,12 +19,10 @@ object AudioPlayerManager {
         }
     }
 }
-
 fun playAudioFromRawAssets(context: Context, fileName: Int) {
     val mediaPlayer = MediaPlayer.create(context, fileName)
     mediaPlayer.start()
 }
-
 fun playAudioFromRawAssetsFileString(context: Context, fileName: String){
     AudioPlayerManager.stopCurrentlyPlaying()
     val resourceId = context.resources.getIdentifier(fileName, "raw", context.packageName)

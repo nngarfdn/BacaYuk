@@ -22,7 +22,6 @@ class RegisterActivityTest{
     @Test
     fun testRegister() {
         Espresso.onView(ViewMatchers.withId(R.id.edt_name)).perform(ViewActions.typeText("Nanang"), ViewActions.closeSoftKeyboard())
-        //generate random email
         val email = "nanang" + System.currentTimeMillis() + "@gmail.com"
         Espresso.onView(ViewMatchers.withId(R.id.edt_email)).perform(ViewActions.typeText(email), ViewActions.closeSoftKeyboard())
         Espresso.onView(ViewMatchers.withId(R.id.edt_password)).perform(
@@ -33,7 +32,6 @@ class RegisterActivityTest{
             ViewActions.closeSoftKeyboard())
         Thread.sleep(2000)
         Espresso.onView(ViewMatchers.withId(R.id.btn_register)).perform(ViewActions.click())
-        //verify view in login activity
         Thread.sleep(4000)
         Espresso.onView(ViewMatchers.withId(R.id.txt_forgot_password)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }

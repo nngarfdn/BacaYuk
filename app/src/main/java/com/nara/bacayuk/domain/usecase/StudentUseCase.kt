@@ -11,7 +11,6 @@ class StudentUseCase(private val repository: StudentRepository) {
         repository.getAllUserFromFirestore(id)
     suspend fun addUpdateStudentToFirestore(idUser: String,user: Student): Boolean =
         repository.addUpdateStudentToFirestore(idUser,user)
-
     suspend fun deleteStudentFromFirestore(id: String, idStudent: String): Boolean =
         repository.deleteStudentFromFirestore(id,idStudent)
 

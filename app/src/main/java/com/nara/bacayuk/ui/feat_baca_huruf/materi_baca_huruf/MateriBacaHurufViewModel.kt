@@ -64,8 +64,6 @@ class MateriBacaHurufViewModel(
             e.printStackTrace()
         }
     }
-
-
     fun getUser(id: String) {
         Log.d("MainViewModel", "getUser: called")
         viewModelScope.launch {

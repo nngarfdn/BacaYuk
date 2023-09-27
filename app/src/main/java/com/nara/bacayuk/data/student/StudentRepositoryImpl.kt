@@ -9,11 +9,9 @@ class StudentRepositoryImpl(private val studentDataSource: StudentDataSource): S
     override fun getAllUserFromFirestore(id: String): Flow<Response<List<Student>>> {
         return studentDataSource.getAllUserFromFirestore(id)
     }
-
     override suspend fun addUpdateStudentToFirestore(idUser: String, user: Student): Boolean {
         return studentDataSource.addUpdateStudentToFirestore(idUser, user)
     }
-
     override suspend fun deleteStudentFromFirestore(idUser: String, idStudent: String): Boolean {
         return studentDataSource.deleteStudentFromFirestore(idUser, idStudent)
     }

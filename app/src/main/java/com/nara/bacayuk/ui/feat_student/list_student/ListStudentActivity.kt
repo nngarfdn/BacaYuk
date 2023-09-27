@@ -209,9 +209,7 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
                 }
             )
             dialogDelete.show()
-
         }
-
         if (isSelected) {
             editSiswaText.visible()
             deleteSiswaText.visible()
@@ -221,8 +219,6 @@ class ListStudentActivity : AppCompatActivity(), AdapterListener {
             deleteSiswaText.gone()
             addSiswaText.visible()
         }
-
-
     }
 
     private fun showBalloon(isSelected: Boolean = false) {

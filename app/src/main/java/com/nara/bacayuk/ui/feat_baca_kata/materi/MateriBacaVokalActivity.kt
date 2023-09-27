@@ -162,10 +162,6 @@ class MateriBacaVokalActivity : AppCompatActivity()
             }
         }
     }
-
-
-
-
 }
 
 

@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.feat_menu_utama.MainActivity">
-
-
     <include
         android:id="@+id/toolbar"
         layout="@layout/layout_toolbar_action"/>
@@ -27,7 +25,6 @@
                 android:src="@drawable/ic_person"
                 app:civ_border_color="@color/primary_100"
                 app:civ_border_width="@dimen/_2sdp"/>
-
             <TextView
                 android:id="@+id/txt_name"
                 android:layout_width="match_parent"
@@ -50,8 +47,6 @@
                 android:paddingVertical="@dimen/_8sdp"
                 android:textColor="@color/neutral_500"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
-
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_baca_huruf"
                 android:layout_marginTop="@dimen/_48sdp"
@@ -103,13 +98,6 @@
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:text="Keluar"/>
-
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-
-
-
-
 </LinearLayout>

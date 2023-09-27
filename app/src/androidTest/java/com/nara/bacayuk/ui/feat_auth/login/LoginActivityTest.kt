@@ -26,9 +26,7 @@ class LoginActivityTest{
         Espresso.onView(withId(R.id.edt_email)).perform(ViewActions.typeText("testertab@gmail.com"), ViewActions.closeSoftKeyboard())
         Espresso.onView(withId(R.id.edt_password)).perform(ViewActions.typeText("12345678"),ViewActions.closeSoftKeyboard())
         Espresso.onView(withId(R.id.btn_login)).perform(ViewActions.click())
-        //verify view in main activity
         Thread.sleep(4000)
-        //check word "Pilih Siswa"
         Espresso.onView(withText("Pilih Siswa")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 

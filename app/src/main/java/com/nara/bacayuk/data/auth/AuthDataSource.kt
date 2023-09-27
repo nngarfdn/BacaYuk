@@ -9,15 +9,12 @@ class AuthDataSource(private val firebaseAuth: FirebaseAuth) {
     suspend fun login(email: String, password: String): AuthResult {
         return firebaseAuth.signInWithEmailAndPassword(email, password).await()
     }
-
     suspend fun register(email: String, password: String): AuthResult {
         return firebaseAuth.createUserWithEmailAndPassword(email, password).await()
     }
-
     suspend fun forgotPassword(email: String){
         firebaseAuth.sendPasswordResetEmail(email).await()
     }
-
     suspend fun logOut() {
         firebaseAuth.signOut()
     }

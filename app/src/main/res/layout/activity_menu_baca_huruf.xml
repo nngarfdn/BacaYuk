@@ -15,13 +15,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_16sdp">
-
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_marginTop="@dimen/_80sdp"
@@ -29,13 +27,11 @@
                 android:visibility="gone"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/progress"/>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_16sdp"
                 android:id="@+id/rv_abjad"/>
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

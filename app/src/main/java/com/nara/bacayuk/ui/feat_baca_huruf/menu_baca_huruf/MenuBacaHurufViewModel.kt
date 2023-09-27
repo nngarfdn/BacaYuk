@@ -44,11 +44,9 @@ class MenuBacaHurufViewModel(
         viewModelScope.launch {
             try {
                 reportUseCase.getAllReportFromFirestore(getUID() ?: "-", idStudent).collect {
-                    Log.d("ListStudentViewModel", "getUser: success")
                     _reports.value = it
                 }
             } catch (e: Exception) {
-                Log.d("ListStudentViewModel", "getUser: fail")
                 e.printStackTrace()
             }
         }

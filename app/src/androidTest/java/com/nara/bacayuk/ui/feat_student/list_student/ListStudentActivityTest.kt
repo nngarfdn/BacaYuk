@@ -130,7 +130,6 @@ class ListStudentActivityTest {
         onView(withId(R.id.btn_huruf))
             .perform(click())
         Thread.sleep(4000)
-        //go to RiwayatHurufActivity
         onView(withId(R.id.rv_riwayat_huruf))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
@@ -187,7 +186,6 @@ class ListStudentActivityTest {
         onView(withId(R.id.btn_kalimat))
             .perform(click())
         Thread.sleep(4000)
-        //go to RiwayatHurufActivity
         withCount("Level 1", 2)
     }
 
@@ -385,6 +383,4 @@ class ListStudentActivityTest {
             )
         Thread.sleep(3000)
     }
-
-
 }

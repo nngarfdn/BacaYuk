@@ -14,18 +14,11 @@ class AuthRepositoryImpl(
     private val firebaseAuthDataSource: AuthDataSource
 ) : AuthRepository {
 
-    override suspend fun forgotPassword(email: String) {
-        firebaseAuthDataSource.forgotPassword(email)
-    }
-
     override suspend fun logOut() {
         firebaseAuthDataSource.logOut()
     }
 
-
-
     override suspend fun register(email: String, password: String):  Flow<RegisterResponse>{
-
         return flow {
             try {
                 val result: AuthResult = firebaseAuthDataSource.register(email, password)
@@ -43,7 +36,6 @@ class AuthRepositoryImpl(
             }
         }
     }
-
     override suspend fun login(email: String, password: String): Flow<LoginResponse> {
         return flow {
             val result: AuthResult = firebaseAuthDataSource.login(email, password)
@@ -54,6 +46,9 @@ class AuthRepositoryImpl(
                 emit(Response.Error(Exception("Failed to login: User is null")))
             }
         }
+    }
+    override suspend fun forgotPassword(email: String) {
+        firebaseAuthDataSource.forgotPassword(email)
     }
 
 }

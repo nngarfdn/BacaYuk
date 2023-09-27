@@ -68,12 +68,12 @@ class ReportRepositoryImpl(private val dataSource: ReportDataSource) :ReportRepo
     ): Boolean {
         return dataSource.addUpdateReportKalimat(idUser, idStudent, reportHuruf)
     }
-
     override fun getAllReportKalimatFromFirestore(
         idUser: String,
         idStudent: String
     ): Flow<Response<ReportKalimat>> {
         return dataSource.getAllReportKalimatFromFirestore(idUser, idStudent)
     }
+
 }
 

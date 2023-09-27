@@ -33,7 +33,6 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
     private val dialog by lazy { waitingDialog() }
     private val menuBacaHurufViewModel: MenuBacaHurufViewModel by viewModel()
     private val listAbjadMenu = arrayListOf<Abjad>()
-
     private var isBacaKata = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,14 +127,12 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
                     onBackPressed()
                 }
             }
-
             rvAbjad.apply {
                 adapter = adapterAbjadMenuAdapter
                 layoutManager = androidx.recyclerview.widget.GridLayoutManager(this@MenuBacaHurufActivity, 4)
             }
         }
     }
-
     override fun onResume() {
         super.onResume()
         if (isBacaKata) {
@@ -147,7 +144,6 @@ class MenuBacaHurufActivity : AppCompatActivity(), AdapterListener {
             dialog.show()
         }
     }
-
     override fun onClick(data: Any?, position: Int?, view: View?, type: String) {
         Log.d("menubaca", "onClick $isBacaKata")
         val intent1 = Intent(this@MenuBacaHurufActivity, MateriBacaHurufActivity::class.java)

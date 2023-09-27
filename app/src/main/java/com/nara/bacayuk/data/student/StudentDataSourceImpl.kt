@@ -17,26 +17,20 @@ class StudentDataSourceImpl: StudentDataSource {
             val students = mutableListOf<Student>()
             val snapshot = firestoreInstance.collection("Users")
                 .document(id).collection("Students").get().await()
-            //get list students
-
             for (doc in snapshot.documents) {
                 doc.toObject(Student::class.java)?.let { students.add(it) }
             }
             emit(Response.Success(students))
         }.catch {
-//            emit(Response.Error(null,"Failed to fetch user data from Firestore."))
-
             Log.e("getAllUserFromFirestore", "Failed to fetch user data from Firestore.", it)
         }
     }
-
     override suspend fun addUpdateStudentToFirestore(idUser:String, student: Student): Boolean {
         return try {
             val firestoreInstance = FirebaseFirestore.getInstance()
             val documentReference =
                 firestoreInstance.collection("Users").document(idUser)
                     .collection("Students").document(student.uuid)
-
             documentReference.set(student).await()
             true // kembalikan nilai boolean true jika operasi berhasil
         } catch (e: Exception) {
@@ -44,7 +38,6 @@ class StudentDataSourceImpl: StudentDataSource {
             false // kembalikan nilai boolean false jika operasi gagal
         }
     }
-
     override suspend fun deleteStudentFromFirestore(idUser: String, idStudent: String): Boolean {
         return try {
             val firestoreInstance = FirebaseFirestore.getInstance()
