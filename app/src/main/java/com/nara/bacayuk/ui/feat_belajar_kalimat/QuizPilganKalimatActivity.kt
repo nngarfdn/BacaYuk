@@ -83,7 +83,7 @@ class QuizPilganKalimatActivity : AppCompatActivity() {
             opt1.setText(listQuestions[0])
             opt2.setText(listQuestions[1])
             opt3.setText(listQuestions[2])
-            opt4.setText(listQuestions[3])
+//            opt4.setText(listQuestions[3])
             imageView4.loadImage(this@QuizPilganKalimatActivity, soalKata?.imageUrl?:"")
             rbAnswer.setOnCheckedChangeListener { group, checkedId ->
                 val selectedRadioButton: RadioButton = findViewById(checkedId)
